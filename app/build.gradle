@@ -5,6 +5,7 @@ plugins {
 def AAVersion = '4.8.0'
 def ACVersion = '1.2.0'
 def EBVersion = '3.1.1'
+def SFVersion = '2.7.1'
 
 android {
     compileSdkVersion 29
@@ -38,6 +39,12 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:${ACVersion}"
     implementation "org.greenrobot:eventbus:${EBVersion}"
+
+    implementation("org.simpleframework:simple-xml:${SFVersion}") {
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
 
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
