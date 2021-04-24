@@ -10,13 +10,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="blue">#1970f9</color>
-    <color name="blue_light">#59B0F9</color>
-    <color name="blue_cyan">#00FFFF</color>
     <color name="blue_deep_sky">#00BFFF</color>
+    <color name="blue_light">#59B0F9</color>
+    <color name="blue_warm">#00AAFA</color>
+    <color name="blue_cyan">#00FFFF</color>
     <color name="blue_royal">#4169E1</color>
-    <color name="blue_navy">#000080</color>
+    <color name="blue">#1970f9</color>
     <color name="blue_midnight_light">#0940E9</color>
     <color name="blue_midnight">#191970</color>
+    <color name="blue_navy">#000080</color>
+
+    <color name="orange_warm">#FAAA00</color>
 
 </resources>
