@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         // TODO: uncomment
-        EventBus.getDefault().register(this);
+        //EventBus.getDefault().register(this);
     }
 
     @Override
