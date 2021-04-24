@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header_shape_top"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/header_frame_top_shape"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue_cyan"
+        android:textStyle="bold"
+        android:textSize="8sp"
+        android:textScaleX="1.2"
+        android:text="HPOD: 32.0027"
+        tools:text="HPOD: 32.0027"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue_cyan"
+        android:textSize="6sp"
+        android:textScaleX="1.2"
+        android:text="Unit 072 >>> 4598"
+        tools:text="Unit 072 >>> 4598"
+        />
+
+</LinearLayout>
