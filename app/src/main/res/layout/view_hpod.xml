@@ -2,12 +2,13 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <org.pb.android.uxdesign.ui.view.HeaderViewTop_
@@ -58,6 +59,22 @@
             android:layout_height="2dp"
             android:background="@color/blue_deep_sky"
             android:layout_alignParentTop="true"
+            />
+
+        <org.pb.android.uxdesign.ui.view.HpodHeader_
+            android:id="@+id/hpodHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <org.pb.android.uxdesign.ui.view.HpodFooter_
+            android:id="@+id/hpodFooter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/hpodHeader"
             />
 
         <View
