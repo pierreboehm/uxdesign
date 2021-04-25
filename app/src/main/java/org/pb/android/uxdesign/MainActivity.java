@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.pm.ActivityInfo;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startMainFragment() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         MainFragment mainFragment = MainFragment_.builder().build();
         setFragment(mainFragment, MainFragment.TAG);
     }
