@@ -12,6 +12,9 @@ public class MainFragment extends Fragment {
 
     public static final String TAG = MainFragment.class.getSimpleName();
 
+    @ViewById(R.id.hpodView)
+    HpodView hpodView;
+
     @Bean
     Demonstrator demonstrator;
 
