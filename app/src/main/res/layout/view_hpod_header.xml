@@ -42,14 +42,15 @@
 
     <TextView
         android:id="@+id/tvState"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvProfession"
-        android:textSize="28sp"
+        android:textSize="20sp"
         android:textStyle="bold"
+        android:textScaleX="1.2"
         android:textColor="@color/white"
-        android:text="PASSENGER\nDISCHARGED"
-        android:visibility="invisible"
+        android:textAllCaps="true"
+        android:text="@string/vitalState_discharged"
         />
 
     <LinearLayout
@@ -58,7 +59,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@id/tvState"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,6 +90,7 @@
         android:layout_alignParentRight="true">
 
         <ImageView
+            android:id="@+id/ivLogo"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:src="@drawable/homestead_logo"

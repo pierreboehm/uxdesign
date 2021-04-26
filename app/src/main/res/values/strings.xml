@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">uxdesign</string>
     <string name="backPressedHintText">Press again to close the app.</string>
+    <string name="vitalState_discharged">PASSENGER DISCHARGED</string>
 </resources>

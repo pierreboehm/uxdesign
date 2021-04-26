@@ -19,11 +19,32 @@ public class HpodFooter extends RelativeLayout {
         super(context, attrs);
     }
 
-    public void setupVitalStatusView() {
+    public void prepareMainScreen() {
+        viewContainer.removeAllViews();
+
+        // TODO: add menu-view
+    }
+
+    public void prepareVitalStatusScreen() {
         viewContainer.removeAllViews();
 
         VitalStatusView vitalStatusView = VitalStatusView_.build(getContext());
         viewContainer.addView(vitalStatusView);
     }
 
+    public void prepareSystemStatusScreen() {
+        viewContainer.removeAllViews();
+
+        // TODO: add system-status-view
+    }
+
+    public void startVitalGraph() {
+        VitalStatusView vitalStatusView = (VitalStatusView) viewContainer.getChildAt(0);
+        vitalStatusView.startVitalGraph();
+    }
+
+    public void stopVitalGraph() {
+        VitalStatusView vitalStatusView = (VitalStatusView) viewContainer.getChildAt(0);
+        vitalStatusView.stopVitalGraph();
+    }
 }

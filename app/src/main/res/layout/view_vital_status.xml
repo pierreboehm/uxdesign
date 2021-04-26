@@ -47,8 +47,8 @@
 
     </LinearLayout>
 
-    <org.pb.android.uxdesign.ui.view.RasterView_
-        android:id="@+id/rasterBox"
+    <org.pb.android.uxdesign.ui.view.VitalGraphView_
+        android:id="@+id/vitalGraphView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/modeBox"

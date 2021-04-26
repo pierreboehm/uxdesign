@@ -4,13 +4,24 @@ import android.content.Context;
 import android.widget.LinearLayout;
 
 import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
 
 @EViewGroup(R.layout.view_vital_status)
 public class VitalStatusView extends LinearLayout {
 
+    @ViewById(R.id.vitalGraphView)
+    VitalGraphView vitalGraphView;
+
     public VitalStatusView(Context context) {
         super(context);
     }
 
+    public void startVitalGraph() {
+        vitalGraphView.start();
+    }
+
+    public void stopVitalGraph() {
+        vitalGraphView.stop();
+    }
 }

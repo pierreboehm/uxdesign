@@ -14,6 +14,10 @@ import org.androidannotations.annotations.UiThread;
 import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.fragment.MainFragment;
 import org.pb.android.uxdesign.fragment.MainFragment_;
+import org.pb.android.uxdesign.fragment.SystemStatusFragment;
+import org.pb.android.uxdesign.fragment.SystemStatusFragment_;
+import org.pb.android.uxdesign.fragment.VitalStatusFragment;
+import org.pb.android.uxdesign.fragment.VitalStatusFragment_;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
@@ -59,10 +63,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startMainFragment() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         MainFragment mainFragment = MainFragment_.builder().build();
         setFragment(mainFragment, MainFragment.TAG);
+    }
+
+    private void startVitalStatusFragment() {
+        VitalStatusFragment vitalStatusFragment = VitalStatusFragment_.builder().build();
+        setFragment(vitalStatusFragment, VitalStatusFragment.TAG);
+    }
+
+    private void startSystemStatusFragment() {
+        SystemStatusFragment systemStatusFragment = SystemStatusFragment_.builder().build();
+        setFragment(systemStatusFragment, SystemStatusFragment.TAG);
     }
 
     private void setFragment(Fragment fragment, String fragmentTag) {

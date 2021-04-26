@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
@@ -39,9 +40,36 @@ public class HpodHeader extends RelativeLayout {
         super(context, attrs);
     }
 
+    @Click(R.id.ivLogo)
+    public void onLogoClick() {
+
+    }
+
     public void setCurrentUser(CurrentUser currentUser) {
         this.currentUser = currentUser;
         bind(currentUser);
+    }
+
+    public void prepareMainScreen() {
+        setDischargedState(false);
+        idBox.setVisibility(VISIBLE);
+    }
+
+    public void prepareVitalStatusScreen() {
+        setDischargedState(true);
+        idBox.setVisibility(GONE);
+    }
+
+    public void prepareSystemStatusScreen() {
+        // TODO
+    }
+
+    public void setDischargedState(boolean showDischargedState) {
+        if (showDischargedState) {
+            tvState.setVisibility(VISIBLE);
+        } else {
+            tvState.setVisibility(INVISIBLE);
+        }
     }
 
     private void bind(CurrentUser currentUser) {
