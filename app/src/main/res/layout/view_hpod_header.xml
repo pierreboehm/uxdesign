@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/tvName"
@@ -12,7 +13,7 @@
         android:textStyle="bold"
         android:textColor="@color/blue_light"
         android:textAllCaps="true"
-        android:text="James Preston"
+        tools:text="James Preston"
         />
 
     <TextView
@@ -24,7 +25,7 @@
         android:textStyle="bold"
         android:textColor="@color/blue_light"
         android:textAllCaps="true"
-        android:text="Denver, Colorado"
+        tools:text="Denver, Colorado"
         />
 
     <TextView
@@ -36,7 +37,7 @@
         android:textStyle="bold"
         android:textColor="@color/blue_light"
         android:textAllCaps="true"
-        android:text="Rate 2 Mechanical engineer"
+        tools:text="Rate 2 Mechanical engineer"
         />
 
     <TextView
@@ -52,7 +53,7 @@
         />
 
     <LinearLayout
-        android:id="@+id/codeBox"
+        android:id="@+id/idBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -60,7 +61,6 @@
         android:visibility="gone">
 
         <TextView
-            android:id="@+id/tvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -76,7 +76,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/blue_light"
-            android:text="0352.0027"
+            tools:text="0352.0027"
             />
 
     </LinearLayout>

@@ -8,7 +8,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
-import org.pb.android.uxdesign.data.user.User;
+import org.pb.android.uxdesign.data.user.CurrentUser;
 
 @EViewGroup(R.layout.view_hpod)
 public class HpodView extends LinearLayout {
@@ -25,12 +25,12 @@ public class HpodView extends LinearLayout {
 
     @AfterViews
     public void initViews() {
-        // TODO: exchange with start-view
+        // TODO: exchange with start-view if ready
         hpodFooter.setupVitalStatusView();
     }
 
-    public void setupUser(User user) {
-        hpodHeader.setUser(user);
+    public void setupCurrentUser(CurrentUser user) {
+        hpodHeader.setCurrentUser(user);
     }
 
 }
