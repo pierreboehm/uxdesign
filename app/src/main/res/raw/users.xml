@@ -1,5 +1,14 @@
 <Users>
     <User id="0352.0027">
+        <Name>James Preston</Name>
+        <Country>United States of America</Country>
+        <CountryCode>US</CountryCode>
+        <State>Colorado</State>
+        <Locality>Denver</Locality>
+        <Profession>Rate 2 Mechanical Engineer</Profession>
+    </User>
+
+    <User id="0352.0047">
         <Name>Pierre Boehm</Name>
         <Country>Germany</Country>
         <CountryCode>DE</CountryCode>

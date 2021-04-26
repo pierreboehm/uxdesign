@@ -48,7 +48,7 @@ public class HpodHeader extends RelativeLayout {
         UserData userData = currentUser.getUserData();
 
         tvName.setText(userData.getName());
-        tvHome.setText(String.format("%s, %s", userData.getLocality(), userData.getCountry()));
+        tvHome.setText(String.format("%s, %s", userData.getLocality(), userData.getState()));
         tvProfession.setText(userData.getProfession());
 
         tvIdCode.setText(userData.getId());
