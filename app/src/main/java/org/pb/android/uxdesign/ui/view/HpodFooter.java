@@ -22,7 +22,8 @@ public class HpodFooter extends RelativeLayout {
     public void prepareMainScreen() {
         viewContainer.removeAllViews();
 
-        // TODO: add menu-view
+        MainMenuView mainMenuView = MainMenuView_.build(getContext());
+        viewContainer.addView(mainMenuView);
     }
 
     public void prepareVitalStatusScreen() {
@@ -36,6 +37,9 @@ public class HpodFooter extends RelativeLayout {
         viewContainer.removeAllViews();
 
         // TODO: add system-status-view
+        // FIXME: main menu view is just for test !!!
+        MainMenuView mainMenuView = MainMenuView_.build(getContext());
+        viewContainer.addView(mainMenuView);
     }
 
     public void startVitalGraph() {

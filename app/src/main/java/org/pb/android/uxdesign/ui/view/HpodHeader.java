@@ -9,9 +9,11 @@ import android.widget.TextView;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.data.user.UserData;
+import org.pb.android.uxdesign.event.Event;
 
 @EViewGroup(R.layout.view_hpod_header)
 public class HpodHeader extends RelativeLayout {
@@ -42,7 +44,7 @@ public class HpodHeader extends RelativeLayout {
 
     @Click(R.id.ivLogo)
     public void onLogoClick() {
-
+        EventBus.getDefault().post(new Event.ShowUserStatus());
     }
 
     public void setCurrentUser(CurrentUser currentUser) {

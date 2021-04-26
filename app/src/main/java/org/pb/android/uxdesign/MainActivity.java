@@ -12,6 +12,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.fragment.MainFragment;
 import org.pb.android.uxdesign.fragment.MainFragment_;
 import org.pb.android.uxdesign.fragment.SystemStatusFragment;
@@ -33,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        // TODO: uncomment
-        //EventBus.getDefault().register(this);
+
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onPause() {
-        // TODO: uncomment
-        //EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
+
         super.onPause();
     }
 
@@ -60,6 +63,21 @@ public class MainActivity extends AppCompatActivity {
     @UiThread(delay = 2000)
     void resetCloseAppToast() {
         closeAppToast = null;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ShowUserStatus event) {
+        startMainFragment();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ShowVitalStatus event) {
+        startVitalStatusFragment();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ShowSystemStatus event) {
+        startSystemStatusFragment();
     }
 
     private void startMainFragment() {
