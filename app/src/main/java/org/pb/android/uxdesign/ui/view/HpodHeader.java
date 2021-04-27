@@ -33,8 +33,14 @@ public class HpodHeader extends RelativeLayout {
     @ViewById(R.id.tvState)
     TextView tvState;       // just for visibility changes
 
+    @ViewById(R.id.userDataBox)
+    ViewGroup userDataBox;
+
     @ViewById(R.id.idBox)
     ViewGroup idBox;        // just for visibility changes
+
+    @ViewById(R.id.logoBox)
+    ViewGroup logoBox;
 
     private CurrentUser currentUser;
 
@@ -53,17 +59,22 @@ public class HpodHeader extends RelativeLayout {
     }
 
     public void prepareMainScreen() {
-        setDischargedState(false);
+        userDataBox.setVisibility(VISIBLE);
+        logoBox.setVisibility(VISIBLE);
         idBox.setVisibility(VISIBLE);
+        setDischargedState(false);
     }
 
     public void prepareVitalStatusScreen() {
-        setDischargedState(true);
+        userDataBox.setVisibility(VISIBLE);
+        logoBox.setVisibility(VISIBLE);
         idBox.setVisibility(GONE);
+        setDischargedState(true);
     }
 
     public void prepareSystemStatusScreen() {
-        // TODO
+        userDataBox.setVisibility(GONE);
+        logoBox.setVisibility(VISIBLE);
     }
 
     public void setDischargedState(boolean showDischargedState) {

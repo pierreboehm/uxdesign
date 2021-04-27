@@ -5,89 +5,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/blue_light"
-        android:textAllCaps="true"
-        tools:text="James Preston"
-        />
-
-    <TextView
-        android:id="@+id/tvHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvName"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="@color/blue_light"
-        android:textAllCaps="true"
-        tools:text="Denver, Colorado"
-        />
-
-    <TextView
-        android:id="@+id/tvProfession"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvHome"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="@color/blue_light"
-        android:textAllCaps="true"
-        tools:text="Rate 2 Mechanical engineer"
-        />
-
-    <TextView
-        android:id="@+id/tvState"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvProfession"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textScaleX="1.2"
-        android:textColor="@color/white"
-        android:textAllCaps="true"
-        android:text="@string/vitalState_discharged"
-        />
-
     <LinearLayout
-        android:id="@+id/idBox"
+        android:id="@+id/userDataBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/tvState"
-        android:visibility="gone"
         tools:visibility="visible">
 
         <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/blue_light"
+            android:textAllCaps="true"
+            tools:text="James Preston"
+            />
+
+        <TextView
+            android:id="@+id/tvHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/blue_light"
-            android:text="ID CODE:"
+            android:textAllCaps="true"
+            tools:text="Denver, Colorado"
             />
 
         <TextView
-            android:id="@+id/tvIdCode"
+            android:id="@+id/tvProfession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/blue_light"
-            tools:text="0352.0027"
+            android:textAllCaps="true"
+            tools:text="Rate 2 Mechanical engineer"
             />
+
+        <TextView
+            android:id="@+id/tvState"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textScaleX="1.2"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:text="@string/vitalState_discharged"
+            />
+
+        <LinearLayout
+            android:id="@+id/idBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue_light"
+                android:text="ID CODE:"
+                />
+
+            <TextView
+                android:id="@+id/tvIdCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue_light"
+                tools:text="0352.0027"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/logoBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/ivLogo"
