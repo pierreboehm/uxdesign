@@ -80,7 +80,7 @@ public class VitalGraphView extends View {
             public void run() {
                 update();
             }
-        }, 0, 50);
+        }, 0, 60);
     }
 
     public void stop() {

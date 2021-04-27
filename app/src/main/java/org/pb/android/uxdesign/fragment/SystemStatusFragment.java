@@ -1,5 +1,7 @@
 package org.pb.android.uxdesign.fragment;
 
+import android.annotation.SuppressLint;
+
 import androidx.fragment.app.Fragment;
 
 import org.androidannotations.annotations.AfterViews;
@@ -9,6 +11,7 @@ import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 
+@SuppressLint("NonConstantResourceId")
 @EFragment(R.layout.fragment_system_status)
 public class SystemStatusFragment extends Fragment {
 

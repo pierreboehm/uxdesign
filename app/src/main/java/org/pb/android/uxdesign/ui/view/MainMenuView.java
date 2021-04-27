@@ -1,5 +1,6 @@
 package org.pb.android.uxdesign.ui.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.RelativeLayout;
 
@@ -9,6 +10,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.event.Event;
 
+@SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_main_menu)
 public class MainMenuView extends RelativeLayout {
 

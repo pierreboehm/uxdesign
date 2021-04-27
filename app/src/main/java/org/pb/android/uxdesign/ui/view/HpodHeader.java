@@ -1,20 +1,20 @@
 package org.pb.android.uxdesign.ui.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.data.user.UserData;
-import org.pb.android.uxdesign.event.Event;
 
+@SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_header)
 public class HpodHeader extends RelativeLayout {
 
@@ -31,13 +31,19 @@ public class HpodHeader extends RelativeLayout {
     TextView tvIdCode;
 
     @ViewById(R.id.tvState)
-    TextView tvState;       // just for visibility changes
+    TextView tvState;
+
+    @ViewById(R.id.ivLogo)
+    ImageView ivLogo;
+
+    @ViewById(R.id.tvLogo)
+    TextView tvLogo;
 
     @ViewById(R.id.userDataBox)
     ViewGroup userDataBox;
 
     @ViewById(R.id.idBox)
-    ViewGroup idBox;        // just for visibility changes
+    ViewGroup idBox;
 
     @ViewById(R.id.logoBox)
     ViewGroup logoBox;
@@ -46,11 +52,6 @@ public class HpodHeader extends RelativeLayout {
 
     public HpodHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
-    }
-
-    @Click(R.id.ivLogo)
-    public void onLogoClick() {
-        EventBus.getDefault().post(new Event.ShowUserStatus());
     }
 
     public void setCurrentUser(CurrentUser currentUser) {
@@ -62,14 +63,14 @@ public class HpodHeader extends RelativeLayout {
         userDataBox.setVisibility(VISIBLE);
         logoBox.setVisibility(VISIBLE);
         idBox.setVisibility(VISIBLE);
-        setDischargedState(false);
+        setDischargedState(false, false);
     }
 
     public void prepareVitalStatusScreen() {
         userDataBox.setVisibility(VISIBLE);
         logoBox.setVisibility(VISIBLE);
         idBox.setVisibility(GONE);
-        setDischargedState(true);
+        setDischargedState(true, false);
     }
 
     public void prepareSystemStatusScreen() {
@@ -77,12 +78,24 @@ public class HpodHeader extends RelativeLayout {
         logoBox.setVisibility(VISIBLE);
     }
 
-    public void setDischargedState(boolean showDischargedState) {
+    public void setDischargedState(boolean showDischargedState, boolean involveLogo) {
         if (showDischargedState) {
             tvState.setVisibility(VISIBLE);
+            if (involveLogo) {
+                ivLogo.clearColorFilter();
+                tvLogo.setTextColor(getContext().getColor(R.color.blue_light));
+            }
         } else {
             tvState.setVisibility(INVISIBLE);
+            if (involveLogo) {
+                ivLogo.setColorFilter(getContext().getColor(R.color.blue_cyan));
+                tvLogo.setTextColor(getContext().getColor(R.color.blue_cyan));
+            }
         }
+    }
+
+    public boolean isDischargedState() {
+        return tvState.getVisibility() == VISIBLE;
     }
 
     private void bind(CurrentUser currentUser) {
