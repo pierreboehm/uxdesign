@@ -3,6 +3,7 @@ package org.pb.android.uxdesign.ui.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -45,6 +46,9 @@ public class HpodHeader extends RelativeLayout {
     @ViewById(R.id.idBox)
     ViewGroup idBox;
 
+    @ViewById(R.id.modeBox)
+    ViewGroup modeBox;
+
     @ViewById(R.id.logoBox)
     ViewGroup logoBox;
 
@@ -63,6 +67,7 @@ public class HpodHeader extends RelativeLayout {
         userDataBox.setVisibility(VISIBLE);
         logoBox.setVisibility(VISIBLE);
         idBox.setVisibility(VISIBLE);
+        modeBox.setVisibility(GONE);
         setDischargedState(false, false);
     }
 
@@ -70,12 +75,16 @@ public class HpodHeader extends RelativeLayout {
         userDataBox.setVisibility(VISIBLE);
         logoBox.setVisibility(VISIBLE);
         idBox.setVisibility(GONE);
+        modeBox.setVisibility(VISIBLE);
         setDischargedState(true, false);
     }
 
     public void prepareSystemStatusScreen() {
         userDataBox.setVisibility(GONE);
         logoBox.setVisibility(VISIBLE);
+        idBox.setVisibility(GONE);
+        modeBox.setVisibility(GONE);
+        setDischargedState(false, true);
     }
 
     public void setDischargedState(boolean showDischargedState, boolean involveLogo) {
