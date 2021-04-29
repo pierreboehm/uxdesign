@@ -1,5 +1,7 @@
 package org.pb.android.uxdesign.util;
 
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.util.Log;
 
 import org.androidannotations.annotations.AfterInject;
@@ -28,6 +30,8 @@ public class EKG {
     private static final int BPM_MIN = 60;
     private static final int BPM_MAX = 120;
 
+    private static final int WAVE_STAGE_INDEX_MAX = 4;
+
     private static final int P = 5;
     private static final int Q = 4;
     private static final int R = 3;
@@ -36,16 +40,19 @@ public class EKG {
     private static final int U = 0;
 
     private int ekgValue = 0;
-    private int waveStage = 0;
+    private int waveStageIndex = 0;
+    private long qSetTime = 0L;
 
     private volatile int bpm = BPM_MIN;
 
     private Timer timer;
+    private ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_MUSIC, 70);
 
     @AfterInject
     void reset() {
         ekgValue = 0;
-        waveStage = 0;
+        waveStageIndex = 0;
+        qSetTime = 0L;
     }
 
     public void start() {
@@ -54,7 +61,7 @@ public class EKG {
         }
 
         timer = new Timer();
-        timer.schedule(getTimerTask(), 1000);
+        timer.schedule(getRestartTimerTask(), Util.getRandomBetween(200, 500));
     }
 
     public void stop() {
@@ -68,6 +75,10 @@ public class EKG {
         float cardiacAmplitude = ((float) (Math.sin(cardiacIndex * 0.1f)) * 1.2f) + (float) Math.random();
         cardiacAmplitude += getCardiacAmplitudeExtra();
         return cardiacAmplitude;
+    }
+
+    public float getBpmAmplitude() {
+        return (float) bpm;
     }
 
     private float getCardiacAmplitudeExtra() {
@@ -108,13 +119,13 @@ public class EKG {
         prepareCascade();
         startCascade();
 
-        float bpMilliSeconds = (float) bpm / 60f * 1000f;
+        float bpMilliSeconds = 60f / (float) bpm * 1000f;
 
         // schedule next heart beat
-        timer.schedule(getTimerTask(), (long) bpMilliSeconds);
+        timer.schedule(getRestartTimerTask(), (long) bpMilliSeconds);
     }
 
-    private TimerTask getTimerTask() {
+    private TimerTask getRestartTimerTask() {
         return new TimerTask() {
             @Override
             public void run() {
@@ -129,7 +140,7 @@ public class EKG {
     }
 
     private void startCascade() {
-        //setP();
+        setP();
     }
 
 
@@ -138,12 +149,39 @@ public class EKG {
     }
 
     private float getPAmplitude() {
-        return 0f;
+        float value = 0f;   // TODO
+        waveStageIndex++;
+
+        if (waveStageIndex == 0) {
+            value = 7.5f;
+        } else if (waveStageIndex == 1) {
+            value = 14f;
+        } else if (waveStageIndex == 2) {
+            value = 27f;
+        } else if (waveStageIndex == 3) {
+            value = 15f;
+        } else if (waveStageIndex == 4) {
+            value = 4.5f;
+        }
+
+        if (waveStageIndex > WAVE_STAGE_INDEX_MAX) {
+            ekgValue = 0;
+
+            long pqDelay = Util.getRandomBetween(160, 200);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    setQ();
+                }
+            }, pqDelay);
+        }
+
+        return value;
     }
 
     private void setP() {
         ekgValue = setBit(P);
-        waveStage = setBit(0);
+        waveStageIndex = 0;
     }
 
     private boolean hasQ() {
@@ -151,12 +189,33 @@ public class EKG {
     }
 
     private float getQAmplitude() {
-        return 0f;
+        float value = 0f;   // TODO
+        waveStageIndex++;
+
+        if (waveStageIndex == 0) {
+            value = -7.5f;
+        } else if (waveStageIndex == 1) {
+            value = -15f;
+        } else if (waveStageIndex == 2) {
+            value = (float) Util.getRandomBetween(-30, -40);
+        } else if (waveStageIndex == 3) {
+            value = -15f;
+        } else if (waveStageIndex == 4) {
+            value = -7.5f;
+        }
+
+        if (waveStageIndex > WAVE_STAGE_INDEX_MAX) {
+            ekgValue = 0;
+            setR();
+        }
+
+        return value;
     }
 
     private void setQ() {
         ekgValue = setBit(Q);
-        waveStage = setBit(0);
+        waveStageIndex = 0;
+        qSetTime = System.currentTimeMillis();
     }
 
     private boolean hasR() {
@@ -164,12 +223,33 @@ public class EKG {
     }
 
     private float getRAmplitude() {
-        return 0f;
+        float value = 0f;   // TODO
+        waveStageIndex++;
+
+        if (waveStageIndex == 0) {
+            value = 17.5f;
+        } else if (waveStageIndex == 1) {
+            value = 35f;
+        } else if (waveStageIndex == 2) {
+            value = (float) Util.getRandomBetween(70, 90);
+            beep();
+        } else if (waveStageIndex == 3) {
+            value = 35f;
+        } else if (waveStageIndex == 4) {
+            value = 17.5f;
+        }
+
+        if (waveStageIndex > WAVE_STAGE_INDEX_MAX) {
+            ekgValue = 0;
+            setS();
+        }
+
+        return value;
     }
 
     private void setR() {
         ekgValue = setBit(R);
-        waveStage = setBit(0);
+        waveStageIndex = 0;
     }
 
     private boolean hasS() {
@@ -177,12 +257,45 @@ public class EKG {
     }
 
     private float getSAmplitude() {
-        return 0f;
+        float value = 0f;   // TODO
+        waveStageIndex++;
+
+        if (waveStageIndex == 0) {
+            value = -11.25f;
+        } else if (waveStageIndex == 1) {
+            value = -22.5f;
+        } else if (waveStageIndex == 2) {
+            value = (float) Util.getRandomBetween(-35, -45);
+        } else if (waveStageIndex == 3) {
+            value = -22.5f;
+        } else if (waveStageIndex == 4) {
+            value = -11.25f;
+        }
+
+        if (waveStageIndex > WAVE_STAGE_INDEX_MAX) {
+            ekgValue = 0;
+
+            long qsTime = System.currentTimeMillis() - qSetTime;
+            // FIXME
+            //long stDelay = (long) (((float) Util.getRandomBetween(390, 440) - (float) qsTime) / 2f);
+            long stDelay = Math.max(120 - qsTime, 100);
+
+            //Log.d(TAG, "qsTime = " + qsTime + "ms, stDelay = " + stDelay + "ms");
+
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    setT();
+                }
+            }, stDelay);
+        }
+
+        return value;
     }
 
     private void setS() {
         ekgValue = setBit(S);
-        waveStage = setBit(0);
+        waveStageIndex = 0;
     }
 
     private boolean hasT() {
@@ -190,12 +303,32 @@ public class EKG {
     }
 
     private float getTAmplitude() {
-        return 0f;
+        float value = 0f;   // TODO
+        waveStageIndex++;
+
+        if (waveStageIndex == 0) {
+            value = 2.5f;
+        } else if (waveStageIndex == 1) {
+            value = 17.5f;
+        } else if (waveStageIndex == 2) {
+            value = 31f;
+        } else if (waveStageIndex == 3) {
+            value = 22.1f;
+        } else if (waveStageIndex == 4) {
+            value = 4.5f;
+        }
+
+        if (waveStageIndex > WAVE_STAGE_INDEX_MAX) {
+            ekgValue = 0;
+            setU();
+        }
+
+        return value;
     }
 
     private void setT() {
         ekgValue = setBit(T);
-        waveStage = setBit(0);
+        waveStageIndex = 0;
     }
 
     private boolean hasU() {
@@ -203,12 +336,18 @@ public class EKG {
     }
 
     private float getUAmplitude() {
+        waveStageIndex++;
+
+        if (waveStageIndex > WAVE_STAGE_INDEX_MAX) {
+            ekgValue = 0;
+        }
+
         return 0f;
     }
 
     private void setU() {
         ekgValue = setBit(U);
-        waveStage = setBit(0);
+        waveStageIndex = 0;
     }
 
     private boolean getBit(final int x, final int p) {
@@ -217,5 +356,10 @@ public class EKG {
 
     private int setBit(final int p) {
         return (1 << (P - p));
+    }
+
+    @UiThread(propagation = UiThread.Propagation.REUSE)
+    void beep() {
+        toneGenerator.startTone(ToneGenerator.TONE_CDMA_PIP,50);
     }
 }

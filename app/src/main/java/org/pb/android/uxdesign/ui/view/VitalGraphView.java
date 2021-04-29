@@ -9,7 +9,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -20,7 +19,6 @@ import org.androidannotations.annotations.EView;
 import org.androidannotations.annotations.UiThread;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.util.EKG;
-import org.pb.android.uxdesign.util.Respiration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +30,12 @@ public class VitalGraphView extends View {
 
     private static final String TAG = VitalGraphView.class.getSimpleName();
 
-    private static final float GRAPH_STROKE_WIDTH = 3f;
+    private static final float GRAPH_STROKE_WIDTH = 4f;
     private static final float GRADIENT_GRAPH_STROKE_WIDTH = 12f;
     private static final int RASTER_COUNT_X_DIRECTION = 100;
 
     private Context context;
-    private Timer timer;
+    private Timer cardiacWaveTimer;
 
     private Paint rasterColor;
     private Paint graphColor;
@@ -46,28 +44,25 @@ public class VitalGraphView extends View {
     private List<PointF> cardiacWave = new ArrayList<>();
     private Path cardiacGraph = new Path();
 
-    private List<PointF> respirationSinusWave = new ArrayList<>();
-    private Path respirationSinusGraph = new Path();
-    private List<PointF> respirationCosinusWave = new ArrayList<>();
-    private Path respirationCosinusGraph = new Path();
+    private List<PointF> bpmNewWave = new ArrayList<>();
+    private Path bpmNewGraph = new Path();
+    private List<PointF> bpmOldWave = new ArrayList<>();
+    private Path bpmOldGraph = new Path();
 
     private int cardiacIndex = 0;
-    private int respirationIndex = 0;
+    private int bpmIndex = 0;
     private int canvasWidth = 0;
 
     private float yReferenceCardiac = 0f;
-    private float yReferenceRespiration = 0f;
+    private float yReferenceBpm = 0f;
 
     @Bean
     EKG ekg;
 
-    @Bean
-    Respiration respiration;
-
     public VitalGraphView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        timer = null;
+        cardiacWaveTimer = null;
     }
 
     @AfterViews
@@ -100,7 +95,7 @@ public class VitalGraphView extends View {
         }
 
         if (cardiacIndex > 0) {
-            drawHeartBeatGraph(canvas);
+            drawCardiacWave(canvas);
         }
 
         super.onDraw(canvas);
@@ -108,7 +103,7 @@ public class VitalGraphView extends View {
 
     @UiThread
     public void update() {
-        if (canvasWidth == 0 || timer == null) {
+        if (canvasWidth == 0 || cardiacWaveTimer == null) {
             return;
         }
 
@@ -118,14 +113,31 @@ public class VitalGraphView extends View {
         invalidate();
     }
 
+    @UiThread
+    public void updateBpm() {
+        if (canvasWidth == 0 || cardiacWaveTimer == null) {
+            return;
+        }
+
+        updateBpmWave();
+    }
+
     public void start() {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
+        cardiacWaveTimer = new Timer();
+
+        cardiacWaveTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 update();
             }
         }, 0, 1);
+
+        cardiacWaveTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                updateBpm();
+            }
+        }, 0, 250);
 
         ekg.start();
     }
@@ -133,9 +145,9 @@ public class VitalGraphView extends View {
     public void stop() {
         ekg.stop();
 
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
+        if (cardiacWaveTimer != null) {
+            cardiacWaveTimer.cancel();
+            cardiacWaveTimer = null;
         }
 
         // cleanup drawings
@@ -157,57 +169,61 @@ public class VitalGraphView extends View {
         cardiacIndex++;
     }
 
-    private void updateRespirationWave() {
-        if (respirationIndex > canvasWidth) {
-            respirationIndex = 0;
+    private void updateBpmWave() {
+        if (bpmIndex > canvasWidth) {
+            bpmIndex = 0;
+
+            if (!bpmNewWave.isEmpty()) {
+                bpmOldGraph.reset();
+                bpmOldWave.clear();
+                bpmOldWave.addAll(0, bpmNewWave);
+            }
+
+            bpmNewWave.clear();
         }
 
-        float respirationSinusAmplitude = respiration.getRespirationSinusAmplitude(respirationIndex);
-        float respirationCosinusAmplitude = respiration.getRespirationCosinusAmplitude(respirationIndex);
+        float bpmAmplitude = ekg.getBpmAmplitude();
+        PointF pointBpmWave = new PointF(bpmIndex, bpmAmplitude);
 
-        PointF pointRespirationWave = new PointF(respirationIndex, respirationSinusAmplitude);
-        if (respirationIndex >= respirationSinusWave.size()) {
-            respirationSinusWave.add(pointRespirationWave);
-        } else {
-            respirationSinusWave.set(respirationIndex, pointRespirationWave);
-        }
-
-        pointRespirationWave = new PointF(respirationIndex, respirationCosinusAmplitude);
-        if (respirationIndex >= respirationCosinusWave.size()) {
-            respirationCosinusWave.add(pointRespirationWave);
-        } else {
-            respirationCosinusWave.set(respirationIndex, pointRespirationWave);
-        }
-
-        respirationIndex++;
+        bpmNewWave.add(pointBpmWave);
+        bpmIndex++;
     }
 
-    private void drawBreathGraph(Canvas canvas) {
-        respirationSinusGraph.reset();
-        respirationCosinusGraph.reset();
+    private void drawBpmWave(Canvas canvas) {
+        bpmNewGraph.reset();
 
-        PointF wavePoint = respirationSinusWave.get(0);
-        respirationSinusGraph.moveTo(wavePoint.x, yReferenceRespiration - wavePoint.y);
+        int waveSize = bpmNewWave.size();
+        PointF wavePoint = bpmNewWave.get(0);
+        bpmNewGraph.moveTo(wavePoint.x, yReferenceBpm - wavePoint.y);
 
-        wavePoint = respirationCosinusWave.get(0);
-        respirationCosinusGraph.moveTo(wavePoint.x, yReferenceRespiration - wavePoint.y);
-
-        int waveSize = respirationSinusWave.size();
         for (int waveXPosition = 1; waveXPosition < waveSize; waveXPosition++) {
-            wavePoint = respirationSinusWave.get(waveXPosition);
-            respirationSinusGraph.lineTo(waveXPosition, yReferenceRespiration - wavePoint.y);
-
-            wavePoint = respirationCosinusWave.get(waveXPosition);
-            respirationCosinusGraph.lineTo(waveXPosition, yReferenceRespiration - wavePoint.y);
+            wavePoint = bpmNewWave.get(waveXPosition);
+            bpmNewGraph.lineTo(wavePoint.x, yReferenceBpm - wavePoint.y);
         }
 
         graphColor.setStyle(Paint.Style.STROKE);
 
-        canvas.drawPath(respirationCosinusGraph, graphColor);
-        //canvas.drawPath(respirationSinusGraph, graphColor);
+        if (!bpmOldWave.isEmpty() && bpmOldGraph.isEmpty()) {
+            waveSize = bpmOldWave.size();
+            wavePoint = bpmOldWave.get(0);
+            bpmOldGraph.moveTo(wavePoint.x, yReferenceBpm - wavePoint.y);
+
+            for (int waveXPosition = 1; waveXPosition < waveSize; waveXPosition++) {
+                wavePoint = bpmOldWave.get(waveXPosition);
+                bpmOldGraph.lineTo(wavePoint.x, yReferenceBpm - wavePoint.y);
+            }
+        }
+
+        if (!bpmOldGraph.isEmpty()) {
+            graphColor.setAlpha(128);
+            canvas.drawPath(bpmOldGraph, graphColor);
+        }
+
+        graphColor.setAlpha(255);
+        canvas.drawPath(bpmNewGraph, graphColor);
     }
 
-    private void drawHeartBeatGraph(Canvas canvas) {
+    private void drawCardiacWave(Canvas canvas) {
         int index = cardiacIndex - 1;
         float cardiacAmplitude = cardiacWave.get(index).y;
 
@@ -254,7 +270,8 @@ public class VitalGraphView extends View {
             }
 
             if (++line == 7) {
-                yReferenceRespiration = y / 2f;     // half length between top and current y
+                // FIXME
+                yReferenceBpm = 180 - square;     // half length between top and current y
 
                 y += square * 2;
 
