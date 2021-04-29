@@ -17,6 +17,8 @@ public class HpodFooter extends RelativeLayout {
     @ViewById(R.id.viewContainer)
     ViewGroup viewContainer;
 
+    private VitalStatusView vitalStatusView;
+
     public HpodFooter(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -31,7 +33,7 @@ public class HpodFooter extends RelativeLayout {
     public void prepareVitalStatusScreen() {
         viewContainer.removeAllViews();
 
-        VitalStatusView vitalStatusView = VitalStatusView_.build(getContext());
+        vitalStatusView = VitalStatusView_.build(getContext());
         viewContainer.addView(vitalStatusView);
     }
 
@@ -45,12 +47,20 @@ public class HpodFooter extends RelativeLayout {
     }
 
     public void startVitalGraph() {
-        VitalStatusView vitalStatusView = (VitalStatusView) viewContainer.getChildAt(0);
-        vitalStatusView.startVitalGraph();
+        if (vitalStatusView != null) {
+            vitalStatusView.startVitalGraph();
+        }
     }
 
     public void stopVitalGraph() {
-        VitalStatusView vitalStatusView = (VitalStatusView) viewContainer.getChildAt(0);
-        vitalStatusView.stopVitalGraph();
+        if (vitalStatusView != null) {
+            vitalStatusView.stopVitalGraph();
+        }
+    }
+
+    public void updateBpmValue(int bpmValue) {
+        if (vitalStatusView != null) {
+            vitalStatusView.updateBpmValue(bpmValue);
+        }
     }
 }
