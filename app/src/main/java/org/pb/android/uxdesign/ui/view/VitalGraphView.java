@@ -90,8 +90,8 @@ public class VitalGraphView extends View {
     public void onDraw(Canvas canvas) {
         drawRaster(canvas);
 
-        if (respirationIndex > 0) {
-            drawBreathGraph(canvas);
+        if (bpmIndex > 0) {
+            drawBpmWave(canvas);
         }
 
         if (cardiacIndex > 0) {
@@ -108,8 +108,6 @@ public class VitalGraphView extends View {
         }
 
         updateCardiacWave();
-        updateRespirationWave();
-
         invalidate();
     }
 
