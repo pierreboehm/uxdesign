@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import org.pb.android.uxdesign.fragment.SystemStatusFragment_;
 import org.pb.android.uxdesign.fragment.VitalStatusFragment;
 import org.pb.android.uxdesign.fragment.VitalStatusFragment_;
 
+@SuppressLint("NonConstantResourceId")
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
