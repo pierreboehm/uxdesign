@@ -9,9 +9,13 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.Demonstrator;
 import org.pb.android.uxdesign.data.user.CurrentUser;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 
@@ -37,6 +41,23 @@ public class VitalStatusFragment extends Fragment {
 
         hpodHeader.prepareVitalStatusScreen();
         hpodFooter.prepareVitalStatusScreen();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        EventBus.getDefault().unregister(this);
+        super.onPause();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    public void onEvent(Event.BpmUpdate event) {
+        hpodFooter.updateBpmValue(event.getBpmValue());
     }
 
     @Click(R.id.ivLogo)
