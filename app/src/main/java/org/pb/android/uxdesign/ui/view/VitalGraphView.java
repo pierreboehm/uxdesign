@@ -15,9 +15,12 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EView;
 import org.androidannotations.annotations.UiThread;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.util.EKG;
+import org.pb.android.uxdesign.util.Respiration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +58,12 @@ public class VitalGraphView extends View {
     private float yReferenceCardiac = 0f;
     private float yReferenceRespiration = 0f;
 
+    @Bean
+    EKG ekg;
+
+    @Bean
+    Respiration respiration;
+
     public VitalGraphView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -78,6 +87,7 @@ public class VitalGraphView extends View {
 
         gradientGraphColor = new Paint();
         gradientGraphColor.setStyle(Paint.Style.STROKE);
+        gradientGraphColor.setStrokeJoin(Paint.Join.ROUND);
         gradientGraphColor.setStrokeWidth(GRADIENT_GRAPH_STROKE_WIDTH);
     }
 
@@ -116,9 +126,13 @@ public class VitalGraphView extends View {
                 update();
             }
         }, 0, 1);
+
+        ekg.start();
     }
 
     public void stop() {
+        ekg.stop();
+
         if (timer != null) {
             timer.cancel();
             timer = null;
@@ -136,22 +150,7 @@ public class VitalGraphView extends View {
             cardiacWave.clear();
         }
 
-        float cardiacAmplitude = ((float) (Math.sin(cardiacIndex * 0.1f)) * 1.2f) + (float) Math.random();
-
-        if (cardiacIndex == canvasWidth / 2) {
-            cardiacAmplitude += 25f;
-        } else if (cardiacIndex == canvasWidth / 2 + 1) {
-            cardiacAmplitude += 50f;
-        } else if (cardiacIndex == canvasWidth / 2 + 2) {
-            cardiacAmplitude += 25f;
-        } else if (cardiacIndex == canvasWidth / 2 + 4) {
-            cardiacAmplitude -= 5f;
-        } else if (cardiacIndex == canvasWidth / 2 + 5) {
-            cardiacAmplitude -= 15f;
-        } else if(cardiacIndex == canvasWidth / 2 + 6) {
-            cardiacAmplitude -= 5f;
-        }
-
+        float cardiacAmplitude = ekg.getCardiacAmplitude(cardiacIndex);
         PointF pointCardiacWave = new PointF(cardiacIndex, cardiacAmplitude);
 
         cardiacWave.add(pointCardiacWave);
@@ -163,8 +162,8 @@ public class VitalGraphView extends View {
             respirationIndex = 0;
         }
 
-        float respirationSinusAmplitude = ((float) (Math.sin(respirationIndex * 0.05f)) * (4f + (float) Math.random() * 10f)) + (float) Math.random();
-        float respirationCosinusAmplitude = ((float) (Math.cos(respirationIndex * 0.05f)) * 4f) + (float) Math.random();
+        float respirationSinusAmplitude = respiration.getRespirationSinusAmplitude(respirationIndex);
+        float respirationCosinusAmplitude = respiration.getRespirationCosinusAmplitude(respirationIndex);
 
         PointF pointRespirationWave = new PointF(respirationIndex, respirationSinusAmplitude);
         if (respirationIndex >= respirationSinusWave.size()) {
@@ -260,6 +259,7 @@ public class VitalGraphView extends View {
                 y += square * 2;
 
                 yReferenceCardiac = y + ((effectiveHeight - y) / 2f);   // half length between current y and bottom added to current y
+                yReferenceCardiac += square * 2;                        // add 2 lines extra space
             }
         }
     }
