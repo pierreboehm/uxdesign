@@ -18,6 +18,8 @@ import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
+import org.pb.android.uxdesign.ui.view.HpodProcessingView;
+import org.pb.android.uxdesign.ui.view.HpodScanningView;
 
 @SuppressLint("NonConstantResourceId")
 @EFragment(R.layout.fragment_vital_status)
@@ -30,6 +32,9 @@ public class VitalStatusFragment extends Fragment {
 
     @ViewById(R.id.hpodFooter)
     HpodFooter hpodFooter;
+
+    @ViewById(R.id.hpodProcessingView)
+    HpodProcessingView hpodProcessingView;
 
     @Bean
     Demonstrator demonstrator;
@@ -60,13 +65,30 @@ public class VitalStatusFragment extends Fragment {
         hpodFooter.updateBpmValue(event.getBpmValue());
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.StatusSystemProgressUpdate event) {
+        hpodProcessingView.setProgressStatusSystem(event.getStatusSystemProgress());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.DataProcessingProgressUpdate event) {
+        hpodProcessingView.setProgressDataProcessing(event.getDataProcessingProgress());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.DataMonitoringProgressUpdate event) {
+        hpodProcessingView.setProgressDataMonitoring(event.getDataMonitoringProgress());
+    }
+
     @Click(R.id.ivLogo)
     public void onLogoClick() {
         if (hpodHeader.isDischargedState()) {
             hpodHeader.setDischargedState(false, true);
+            hpodProcessingView.startProcessing();
             hpodFooter.startVitalGraph();
         } else {
             hpodHeader.setDischargedState(true, true);
+            hpodProcessingView.stopProcessing();
             hpodFooter.stopVitalGraph();
         }
     }
