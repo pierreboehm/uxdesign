@@ -49,6 +49,8 @@ public class VitalStatusFragment extends Fragment {
 
         hpodHeader.prepareVitalStatusScreen();
         hpodFooter.prepareVitalStatusScreen();
+
+        // FIXME: adapt measured margin from parent layout, so parent container has same surrounding space
     }
 
     @Override
@@ -87,11 +89,17 @@ public class VitalStatusFragment extends Fragment {
     public void onLogoClick() {
         if (hpodHeader.isDischargedState()) {
             hpodHeader.setDischargedState(false, true);
+
             hpodProcessingView.startProcessing();
+            hpodScanningView.startScanning();
+
             hpodFooter.startVitalGraph();
         } else {
             hpodHeader.setDischargedState(true, true);
+
             hpodProcessingView.stopProcessing();
+            hpodScanningView.stopScanning();
+
             hpodFooter.stopVitalGraph();
         }
     }

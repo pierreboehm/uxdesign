@@ -8,6 +8,7 @@
     android:padding="5dp">
 
     <org.pb.android.uxdesign.ui.view.ScanningView_
+        android:id="@+id/scanningView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         />
