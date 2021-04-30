@@ -45,4 +45,8 @@ public class Util {
     public static int getRandomBetween(int min, int max) {
         return min + (int) (Math.random() * ((max - (min)) + 1));
     }
+
+    public static int getProgressValue(int value, int maxValue) {
+        return (int) ((float) value * 100f / (float) maxValue);
+    }
 }
