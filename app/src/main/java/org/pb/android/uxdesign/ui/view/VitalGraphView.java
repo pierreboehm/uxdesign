@@ -17,8 +17,11 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EView;
 import org.androidannotations.annotations.UiThread;
+import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.util.EKG;
+import org.pb.android.uxdesign.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +105,7 @@ public class VitalGraphView extends View {
     }
 
     @UiThread
-    public void update() {
+    public void updateCardiac() {
         if (canvasWidth == 0 || cardiacWaveTimer == null) {
             return;
         }
@@ -126,7 +129,7 @@ public class VitalGraphView extends View {
         cardiacWaveTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                update();
+                updateCardiac();
             }
         }, 0, 1);
 
@@ -151,6 +154,12 @@ public class VitalGraphView extends View {
         // cleanup drawings
         cardiacIndex = 0;
         cardiacWave.clear();
+
+        bpmIndex = 0;
+        bpmNewWave.clear();
+        bpmOldWave.clear();
+        bpmOldGraph.reset();
+
         invalidate();
     }
 
@@ -159,6 +168,12 @@ public class VitalGraphView extends View {
             cardiacIndex = 0;
             cardiacWave.clear();
         }
+
+        int progressValue = Util.getProgressValue(cardiacIndex + bpmIndex, canvasWidth);
+        EventBus.getDefault().post(new Event.StatusSystemProgressUpdate(progressValue));
+
+        progressValue = Util.getProgressValue(cardiacIndex, canvasWidth);
+        EventBus.getDefault().post(new Event.DataMonitoringProgressUpdate(progressValue));
 
         float cardiacAmplitude = ekg.getCardiacAmplitude(cardiacIndex);
         PointF pointCardiacWave = new PointF(cardiacIndex, cardiacAmplitude);
@@ -179,6 +194,9 @@ public class VitalGraphView extends View {
 
             bpmNewWave.clear();
         }
+
+        int progressValue = Util.getProgressValue(bpmIndex, canvasWidth);
+        EventBus.getDefault().post(new Event.DataProcessingProgressUpdate(progressValue));
 
         float bpmAmplitude = ekg.getBpmAmplitude();
         PointF pointBpmWave = new PointF(bpmIndex, bpmAmplitude);

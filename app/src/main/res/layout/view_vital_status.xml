@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <org.pb.android.uxdesign.ui.view.VitalGraphView_
         android:id="@+id/vitalGraphView"
@@ -17,12 +18,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="2dp"
         android:layout_marginRight="4dp"
         android:padding="2dp"
         android:textStyle="bold"
         android:textColor="@color/blue_cyan"
-        android:textSize="12sp"
+        android:textSize="10sp"
         tools:text="60/min"
         />
 
