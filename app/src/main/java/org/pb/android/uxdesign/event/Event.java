@@ -23,4 +23,40 @@ public class Event {
         }
     }
 
+    public static class StatusSystemProgressUpdate {
+        private final int statusSystemProgress;
+
+        public StatusSystemProgressUpdate(int statusSystemProgress) {
+            this.statusSystemProgress = statusSystemProgress;
+        }
+
+        public int getStatusSystemProgress() {
+            return statusSystemProgress;
+        }
+    }
+
+    public static class DataProcessingProgressUpdate {
+        private final int dataProcessingProgress;
+
+        public DataProcessingProgressUpdate(int dataProcessingProgress) {
+            this.dataProcessingProgress = dataProcessingProgress;
+        }
+
+        public int getDataProcessingProgress() {
+            return dataProcessingProgress;
+        }
+    }
+
+    public static class DataMonitoringProgressUpdate {
+        private final int dataMonitoringProgress;
+
+        public DataMonitoringProgressUpdate(int dataMonitoringProgress) {
+            this.dataMonitoringProgress = dataMonitoringProgress;
+        }
+
+        public int getDataMonitoringProgress() {
+            return dataMonitoringProgress;
+        }
+    }
+
 }

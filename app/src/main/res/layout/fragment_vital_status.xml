@@ -31,12 +31,14 @@
                 />
 
             <org.pb.android.uxdesign.ui.view.HpodProcessingView_
+                android:id="@+id/hpodProcessingView"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"
                 />
 
-            <org.pb.android.uxdesign.ui.view.SquareView_
+            <org.pb.android.uxdesign.ui.view.HpodScanningView_
+                android:id="@+id/hpodScanningView"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"
