@@ -36,6 +36,9 @@ public class VitalStatusFragment extends Fragment {
     @ViewById(R.id.hpodProcessingView)
     HpodProcessingView hpodProcessingView;
 
+    @ViewById(R.id.hpodScanningView)
+    HpodScanningView hpodScanningView;
+
     @Bean
     Demonstrator demonstrator;
 
