@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:layout_width="9dp"
+        android:layout_height="14dp"
+        android:src="@drawable/iv_open_hexagon_with_dot"
+        android:scaleType="fitXY"
+        android:fitsSystemWindows="true"
+        />
+
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:textAllCaps="true"
+        android:textSize="6sp"
+        android:textColor="@color/white"
+        tools:text="POWER SYSTEM"
+        />
+
+</LinearLayout>
