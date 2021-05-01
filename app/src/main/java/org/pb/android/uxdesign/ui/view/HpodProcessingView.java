@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.ui.button.ButtonView;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_processing)
@@ -42,8 +44,16 @@ public class HpodProcessingView extends LinearLayout {
     @ViewById(R.id.progressBarDataMonitoring)
     ProgressBar progressBarDataMonitoring;
 
+    @ViewById(R.id.bvFooterText)
+    ButtonView bvFooterText;
+
     public HpodProcessingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @AfterViews
+    public void initView() {
+        bvFooterText.setText("HPOD STATUS SYS");
     }
 
     public void setProgressStatusSystem(int progressStatusSystem) {

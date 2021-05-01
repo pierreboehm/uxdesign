@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="90dp"
+    android:layout_height="90dp"
+    android:orientation="vertical"
+    android:background="@drawable/rect_shape_rounded"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <org.pb.android.uxdesign.ui.button.ButtonView_
+            android:id="@+id/bvSystemStatusHeaderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="14dp"
+            android:src="@drawable/iv_hexagon_semi_transparent"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitXY"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+    <org.pb.android.uxdesign.ui.view.DotPatternBigView_
+        android:id="@+id/dotPatternView"
+        android:layout_width="48dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blue_deep_sky"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="3dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvSystemStatusFooterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textAllCaps="true"
+            android:textSize="6sp"
+            android:textColor="@color/white"
+            tools:text="POWER SYSTEM"
+            />
+
+        <View
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

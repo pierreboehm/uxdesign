@@ -92,29 +92,10 @@
         android:layout_marginBottom="3dp"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <org.pb.android.uxdesign.ui.button.ButtonView_
+        android:id="@+id/bvFooterText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:src="@drawable/hexagon"
-            />
-
-        <ImageButton
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:src="@drawable/hexagon"
-            />
-
-        <ImageButton
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:src="@drawable/hexagon"
-            />
-
-    </LinearLayout>
+        />
 
 </LinearLayout>
