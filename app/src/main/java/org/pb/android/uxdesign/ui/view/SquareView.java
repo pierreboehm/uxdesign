@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import org.androidannotations.annotations.EViewGroup;
 import org.pb.android.uxdesign.R;
 
+@Deprecated
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_square)
 public class SquareView extends LinearLayout {
