@@ -15,12 +15,16 @@ import androidx.annotation.Nullable;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.button.ButtonView;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_processing)
 public class HpodProcessingView extends LinearLayout {
+
+    private static final String TAG = HpodProcessingView.class.getSimpleName();
 
     private static final int ANIMATION_SPEED_IN_MILLISECONDS = 500;
     private static final float NOT_TRANSPARENT = 1f;
@@ -47,6 +51,8 @@ public class HpodProcessingView extends LinearLayout {
     @ViewById(R.id.bvFooterText)
     ButtonView bvFooterText;
 
+    private int modulesOnlineCount;
+
     public HpodProcessingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
@@ -54,6 +60,7 @@ public class HpodProcessingView extends LinearLayout {
     @AfterViews
     public void initView() {
         bvFooterText.setText("HPOD STATUS SYS");
+        modulesOnlineCount = 0;
     }
 
     public void setProgressStatusSystem(int progressStatusSystem) {
@@ -72,6 +79,8 @@ public class HpodProcessingView extends LinearLayout {
         tvStatusSystem.setAlpha(NOT_TRANSPARENT);
         tvDataProcessing.setAlpha(NOT_TRANSPARENT);
         tvDataMonitoring.setAlpha(NOT_TRANSPARENT);
+
+        modulesOnlineCount = 3;
     }
 
     public void stopProcessing() {
@@ -101,10 +110,20 @@ public class HpodProcessingView extends LinearLayout {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 textView.setAlpha(SEMI_TRANSPARENT);
+                afterProcessingShutDown();
             }
         });
 
         animator.setDuration(ANIMATION_SPEED_IN_MILLISECONDS);
         animator.start();
+    }
+
+    // FIXME: really ???
+    private void afterProcessingShutDown() {
+        modulesOnlineCount--;
+
+        if (modulesOnlineCount == 0) {
+            EventBus.getDefault().post(new Event.ShowUserStatus());
+        }
     }
 }
