@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,7 +11,14 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:padding="10dp"
-        android:gravity="center_horizontal">
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:src="@drawable/circle_shape"
+            android:layout_marginRight="8dp"
+            />
 
         <org.pb.android.uxdesign.ui.button.MenueButtonView_
             android:id="@+id/btnPassengerInfo"
@@ -19,19 +27,33 @@
             tools:text="PASSENGER INFO"
             />
 
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:src="@drawable/circle_shape"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            />
+
         <org.pb.android.uxdesign.ui.button.MenueButtonView_
             android:id="@+id/btnUnitInfo"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             tools:text="UNIT INFO"
+            />
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:src="@drawable/circle_shape"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             />
 
         <org.pb.android.uxdesign.ui.button.MenueButtonView_
             android:id="@+id/btnMaintenance"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             tools:text="MAINTENANCE"
             />
 
