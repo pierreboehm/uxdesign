@@ -13,6 +13,7 @@ import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
+import org.pb.android.uxdesign.ui.view.HpodSystemStatusView;
 
 @SuppressLint("NonConstantResourceId")
 @EFragment(R.layout.fragment_main)
@@ -26,6 +27,15 @@ public class MainFragment extends Fragment {
     @ViewById(R.id.hpodFooter)
     HpodFooter hpodFooter;
 
+    @ViewById(R.id.powerSystemStatusView)
+    HpodSystemStatusView powerSystemStatusView;
+
+    @ViewById(R.id.cpuSystemStatusView)
+    HpodSystemStatusView cpuSystemStatusView;
+
+    @ViewById(R.id.tempSystemStatusView)
+    HpodSystemStatusView tempSystemStatusView;
+
     @Bean
     Demonstrator demonstrator;
 
@@ -36,6 +46,10 @@ public class MainFragment extends Fragment {
 
         hpodHeader.prepareMainScreen();
         hpodFooter.prepareMainScreen();
+
+        powerSystemStatusView.preparePowerSystemStatusScreen();
+        cpuSystemStatusView.prepareCpuSystemStatusScreen();
+        tempSystemStatusView.prepareTempSystemStatusScreen();
     }
 
 }

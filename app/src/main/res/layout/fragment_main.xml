@@ -25,19 +25,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <org.pb.android.uxdesign.ui.view.SquareView_
+            <org.pb.android.uxdesign.ui.view.HpodSystemStatusView_
+                android:id="@+id/powerSystemStatusView"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"
                 />
 
-            <org.pb.android.uxdesign.ui.view.SquareView_
+            <org.pb.android.uxdesign.ui.view.HpodSystemStatusView_
+                android:id="@+id/cpuSystemStatusView"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"
                 />
 
-            <org.pb.android.uxdesign.ui.view.SquareView_
+            <org.pb.android.uxdesign.ui.view.HpodSystemStatusView_
+                android:id="@+id/tempSystemStatusView"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"

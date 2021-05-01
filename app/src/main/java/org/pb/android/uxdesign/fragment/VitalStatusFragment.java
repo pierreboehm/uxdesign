@@ -19,6 +19,7 @@ import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 import org.pb.android.uxdesign.ui.view.HpodProcessingView;
 import org.pb.android.uxdesign.ui.view.HpodScanningView;
+import org.pb.android.uxdesign.ui.view.HpodSystemStatusView;
 
 @SuppressLint("NonConstantResourceId")
 @EFragment(R.layout.fragment_vital_status)
@@ -38,6 +39,9 @@ public class VitalStatusFragment extends Fragment {
     @ViewById(R.id.hpodScanningView)
     HpodScanningView hpodScanningView;
 
+    @ViewById(R.id.powerSystemStatusView)
+    HpodSystemStatusView powerSystemStatusView;
+
     @Bean
     Demonstrator demonstrator;
 
@@ -48,6 +52,8 @@ public class VitalStatusFragment extends Fragment {
 
         hpodHeader.prepareVitalStatusScreen();
         hpodFooter.prepareVitalStatusScreen();
+
+        powerSystemStatusView.preparePowerSystemStatusScreen();
     }
 
     @Override
