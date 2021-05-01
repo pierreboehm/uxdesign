@@ -1,7 +1,6 @@
 package org.pb.android.uxdesign.fragment;
 
 import android.annotation.SuppressLint;
-
 import androidx.fragment.app.Fragment;
 
 import org.androidannotations.annotations.AfterViews;
@@ -49,8 +48,6 @@ public class VitalStatusFragment extends Fragment {
 
         hpodHeader.prepareVitalStatusScreen();
         hpodFooter.prepareVitalStatusScreen();
-
-        // FIXME: adapt measured margin from parent layout, so parent container has same surrounding space
     }
 
     @Override
