@@ -89,7 +89,7 @@
         android:layout_height="1dp"
         android:background="@color/blue_deep_sky"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="3dp"
         />
 
     <LinearLayout
