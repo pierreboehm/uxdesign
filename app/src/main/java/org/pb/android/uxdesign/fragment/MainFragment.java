@@ -11,6 +11,7 @@ import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.data.Demonstrator;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
+import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 import org.pb.android.uxdesign.ui.view.HpodSystemStatusView;
@@ -44,8 +45,8 @@ public class MainFragment extends Fragment {
         CurrentUser currentUser = demonstrator.getCurrentUser();
         hpodHeader.setCurrentUser(currentUser);
 
-        hpodHeader.prepareMainScreen();
-        hpodFooter.prepareMainScreen();
+        hpodHeader.prepareScreen(ViewMode.MAIN);
+        hpodFooter.prepareScreen(ViewMode.MAIN);
 
         powerSystemStatusView.preparePowerSystemStatusScreen();
         cpuSystemStatusView.prepareCpuSystemStatusScreen();

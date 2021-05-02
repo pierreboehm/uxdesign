@@ -8,6 +8,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 
@@ -25,7 +26,7 @@ public class SystemStatusFragment extends Fragment {
 
     @AfterViews
     public void initViews() {
-        hpodHeader.prepareSystemStatusScreen();
-        hpodFooter.prepareSystemStatusScreen();
+        hpodHeader.prepareScreen(ViewMode.UNIT_INFO);
+        hpodFooter.prepareScreen(ViewMode.UNIT_INFO);
     }
 }

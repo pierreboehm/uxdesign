@@ -3,7 +3,6 @@ package org.pb.android.uxdesign.ui.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -14,6 +13,7 @@ import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.data.user.UserData;
+import org.pb.android.uxdesign.ui.ViewMode;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_header)
@@ -53,6 +53,7 @@ public class HpodHeader extends RelativeLayout {
     ViewGroup logoBox;
 
     private CurrentUser currentUser;
+    private ViewMode viewMode;
 
     public HpodHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -63,28 +64,26 @@ public class HpodHeader extends RelativeLayout {
         bind(currentUser);
     }
 
-    public void prepareMainScreen() {
-        userDataBox.setVisibility(VISIBLE);
-        logoBox.setVisibility(VISIBLE);
-        idBox.setVisibility(VISIBLE);
-        modeBox.setVisibility(GONE);
-        setDischargedState(false, false);
-    }
+    public void prepareScreen(ViewMode viewMode) {
+        this.viewMode = viewMode;
 
-    public void prepareVitalStatusScreen() {
-        userDataBox.setVisibility(VISIBLE);
-        logoBox.setVisibility(VISIBLE);
-        idBox.setVisibility(GONE);
-        modeBox.setVisibility(VISIBLE);
-        setDischargedState(true, false);
-    }
-
-    public void prepareSystemStatusScreen() {
-        userDataBox.setVisibility(GONE);
-        logoBox.setVisibility(VISIBLE);
-        idBox.setVisibility(GONE);
-        modeBox.setVisibility(GONE);
-        setDischargedState(false, true);
+        switch (viewMode) {
+            case MAIN: {
+                prepareMainScreen();
+                break;
+            }
+            case PASSENGER_INFO: {
+                prepareVitalStatusScreen();
+                break;
+            }
+            case UNIT_INFO: {
+                prepareSystemStatusScreen();
+                break;
+            }
+            case MAINTENANCE: {
+                break;
+            }
+        }
     }
 
     public void setDischargedState(boolean showDischargedState, boolean involveLogo) {
@@ -105,6 +104,30 @@ public class HpodHeader extends RelativeLayout {
 
     public boolean isDischargedState() {
         return tvState.getVisibility() == VISIBLE;
+    }
+
+    private void prepareMainScreen() {
+        userDataBox.setVisibility(VISIBLE);
+        logoBox.setVisibility(VISIBLE);
+        idBox.setVisibility(VISIBLE);
+        modeBox.setVisibility(GONE);
+        setDischargedState(false, false);
+    }
+
+    private void prepareVitalStatusScreen() {
+        userDataBox.setVisibility(VISIBLE);
+        logoBox.setVisibility(VISIBLE);
+        idBox.setVisibility(GONE);
+        modeBox.setVisibility(VISIBLE);
+        setDischargedState(true, false);
+    }
+
+    private void prepareSystemStatusScreen() {
+        userDataBox.setVisibility(GONE);
+        logoBox.setVisibility(VISIBLE);
+        idBox.setVisibility(GONE);
+        modeBox.setVisibility(GONE);
+        setDischargedState(false, true);
     }
 
     private void bind(CurrentUser currentUser) {

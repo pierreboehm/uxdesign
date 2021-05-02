@@ -15,6 +15,7 @@ import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.Demonstrator;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.event.Event;
+import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 import org.pb.android.uxdesign.ui.view.HpodProcessingView;
@@ -50,8 +51,8 @@ public class VitalStatusFragment extends Fragment {
         CurrentUser currentUser = demonstrator.getCurrentUser();
         hpodHeader.setCurrentUser(currentUser);
 
-        hpodHeader.prepareVitalStatusScreen();
-        hpodFooter.prepareVitalStatusScreen();
+        hpodHeader.prepareScreen(ViewMode.PASSENGER_INFO);
+        hpodFooter.prepareScreen(ViewMode.PASSENGER_INFO);
 
         powerSystemStatusView.preparePowerSystemStatusScreen();
     }
