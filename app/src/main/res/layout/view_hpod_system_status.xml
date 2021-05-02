@@ -61,7 +61,7 @@
             tools:text="POWER SYSTEM"
             />
 
-        <View
+        <org.pb.android.uxdesign.ui.view.DotPatternSmallView_
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_alignParentRight="true"
