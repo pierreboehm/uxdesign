@@ -52,6 +52,12 @@ public class HpodHeader extends RelativeLayout {
     @ViewById(R.id.logoBox)
     ViewGroup logoBox;
 
+    @ViewById(R.id.tvMainText)
+    TextView tvMainText;
+
+    @ViewById(R.id.tvSubText)
+    TextView tvSubText;
+
     private CurrentUser currentUser;
     private ViewMode viewMode;
 
@@ -110,7 +116,9 @@ public class HpodHeader extends RelativeLayout {
         userDataBox.setVisibility(VISIBLE);
         logoBox.setVisibility(VISIBLE);
         idBox.setVisibility(VISIBLE);
-        modeBox.setVisibility(GONE);
+        modeBox.setVisibility(VISIBLE);
+        tvSubText.setVisibility(GONE);
+        tvMainText.setText("HPOD SYSTEMS OPTIMAL");
         setDischargedState(false, false);
     }
 
@@ -119,6 +127,9 @@ public class HpodHeader extends RelativeLayout {
         logoBox.setVisibility(VISIBLE);
         idBox.setVisibility(GONE);
         modeBox.setVisibility(VISIBLE);
+        tvSubText.setVisibility(VISIBLE);
+        tvMainText.setText("HPOD SYSTEM");
+        tvSubText.setText("PASSENGER VITAL STATUS");
         setDischargedState(true, false);
     }
 

@@ -27,6 +27,12 @@ public class MainMenuView extends RelativeLayout {
     @ViewById(R.id.btnMaintenance)
     MenueButtonView btnMaintenance;
 
+    @ViewById(R.id.dotPatternBigView)
+    DotPatternBigView dotPatternBigView;
+
+    @ViewById(R.id.dotPatternSmallView)
+    DotPatternSmallView dotPatternSmallView;
+
     public MainMenuView(Context context) {
         super(context);
     }
@@ -36,6 +42,9 @@ public class MainMenuView extends RelativeLayout {
         btnPassengerInfo.setText("PASSENGER INFO");
         btnUnitInfo.setText("UNIT INFO");
         btnMaintenance.setText("MAINTENANCE");
+
+        dotPatternBigView.setDotPattern(DotPatternBigView.DotPattern.RANDOM);
+        dotPatternSmallView.setDefaultColor(getContext().getColor(R.color.white));
     }
 
     @Click(R.id.btnPassengerInfo)
