@@ -38,6 +38,8 @@ public class VitalGraphView extends View {
     private static final int RASTER_COUNT_X_DIRECTION = 100;
 
     private Context context;
+
+    // FIXME: move to Demonstrator
     private Timer cardiacWaveTimer;
 
     private Paint rasterColor;
@@ -59,6 +61,7 @@ public class VitalGraphView extends View {
     private float yReferenceCardiac = 0f;
     private float yReferenceBpm = 0f;
 
+    //FIXME: move to Demonstrator
     @Bean
     EKG ekg;
 
@@ -123,6 +126,8 @@ public class VitalGraphView extends View {
         updateBpmWave();
     }
 
+    // FIXME: move to Demonstrator
+    @Deprecated
     public void start() {
         cardiacWaveTimer = new Timer();
 
@@ -143,6 +148,8 @@ public class VitalGraphView extends View {
         ekg.start();
     }
 
+    // FIXME: move to Demonstrator
+    @Deprecated
     public void stop() {
         ekg.stop();
 
