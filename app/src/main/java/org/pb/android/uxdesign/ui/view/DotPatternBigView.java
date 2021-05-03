@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EView;
+import org.androidannotations.annotations.UiThread;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.util.Util;
 
@@ -17,7 +18,7 @@ import org.pb.android.uxdesign.util.Util;
 public class DotPatternBigView extends View {
 
     public enum DotPattern {
-        UNDEFINED, TRIANGLE, SQUARE, CIRCLE
+        UNDEFINED, TRIANGLE, SQUARE, CIRCLE, RANDOM
     }
 
     private Paint rasterColor;
@@ -61,9 +62,19 @@ public class DotPatternBigView extends View {
                 drawCirclePattern(canvas);
                 break;
             }
+            case RANDOM: {
+                drawRandomSquarePattern(canvas);
+                break;
+            }
+
         }
 
         super.onDraw(canvas);
+    }
+
+    @UiThread
+    public void update() {
+        invalidate();
     }
 
     public void setDotPattern(DotPattern dotPattern) {
@@ -175,5 +186,38 @@ public class DotPatternBigView extends View {
                 break;
             }
         }
+    }
+
+    private void drawRandomSquarePattern(Canvas canvas) {
+        float halfWidth = canvas.getWidth() / 2f;
+        int height = canvas.getHeight();
+
+        int lineCount = 0;
+        int dotCount = 8;
+
+        int dot = (int) ((float) height / (float) ((dotCount * 2) + 1));
+        int doubledDot = dot * 2;
+        float halfDot = dot / 2f;
+
+        int defaultColor = dotColor.getColor();
+        dotColor.setColor(getContext().getColor(R.color.white));
+
+        for (int dotY = doubledDot; dotY < height; dotY += doubledDot) {
+
+            float dotX = halfWidth - (dot * (dotCount - 1));
+
+            for (int dotNumber = 0; dotNumber < dotCount; dotNumber++) {
+                if (Util.getRandomBoolean()) {
+                    canvas.drawCircle(dotX, dotY, halfDot, dotColor);
+                }
+                dotX += (float) doubledDot;
+            }
+
+            if (++lineCount > (dotCount - 1)) {
+                break;
+            }
+        }
+
+        dotColor.setColor(defaultColor);
     }
 }

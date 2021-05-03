@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EView;
+import org.androidannotations.annotations.UiThread;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.util.Util;
 
@@ -38,6 +39,15 @@ public class DotPatternSmallView extends View {
         drawDotPattern(canvas);
 
         super.onDraw(canvas);
+    }
+
+    @UiThread
+    public void update() {
+        invalidate();
+    }
+
+    public void setDefaultColor(int defaultColor) {
+        color.setColor(defaultColor);
     }
 
     private void drawDotPattern(Canvas canvas) {
