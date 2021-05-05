@@ -12,27 +12,14 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
-import org.pb.android.uxdesign.data.user.UserData;
 import org.pb.android.uxdesign.ui.ViewMode;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_header)
 public class HpodHeader extends RelativeLayout {
 
-    @ViewById(R.id.tvName)
-    TextView tvName;
-
-    @ViewById(R.id.tvHome)
-    TextView tvHome;
-
-    @ViewById(R.id.tvProfession)
-    TextView tvProfession;
-
-    @ViewById(R.id.tvIdCode)
-    TextView tvIdCode;
-
-    @ViewById(R.id.tvState)
-    TextView tvState;
+    @ViewById(R.id.headerViewContainer)
+    ViewGroup viewContainer;
 
     @ViewById(R.id.ivLogo)
     ImageView ivLogo;
@@ -40,26 +27,10 @@ public class HpodHeader extends RelativeLayout {
     @ViewById(R.id.tvLogo)
     TextView tvLogo;
 
-    @ViewById(R.id.userDataBox)
-    ViewGroup userDataBox;
-
-    //@ViewById(R.id.idBox)
-    //ViewGroup idBox;
-
-    @ViewById(R.id.tvCodeStatic)
-    TextView tvCodeStatic;
-
-    @ViewById(R.id.modeBox)
-    ViewGroup modeBox;
-
     @ViewById(R.id.logoBox)
     ViewGroup logoBox;
 
-    @ViewById(R.id.tvMainText)
-    TextView tvMainText;
-
-    @ViewById(R.id.tvSubText)
-    TextView tvSubText;
+    private UserDataView userDataView;
 
     private CurrentUser currentUser;
     private ViewMode viewMode;
@@ -70,7 +41,6 @@ public class HpodHeader extends RelativeLayout {
 
     public void setCurrentUser(CurrentUser currentUser) {
         this.currentUser = currentUser;
-        bind(currentUser);
     }
 
     public void prepareScreen(ViewMode viewMode) {
@@ -96,18 +66,16 @@ public class HpodHeader extends RelativeLayout {
     }
 
     public void setDischargedState(boolean showDischargedState, boolean involveLogo) {
+        if (userDataView != null) {
+            userDataView.setDischargedState(showDischargedState);
+        }
+
         if (showDischargedState) {
-            tvState.setVisibility(VISIBLE);
-            tvCodeStatic.setVisibility(INVISIBLE);
-            tvIdCode.setVisibility(INVISIBLE);
             if (involveLogo) {
                 ivLogo.clearColorFilter();
                 tvLogo.setTextColor(getContext().getColor(R.color.blue_light));
             }
         } else {
-            tvState.setVisibility(INVISIBLE);
-            tvCodeStatic.setVisibility(VISIBLE);
-            tvIdCode.setVisibility(VISIBLE);
             if (involveLogo) {
                 ivLogo.setColorFilter(getContext().getColor(R.color.blue_cyan));
                 tvLogo.setTextColor(getContext().getColor(R.color.blue_cyan));
@@ -116,62 +84,37 @@ public class HpodHeader extends RelativeLayout {
     }
 
     public boolean isDischargedState() {
-        return tvState.getVisibility() == VISIBLE;
+        return userDataView != null && userDataView.isDischargedState();
     }
 
     private void prepareMainScreen() {
-        userDataBox.setVisibility(VISIBLE);
-        logoBox.setVisibility(VISIBLE);
+        viewContainer.removeAllViews();
 
-        //idBox.setVisibility(VISIBLE);
-        tvCodeStatic.setVisibility(VISIBLE);
-        tvIdCode.setVisibility(VISIBLE);
+        userDataView = UserDataView_.build(getContext(), viewMode);
+        userDataView.setCurrentUser(currentUser);
 
-        modeBox.setVisibility(VISIBLE);
-        tvSubText.setVisibility(GONE);
-        tvMainText.setText("HPOD SYSTEMS OPTIMAL");
+        viewContainer.addView(userDataView);
+
         setDischargedState(false, false);
     }
 
     private void prepareVitalStatusScreen() {
-        userDataBox.setVisibility(VISIBLE);
-        logoBox.setVisibility(VISIBLE);
+        viewContainer.removeAllViews();
 
-        //idBox.setVisibility(INVISIBLE);
-        tvCodeStatic.setVisibility(VISIBLE);
-        tvIdCode.setVisibility(VISIBLE);
+        userDataView = UserDataView_.build(getContext(), viewMode);
+        userDataView.setCurrentUser(currentUser);
 
-        modeBox.setVisibility(VISIBLE);
-        tvSubText.setVisibility(VISIBLE);
-        tvMainText.setText("HPOD SYSTEM");
-        tvSubText.setText("PASSENGER VITAL STATUS");
+        viewContainer.addView(userDataView);
+
         setDischargedState(true, false);
     }
 
     private void prepareSystemStatusScreen() {
-        userDataBox.setVisibility(INVISIBLE);
-        logoBox.setVisibility(VISIBLE);
+        viewContainer.removeAllViews();
 
-        //idBox.setVisibility(INVISIBLE);
-        tvCodeStatic.setVisibility(INVISIBLE);
-        tvIdCode.setVisibility(INVISIBLE);
+        userDataView = null;
 
-        modeBox.setVisibility(INVISIBLE);
         setDischargedState(false, true);
-    }
-
-    private void bind(CurrentUser currentUser) {
-        UserData userData = currentUser.getUserData();
-
-        String locality = userData.getLocality();
-        String state = userData.getState();
-        String country = userData.getCountry();
-
-        tvName.setText(userData.getName());
-        tvHome.setText(String.format("%s, %s", locality, locality.equals(state) ? country : state));
-        tvProfession.setText(userData.getProfession());
-
-        tvIdCode.setText(userData.getId());
     }
 
 }

@@ -15,7 +15,7 @@ import org.pb.android.uxdesign.ui.ViewMode;
 @EViewGroup(R.layout.view_hpod_footer)
 public class HpodFooter extends RelativeLayout {
 
-    @ViewById(R.id.viewContainer)
+    @ViewById(R.id.footerViewContainer)
     ViewGroup viewContainer;
 
     private ViewMode viewMode;
