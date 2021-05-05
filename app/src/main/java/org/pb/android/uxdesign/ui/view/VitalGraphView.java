@@ -282,23 +282,19 @@ public class VitalGraphView extends View {
         int square = width / (RASTER_COUNT_X_DIRECTION * 2);
         int line = 0;
 
-        int effectiveWidth = width - square;
-        int effectiveHeight = height - square;
+        canvasWidth = width;
 
-        canvasWidth = width - square;
-
-        for (int y = 0; y < effectiveHeight; y += square * 2) {
-            for (int x = 0; x < effectiveWidth; x += square * 2) {
+        for (int y = 0; y < height; y += square * 2) {
+            for (int x = 0; x < width; x += square * 2) {
                 canvas.drawRect(x, y, x + square, y + square, rasterColor);
             }
 
             if (++line == 7) {
-                // FIXME
-                yReferenceBpm = 180 - square;     // half length between top and current y
+                yReferenceBpm = y + (y / 2f);
 
                 y += square * 2;
 
-                yReferenceCardiac = y + ((effectiveHeight - y) / 2f);   // half length between current y and bottom added to current y
+                yReferenceCardiac = y + ((height - y) / 2f);   // half length between current y and bottom added to current y
                 yReferenceCardiac += square * 2;                        // add 2 lines extra space
             }
         }
