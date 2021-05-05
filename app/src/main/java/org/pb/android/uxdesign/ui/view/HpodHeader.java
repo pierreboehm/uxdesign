@@ -43,8 +43,11 @@ public class HpodHeader extends RelativeLayout {
     @ViewById(R.id.userDataBox)
     ViewGroup userDataBox;
 
-    @ViewById(R.id.idBox)
-    ViewGroup idBox;
+    //@ViewById(R.id.idBox)
+    //ViewGroup idBox;
+
+    @ViewById(R.id.tvCodeStatic)
+    TextView tvCodeStatic;
 
     @ViewById(R.id.modeBox)
     ViewGroup modeBox;
@@ -95,12 +98,16 @@ public class HpodHeader extends RelativeLayout {
     public void setDischargedState(boolean showDischargedState, boolean involveLogo) {
         if (showDischargedState) {
             tvState.setVisibility(VISIBLE);
+            tvCodeStatic.setVisibility(INVISIBLE);
+            tvIdCode.setVisibility(INVISIBLE);
             if (involveLogo) {
                 ivLogo.clearColorFilter();
                 tvLogo.setTextColor(getContext().getColor(R.color.blue_light));
             }
         } else {
             tvState.setVisibility(INVISIBLE);
+            tvCodeStatic.setVisibility(VISIBLE);
+            tvIdCode.setVisibility(VISIBLE);
             if (involveLogo) {
                 ivLogo.setColorFilter(getContext().getColor(R.color.blue_cyan));
                 tvLogo.setTextColor(getContext().getColor(R.color.blue_cyan));
@@ -115,7 +122,11 @@ public class HpodHeader extends RelativeLayout {
     private void prepareMainScreen() {
         userDataBox.setVisibility(VISIBLE);
         logoBox.setVisibility(VISIBLE);
-        idBox.setVisibility(VISIBLE);
+
+        //idBox.setVisibility(VISIBLE);
+        tvCodeStatic.setVisibility(VISIBLE);
+        tvIdCode.setVisibility(VISIBLE);
+
         modeBox.setVisibility(VISIBLE);
         tvSubText.setVisibility(GONE);
         tvMainText.setText("HPOD SYSTEMS OPTIMAL");
@@ -125,7 +136,11 @@ public class HpodHeader extends RelativeLayout {
     private void prepareVitalStatusScreen() {
         userDataBox.setVisibility(VISIBLE);
         logoBox.setVisibility(VISIBLE);
-        idBox.setVisibility(GONE);
+
+        //idBox.setVisibility(INVISIBLE);
+        tvCodeStatic.setVisibility(VISIBLE);
+        tvIdCode.setVisibility(VISIBLE);
+
         modeBox.setVisibility(VISIBLE);
         tvSubText.setVisibility(VISIBLE);
         tvMainText.setText("HPOD SYSTEM");
@@ -134,10 +149,14 @@ public class HpodHeader extends RelativeLayout {
     }
 
     private void prepareSystemStatusScreen() {
-        userDataBox.setVisibility(GONE);
+        userDataBox.setVisibility(INVISIBLE);
         logoBox.setVisibility(VISIBLE);
-        idBox.setVisibility(GONE);
-        modeBox.setVisibility(GONE);
+
+        //idBox.setVisibility(INVISIBLE);
+        tvCodeStatic.setVisibility(INVISIBLE);
+        tvIdCode.setVisibility(INVISIBLE);
+
+        modeBox.setVisibility(INVISIBLE);
         setDischargedState(false, true);
     }
 
