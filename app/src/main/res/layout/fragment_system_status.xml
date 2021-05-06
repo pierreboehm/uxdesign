@@ -25,13 +25,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <org.pb.android.uxdesign.ui.view.SquareView_
+            <org.pb.android.uxdesign.ui.view.HpodProgressValueView_
+                android:id="@+id/progressValue1"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"
                 />
 
-            <org.pb.android.uxdesign.ui.view.SquareView_
+            <org.pb.android.uxdesign.ui.view.HpodProgressValueView_
+                android:id="@+id/progressValue2"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"
