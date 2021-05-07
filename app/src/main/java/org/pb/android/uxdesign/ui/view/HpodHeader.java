@@ -30,6 +30,10 @@ public class HpodHeader extends RelativeLayout {
     @ViewById(R.id.logoBox)
     ViewGroup logoBox;
 
+    @ViewById(R.id.unitInfoTopMenueView)
+    UnitInfoTopMenuView unitInfoTopMenu;
+
+    private UnitInfoTopContentView unitInfoTopContent;
     private UserDataView userDataView;
 
     private CurrentUser currentUser;
@@ -90,6 +94,9 @@ public class HpodHeader extends RelativeLayout {
     private void prepareMainScreen() {
         viewContainer.removeAllViews();
 
+        logoBox.setVisibility(VISIBLE);
+        unitInfoTopMenu.setVisibility(GONE);
+
         userDataView = UserDataView_.build(getContext(), viewMode);
         userDataView.setCurrentUser(currentUser);
 
@@ -100,6 +107,9 @@ public class HpodHeader extends RelativeLayout {
 
     private void prepareVitalStatusScreen() {
         viewContainer.removeAllViews();
+
+        logoBox.setVisibility(VISIBLE);
+        unitInfoTopMenu.setVisibility(GONE);
 
         userDataView = UserDataView_.build(getContext(), viewMode);
         userDataView.setCurrentUser(currentUser);
@@ -112,7 +122,13 @@ public class HpodHeader extends RelativeLayout {
     private void prepareSystemStatusScreen() {
         viewContainer.removeAllViews();
 
+        logoBox.setVisibility(GONE);
+        unitInfoTopMenu.setVisibility(VISIBLE);
+
         userDataView = null;
+
+        unitInfoTopContent = UnitInfoTopContentView_.build(getContext());
+        viewContainer.addView(unitInfoTopContent);
 
         setDischargedState(false, true);
     }

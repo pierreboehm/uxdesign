@@ -90,7 +90,8 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginRight="40dp"
-        tools:visibility="visible">
+        android:visibility="visible"
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/ivLogo"
@@ -114,5 +115,14 @@
             />
 
     </LinearLayout>
+
+    <org.pb.android.uxdesign.ui.view.UnitInfoTopMenuView_
+        android:id="@+id/unitInfoTopMenueView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
 
 </RelativeLayout>

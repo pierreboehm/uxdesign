@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="center_column_x_margin">-18dp</dimen>
+    <dimen name="beside_center_column_x_margin">-8dp</dimen>
+
+    <dimen name="hex_button_1_width">75dp</dimen>
+    <dimen name="hex_button_1_height">65dp</dimen>
+
+    <dimen name="hex_button_2_width">37dp</dimen>
+    <dimen name="hex_button_2_height">32dp</dimen>
+</resources>
