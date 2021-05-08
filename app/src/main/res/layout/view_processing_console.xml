@@ -29,7 +29,7 @@
             android:textColor="@color/blue_cyan"
             android:textSize="3sp"
             android:textScaleX="1.5"
-            android:text="real time data"
+            android:text="ZONE J6/AL24"
             />
 
         <TextView
@@ -47,11 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="6dp"
             android:textColor="@color/blue_cyan"
-            android:textSize="4sp"
+            android:textSize="3sp"
             android:textScaleX="1.5"
-            android:text="Processing console"
+            android:text="PROCESSING CONSOLE"
             />
 
     </RelativeLayout>
