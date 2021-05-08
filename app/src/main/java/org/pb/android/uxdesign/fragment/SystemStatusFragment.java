@@ -47,6 +47,18 @@ public class SystemStatusFragment extends Fragment {
         progressValueView2.setProgressValue(Util.getRandomBetween(0, 100));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //hpodFooter.startConsole();
+    }
+
+    @Override
+    public void onPause() {
+        hpodFooter.stopConsole();
+        super.onPause();
+    }
+
     @Click(R.id.progressValue1)
     void onProgressValue1Click() {
         progressValueView1.setProgressValue(Util.getRandomBetween(0, 100));

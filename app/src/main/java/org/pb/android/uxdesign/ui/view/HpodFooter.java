@@ -22,6 +22,7 @@ public class HpodFooter extends RelativeLayout {
 
     private MainMenuView mainMenuView;
     private VitalStatusView vitalStatusView;
+    private UnitInfoMenuView unitInfoMenuView;
 
     public HpodFooter(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -61,6 +62,18 @@ public class HpodFooter extends RelativeLayout {
         }
     }
 
+    public void startConsole() {
+        if (unitInfoMenuView != null) {
+            unitInfoMenuView.startConsole();
+        }
+    }
+
+    public void stopConsole() {
+        if (unitInfoMenuView != null) {
+            unitInfoMenuView.stopConsole();
+        }
+    }
+
     public void updateBpmValue(int bpmValue) {
         if (vitalStatusView != null) {
             vitalStatusView.updateBpmValue(bpmValue);
@@ -84,9 +97,7 @@ public class HpodFooter extends RelativeLayout {
     private void prepareSystemStatusScreen() {
         viewContainer.removeAllViews();
 
-        // TODO: add system-status-view
-        // FIXME: main menu view is just for test !!!
-        MainMenuView mainMenuView = MainMenuView_.build(getContext());
-        viewContainer.addView(mainMenuView);
+        unitInfoMenuView = UnitInfoMenuView_.build(getContext());
+        viewContainer.addView(unitInfoMenuView);
     }
 }
