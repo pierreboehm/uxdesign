@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_frame_dialog_header">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="8dp"
+            android:src="@drawable/iv_header_left_big"
+            android:scaleType="fitXY"
+            android:fitsSystemWindows="true"
+            app:tint="@color/blue_cyan"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/blue_cyan"
+            android:textSize="3sp"
+            android:textScaleX="1.5"
+            android:text="real time data"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:textColor="@color/white"
+            android:textSize="5sp"
+            android:textStyle="bold"
+            android:textScaleX="1.2"
+            android:text="J6"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/blue_cyan"
+            android:textSize="4sp"
+            android:textScaleX="1.5"
+            android:text="Processing console"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvConsole"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:typeface="monospace"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:gravity="bottom"
+        tools:text="00000000: 00 01 02 03 04 05 06 07 - 08 09 0A 0B 0C 0D 0E 0F   ********"
+        />
+
+</LinearLayout>
