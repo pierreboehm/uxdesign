@@ -22,7 +22,7 @@
         android:textAllCaps="true"
         android:textSize="6sp"
         android:textColor="@color/white"
-        tools:text="POWER SYSTEM"
+        android:text="HPOD STATUS SYS"
         />
 
 </LinearLayout>

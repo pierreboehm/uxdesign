@@ -28,7 +28,7 @@
             android:id="@+id/tvSubTextTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/blue_light"
+            android:textColor="@color/white"
             android:textSize="6sp"
             tools:text="O²"
             />
