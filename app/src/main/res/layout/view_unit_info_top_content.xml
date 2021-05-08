@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:paddingTop="14dp">
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="11dp"
+            android:layout_height="16dp"
+            android:src="@drawable/iv_open_hexagon_with_dot"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/tvMainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_gravity="center_vertical"
+            android:textAllCaps="true"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="HPOD SYSTEMS OVERVIEW"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
