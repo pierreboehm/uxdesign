@@ -13,6 +13,7 @@ import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.ui.ViewMode;
+import org.pb.android.uxdesign.ui.button.LogoButtonView;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_header)
@@ -28,7 +29,7 @@ public class HpodHeader extends RelativeLayout {
     TextView tvLogo;
 
     @ViewById(R.id.logoBox)
-    ViewGroup logoBox;
+    LogoButtonView logoBox;
 
     @ViewById(R.id.unitInfoTopMenueView)
     UnitInfoTopMenuView unitInfoTopMenu;
