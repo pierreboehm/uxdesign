@@ -4,9 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -22,14 +20,8 @@ public class HpodHeader extends RelativeLayout {
     @ViewById(R.id.headerViewContainer)
     ViewGroup viewContainer;
 
-    @ViewById(R.id.ivLogo)
-    ImageView ivLogo;
-
-    @ViewById(R.id.tvLogo)
-    TextView tvLogo;
-
-    @ViewById(R.id.logoBox)
-    LogoButtonView logoBox;
+    @ViewById(R.id.logoButtonView)
+    LogoButtonView logoButtonView;
 
     @ViewById(R.id.unitInfoTopMenueView)
     UnitInfoTopMenuView unitInfoTopMenu;
@@ -70,32 +62,25 @@ public class HpodHeader extends RelativeLayout {
         }
     }
 
-    public void setDischargedState(boolean showDischargedState, boolean involveLogo) {
+    public void setDischargedState(boolean showDischargedState) {
         if (userDataView != null) {
             userDataView.setDischargedState(showDischargedState);
         }
-
-        if (showDischargedState) {
-            if (involveLogo) {
-                ivLogo.clearColorFilter();
-                tvLogo.setTextColor(getContext().getColor(R.color.blue_light));
-            }
-        } else {
-            if (involveLogo) {
-                ivLogo.setColorFilter(getContext().getColor(R.color.blue_cyan));
-                tvLogo.setTextColor(getContext().getColor(R.color.blue_cyan));
-            }
-        }
     }
 
-    public boolean isDischargedState() {
-        return userDataView != null && userDataView.isDischargedState();
+    public void setLogoButtonSelected(boolean selected) {
+        logoButtonView.setSelected(selected);
+    }
+
+    public boolean isLogoButtonSelected() {
+        return logoButtonView.isSelected();
     }
 
     private void prepareMainScreen() {
         viewContainer.removeAllViews();
 
-        logoBox.setVisibility(VISIBLE);
+        logoButtonView.setWaitingState(false);
+        logoButtonView.setVisibility(VISIBLE);
         unitInfoTopMenu.setVisibility(GONE);
 
         userDataView = UserDataView_.build(getContext(), viewMode);
@@ -103,13 +88,15 @@ public class HpodHeader extends RelativeLayout {
 
         viewContainer.addView(userDataView);
 
-        setDischargedState(false, false);
+        setDischargedState(false);
+        setLogoButtonSelected(false);
     }
 
     private void prepareVitalStatusScreen() {
         viewContainer.removeAllViews();
 
-        logoBox.setVisibility(VISIBLE);
+        logoButtonView.setWaitingState(true);
+        logoButtonView.setVisibility(VISIBLE);
         unitInfoTopMenu.setVisibility(GONE);
 
         userDataView = UserDataView_.build(getContext(), viewMode);
@@ -117,13 +104,15 @@ public class HpodHeader extends RelativeLayout {
 
         viewContainer.addView(userDataView);
 
-        setDischargedState(true, false);
+        setDischargedState(true);
+        setLogoButtonSelected(false);
     }
 
     private void prepareSystemStatusScreen() {
         viewContainer.removeAllViews();
 
-        logoBox.setVisibility(GONE);
+        logoButtonView.setWaitingState(false);
+        logoButtonView.setVisibility(GONE);
         unitInfoTopMenu.setVisibility(VISIBLE);
 
         userDataView = null;
@@ -131,7 +120,8 @@ public class HpodHeader extends RelativeLayout {
         unitInfoTopContent = UnitInfoTopContentView_.build(getContext());
         viewContainer.addView(unitInfoTopContent);
 
-        setDischargedState(false, true);
+        setDischargedState(false);
+        setLogoButtonSelected(false);
     }
 
 }

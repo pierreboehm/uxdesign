@@ -81,7 +81,7 @@
     </RelativeLayout>
 
     <org.pb.android.uxdesign.ui.button.LogoButtonView_
-        android:id="@+id/logoBox"
+        android:id="@+id/logoButtonView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

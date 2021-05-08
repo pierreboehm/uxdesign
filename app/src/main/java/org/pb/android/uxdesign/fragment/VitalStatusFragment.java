@@ -91,20 +91,20 @@ public class VitalStatusFragment extends Fragment {
 
     @Click(R.id.ivLogo)
     public void onLogoClick() {
-        if (hpodHeader.isDischargedState()) {
-            hpodHeader.setDischargedState(false, true);
-
-            hpodProcessingView.startProcessing();
-            hpodScanningView.startScanning();
-
-            hpodFooter.startVitalGraph();
-        } else {
-            hpodHeader.setDischargedState(true, true);
+        if (hpodHeader.isLogoButtonSelected()) {
+            hpodHeader.setLogoButtonSelected(false);
 
             hpodProcessingView.stopProcessing();
             hpodScanningView.stopScanning();
 
             hpodFooter.stopVitalGraph();
+        } else {
+            hpodHeader.setLogoButtonSelected(true);
+
+            hpodProcessingView.startProcessing();
+            hpodScanningView.startScanning();
+
+            hpodFooter.startVitalGraph();
         }
     }
 }
