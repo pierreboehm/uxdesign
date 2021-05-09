@@ -29,21 +29,21 @@
         android:gravity="center">
 
         <org.pb.android.uxdesign.ui.button.MenueButtonView_
-            android:id="@+id/btnPassengerInfo"
+            android:id="@+id/btnLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="PASSENGER INFO"
             />
 
         <org.pb.android.uxdesign.ui.button.MenueButtonView_
-            android:id="@+id/btnUnitInfo"
+            android:id="@+id/btnCenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="UNIT INFO"
             />
 
         <org.pb.android.uxdesign.ui.button.MenueButtonView_
-            android:id="@+id/btnMaintenance"
+            android:id="@+id/btnRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="MAINTENANCE"

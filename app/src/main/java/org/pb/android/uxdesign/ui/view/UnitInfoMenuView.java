@@ -12,20 +12,21 @@ import org.androidannotations.annotations.ViewById;
 import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.event.Event;
+import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.button.MenueButtonView;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_unit_info_menu)
 public class UnitInfoMenuView extends RelativeLayout {
 
-    @ViewById(R.id.btnPassengerInfo)
-    MenueButtonView btnPassengerInfo;
+    @ViewById(R.id.btnLeft)
+    MenueButtonView btnLeft;
 
-    @ViewById(R.id.btnUnitInfo)
-    MenueButtonView btnUnitInfo;
+    @ViewById(R.id.btnCenter)
+    MenueButtonView btnCenter;
 
-    @ViewById(R.id.btnMaintenance)
-    MenueButtonView btnMaintenance;
+    @ViewById(R.id.btnRight)
+    MenueButtonView btnRight;
 
     @ViewById(R.id.processingConsoleView)
     ProcessingConsoleView processingConsole;
@@ -36,9 +37,9 @@ public class UnitInfoMenuView extends RelativeLayout {
 
     @AfterViews
     public void initView() {
-        btnPassengerInfo.setText("PASSENGER INFO");
-        btnUnitInfo.setText("HPOD OVERVIEW");
-        btnMaintenance.setText("MAINTENANCE");
+        btnLeft.setText("PASSENGER INFO");
+        btnCenter.setText("HPOD OVERVIEW");
+        btnRight.setText("MAINTENANCE");
     }
 
     public void startConsole() {
@@ -49,18 +50,18 @@ public class UnitInfoMenuView extends RelativeLayout {
         processingConsole.stop();
     }
 
-    @Click(R.id.btnPassengerInfo)
-    public void onButtonVitalStatusClick() {
+    @Click(R.id.btnLeft)
+    public void onButtonLeftClick() {
         EventBus.getDefault().post(new Event.ShowVitalStatus());
     }
 
-    @Click(R.id.btnUnitInfo)
-    public void onButtonSystemStatusClick() {
+    @Click(R.id.btnCenter)
+    public void onButtonCenterClick() {
         EventBus.getDefault().post(new Event.ShowUserStatus());
     }
 
-    @Click(R.id.btnMaintenance)
-    public void onButtonMaintenanceClick() {
-        Toast.makeText(getContext(), "onButtonMaintenanceClick()", Toast.LENGTH_LONG).show();
+    @Click(R.id.btnRight)
+    public void onButtonRightClick() {
+        EventBus.getDefault().post(new Event.ShowDialog(ViewMode.UNIT_INFO));
     }
 }
