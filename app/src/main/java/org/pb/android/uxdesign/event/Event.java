@@ -1,5 +1,7 @@
 package org.pb.android.uxdesign.event;
 
+import org.pb.android.uxdesign.ui.ViewMode;
+
 public class Event {
 
     public static class ShowUserStatus {
@@ -9,6 +11,18 @@ public class Event {
     }
 
     public static class ShowSystemStatus {
+    }
+
+    public static class ShowDialog {
+        private final ViewMode viewMode;
+
+        public ShowDialog(ViewMode viewMode) {
+            this.viewMode = viewMode;
+        }
+
+        public ViewMode getViewMode() {
+            return viewMode;
+        }
     }
 
     public static class BpmUpdate {

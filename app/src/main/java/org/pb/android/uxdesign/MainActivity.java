@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
@@ -21,6 +22,11 @@ import org.pb.android.uxdesign.fragment.SystemStatusFragment;
 import org.pb.android.uxdesign.fragment.SystemStatusFragment_;
 import org.pb.android.uxdesign.fragment.VitalStatusFragment;
 import org.pb.android.uxdesign.fragment.VitalStatusFragment_;
+import org.pb.android.uxdesign.ui.ViewMode;
+import org.pb.android.uxdesign.ui.dialog.ContentDialog;
+import org.pb.android.uxdesign.ui.dialog.ContentDialog_;
+import org.pb.android.uxdesign.ui.view.UserDataView;
+import org.pb.android.uxdesign.ui.view.UserDataView_;
 
 @SuppressLint("NonConstantResourceId")
 @EActivity(R.layout.activity_main)
@@ -79,6 +85,43 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(Event.ShowSystemStatus event) {
         startSystemStatusFragment();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ShowDialog event) {
+        showDialog(event.getViewMode());
+    }
+
+    private void showDialog(ViewMode viewMode) {
+        ViewGroup dialogContent = getDialogContent(viewMode);
+        if (dialogContent == null) {
+            return;
+        }
+
+        new ContentDialog.Builder(this)
+                .setContent(dialogContent)
+                .build()
+                .show();
+    }
+
+    private ViewGroup getDialogContent(ViewMode viewMode) {
+
+        switch (viewMode) {
+            case MAIN: {
+                // TODO: set dialog content
+                break;
+            }
+            case PASSENGER_INFO: {
+                UserDataView userDataView = UserDataView_.build(this, viewMode);
+                return userDataView;
+            }
+            case UNIT_INFO: {
+                // TODO: implement
+                break;
+            }
+        }
+
+        return null;
     }
 
     private void startMainFragment() {
