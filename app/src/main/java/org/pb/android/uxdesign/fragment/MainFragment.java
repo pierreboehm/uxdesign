@@ -8,9 +8,13 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.pb.android.uxdesign.data.Demonstrator;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
@@ -53,4 +57,20 @@ public class MainFragment extends Fragment {
         tempSystemStatusView.prepareTempSystemStatusScreen();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        EventBus.getDefault().unregister(this);
+        super.onPause();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.UserDataUpdate event) {
+        hpodHeader.setCurrentUser(new CurrentUser(event.getUserData()));
+    }
 }

@@ -1,5 +1,6 @@
 package org.pb.android.uxdesign.event;
 
+import org.pb.android.uxdesign.data.user.UserData;
 import org.pb.android.uxdesign.ui.ViewMode;
 
 public class Event {
@@ -22,6 +23,18 @@ public class Event {
 
         public ViewMode getViewMode() {
             return viewMode;
+        }
+    }
+
+    public static class UserDataUpdate {
+        private final UserData userData;
+
+        public UserDataUpdate(UserData userData) {
+            this.userData = userData;
+        }
+
+        public UserData getUserData() {
+            return userData;
         }
     }
 

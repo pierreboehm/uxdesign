@@ -14,8 +14,10 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ItemClick;
 
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.UserData;
+import org.pb.android.uxdesign.event.Event;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_user_list)
@@ -41,6 +43,6 @@ public class UserListView extends LinearLayout {
 
     @ItemClick(R.id.lvItemContainer)
     public void onItemClick(UserData userData) {
-        Log.d(TAG, "name = " + userData.getName());
+        EventBus.getDefault().post(new Event.UserDataUpdate(userData));
     }
 }

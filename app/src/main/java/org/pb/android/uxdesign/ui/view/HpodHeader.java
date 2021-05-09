@@ -42,6 +42,7 @@ public class HpodHeader extends RelativeLayout {
 
     public void setCurrentUser(CurrentUser currentUser) {
         this.currentUser = currentUser;
+        updateCurrentUser();
     }
 
     public void prepareScreen(ViewMode viewMode) {
@@ -133,6 +134,12 @@ public class HpodHeader extends RelativeLayout {
 
         setDischargedState(false);
         setLogoButtonSelected(false);
+    }
+
+    private void updateCurrentUser() {
+        if (userDataView != null) {
+            userDataView.setCurrentUser(currentUser);
+        }
     }
 
 }
