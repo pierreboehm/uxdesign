@@ -16,6 +16,7 @@
     <color name="blue_light_58">#356994</color>
     <color name="blue_light_transparent">#4059B0F9</color>
     <color name="blue_warm">#00AAFA</color>
+    <color name="blue_warm_alpha_16">#3900AAFA</color>
     <color name="blue_cyan">#00FFFF</color>
     <color name="blue_royal">#4169E1</color>
     <color name="blue">#1970f9</color>
