@@ -6,15 +6,19 @@ import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
-import android.view.ViewGroup;
+import android.view.View;
+
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.pb.android.uxdesign.data.Demonstrator;
 import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.fragment.MainFragment;
 import org.pb.android.uxdesign.fragment.MainFragment_;
@@ -32,6 +36,10 @@ import org.pb.android.uxdesign.ui.view.UserListView_;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    @Bean
+    Demonstrator demonstrator;
+
     private Toast closeAppToast;
 
     @AfterViews
@@ -92,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDialog(ViewMode viewMode) {
-        ViewGroup dialogContent = getDialogContent(viewMode);
+        View dialogContent = getDialogContent(viewMode);
         if (dialogContent == null) {
             return;
         }
@@ -104,12 +112,13 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    private ViewGroup getDialogContent(ViewMode viewMode) {
+    private View getDialogContent(ViewMode viewMode) {
 
         switch (viewMode) {
             case MAIN: {
-                // TODO: set dialog content
-                break;
+                ImageView imageView = new ImageView(this);
+                imageView.setImageBitmap(demonstrator.getAccessCodeBitmap());
+                return imageView;
             }
             case PASSENGER_INFO: {
                 UserListView userListView = UserListView_.build(this);

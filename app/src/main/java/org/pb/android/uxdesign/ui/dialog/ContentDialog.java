@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -84,7 +85,7 @@ public class ContentDialog extends LinearLayout {
             return contentDialog;
         }
 
-        public ContentDialog.Builder setContent(ViewGroup content) {
+        public ContentDialog.Builder setContent(View content) {
             contentDialog.dialogContentContainer.removeAllViews();
             contentDialog.dialogContentContainer.addView(content);
             return this;

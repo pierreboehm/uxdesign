@@ -2,21 +2,28 @@ package org.pb.android.uxdesign.ui.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.data.Demonstrator;
 import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.ViewMode;
+import org.pb.android.uxdesign.ui.button.MenueAccessSystemView;
 import org.pb.android.uxdesign.ui.button.MenueButtonView;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_main_menu)
 public class MainMenuView extends RelativeLayout {
+
+    private static final String TAG = MainMenuView.class.getSimpleName();
 
     @ViewById(R.id.btnLeft)
     MenueButtonView btnLeft;
@@ -27,11 +34,17 @@ public class MainMenuView extends RelativeLayout {
     @ViewById(R.id.btnRight)
     MenueButtonView btnRight;
 
+    @ViewById(R.id.menueAccessSystemView)
+    MenueAccessSystemView menueAccessSystemView;
+
     @ViewById(R.id.dotPatternBigView)
     DotPatternBigView dotPatternBigView;
 
     @ViewById(R.id.dotPatternSmallView)
     DotPatternSmallView dotPatternSmallView;
+
+    @Bean
+    Demonstrator demonstrator;
 
     public MainMenuView(Context context) {
         super(context);
@@ -60,5 +73,15 @@ public class MainMenuView extends RelativeLayout {
     @Click(R.id.btnRight)
     public void onButtonRightClick() {
         EventBus.getDefault().post(new Event.ShowDialog(ViewMode.PASSENGER_INFO));
+    }
+
+    @Click(R.id.menueAccessSystemView)
+    public void onMenueAccessSystemViewClick() {
+        Bitmap accessCodeBitmap = menueAccessSystemView.getAccessCodeBitmap();
+        if (accessCodeBitmap != null) {
+            demonstrator.setAccessCodeBitmap(accessCodeBitmap);
+            Log.d(TAG, "access code bitmap stored");
+            EventBus.getDefault().post(new Event.ShowDialog(ViewMode.MAIN));
+        }
     }
 }

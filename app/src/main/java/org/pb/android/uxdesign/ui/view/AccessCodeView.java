@@ -1,7 +1,9 @@
 package org.pb.android.uxdesign.ui.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -17,6 +19,7 @@ import org.pb.android.uxdesign.util.Util;
 public class AccessCodeView extends View {
 
     private Paint color;
+    private Bitmap drawingCacheBitmap;
 
     public AccessCodeView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -25,6 +28,9 @@ public class AccessCodeView extends View {
     @AfterViews
     public void initView() {
         setWillNotDraw(false);
+
+        setDrawingCacheEnabled(true);
+        setDrawingCacheBackgroundColor(Color.TRANSPARENT);
 
         color = new Paint();
         color.setColor(getContext().getColor(R.color.blue_deep_sky));
@@ -38,6 +44,11 @@ public class AccessCodeView extends View {
         drawCodePattern(canvas);
 
         super.onDraw(canvas);
+    }
+
+    @Nullable
+    public Bitmap getDrawingCacheBitmap() {
+        return drawingCacheBitmap;
     }
 
     private void drawCodePattern(Canvas canvas) {
@@ -68,5 +79,7 @@ public class AccessCodeView extends View {
                 }
             }
         }
+
+        drawingCacheBitmap = getDrawingCache();
     }
 }

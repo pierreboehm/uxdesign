@@ -1,6 +1,7 @@
 package org.pb.android.uxdesign.data;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import org.androidannotations.annotations.EBean;
@@ -33,6 +34,7 @@ public class Demonstrator {
     @Pref
     AppPreferences_ preferences;
 
+    private Bitmap accessCodeBitmap;
     private Timer timer;
 
     public void start() {
@@ -45,6 +47,14 @@ public class Demonstrator {
 
     public void setViewMode(ViewMode viewMode) {
         reconfigureTimerTasks(viewMode);
+    }
+
+    public void setAccessCodeBitmap(Bitmap bitmap) {
+        accessCodeBitmap = bitmap;
+    }
+
+    public Bitmap getAccessCodeBitmap() {
+        return accessCodeBitmap;
     }
 
     public CurrentUser getCurrentUser() {
