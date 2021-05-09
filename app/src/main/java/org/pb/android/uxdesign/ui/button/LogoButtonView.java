@@ -64,6 +64,10 @@ public class LogoButtonView extends LinearLayout {
         this.hasWaitingState = hasWaitingState;
     }
 
+    public boolean hasWaitingState() {
+        return hasWaitingState;
+    }
+
     private void showWaitStatus(float startValue, float endValue) {
         if (!hasWaitingState) {
             return;

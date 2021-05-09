@@ -90,7 +90,7 @@ public class VitalStatusFragment extends Fragment {
     }
 
     @Click(R.id.ivLogo)
-    public void onLogoClick() {
+    public void onLogoButtonClick() {
         if (hpodHeader.isLogoButtonSelected()) {
             hpodHeader.setLogoButtonSelected(false);
 
@@ -106,5 +106,10 @@ public class VitalStatusFragment extends Fragment {
 
             hpodFooter.startVitalGraph();
         }
+    }
+
+    @Click(R.id.ib_Leave)
+    public void onLeaveButtonClick() {
+        EventBus.getDefault().post(new Event.ShowUserStatus());
     }
 }

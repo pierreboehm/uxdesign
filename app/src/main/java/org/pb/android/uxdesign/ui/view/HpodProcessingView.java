@@ -12,12 +12,10 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-import org.greenrobot.eventbus.EventBus;
+
 import org.pb.android.uxdesign.R;
-import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.button.ButtonView;
 
 @SuppressLint("NonConstantResourceId")
@@ -51,16 +49,8 @@ public class HpodProcessingView extends LinearLayout {
     @ViewById(R.id.bvFooterText)
     ButtonView bvFooterText;
 
-    private int modulesOnlineCount;
-
     public HpodProcessingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-    }
-
-    @AfterViews
-    public void initView() {
-        bvFooterText.setText("HPOD STATUS SYS");
-        modulesOnlineCount = 0;
     }
 
     public void setProgressStatusSystem(int progressStatusSystem) {
@@ -79,8 +69,6 @@ public class HpodProcessingView extends LinearLayout {
         tvStatusSystem.setAlpha(NOT_TRANSPARENT);
         tvDataProcessing.setAlpha(NOT_TRANSPARENT);
         tvDataMonitoring.setAlpha(NOT_TRANSPARENT);
-
-        modulesOnlineCount = 3;
     }
 
     public void stopProcessing() {
@@ -110,20 +98,10 @@ public class HpodProcessingView extends LinearLayout {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 textView.setAlpha(SEMI_TRANSPARENT);
-                afterProcessingShutDown();
             }
         });
 
         animator.setDuration(ANIMATION_SPEED_IN_MILLISECONDS);
         animator.start();
-    }
-
-    // FIXME: really ??? NO !!!
-    private void afterProcessingShutDown() {
-        modulesOnlineCount--;
-
-        if (modulesOnlineCount == 0) {
-            EventBus.getDefault().post(new Event.ShowUserStatus());
-        }
     }
 }

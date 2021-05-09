@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -19,6 +20,9 @@ public class HpodHeader extends RelativeLayout {
 
     @ViewById(R.id.headerViewContainer)
     ViewGroup viewContainer;
+
+    @ViewById(R.id.ib_Leave)
+    ImageButton leaveButton;
 
     @ViewById(R.id.logoButtonView)
     LogoButtonView logoButtonView;
@@ -70,6 +74,10 @@ public class HpodHeader extends RelativeLayout {
 
     public void setLogoButtonSelected(boolean selected) {
         logoButtonView.setSelected(selected);
+
+        if (logoButtonView.hasWaitingState()) {
+            leaveButton.setVisibility(selected ? GONE : VISIBLE);
+        }
     }
 
     public boolean isLogoButtonSelected() {
@@ -79,6 +87,7 @@ public class HpodHeader extends RelativeLayout {
     private void prepareMainScreen() {
         viewContainer.removeAllViews();
 
+        leaveButton.setVisibility(GONE);
         logoButtonView.setWaitingState(false);
         logoButtonView.setVisibility(VISIBLE);
         unitInfoTopMenu.setVisibility(GONE);
@@ -95,6 +104,7 @@ public class HpodHeader extends RelativeLayout {
     private void prepareVitalStatusScreen() {
         viewContainer.removeAllViews();
 
+        leaveButton.setVisibility(VISIBLE);
         logoButtonView.setWaitingState(true);
         logoButtonView.setVisibility(VISIBLE);
         unitInfoTopMenu.setVisibility(GONE);
@@ -111,6 +121,7 @@ public class HpodHeader extends RelativeLayout {
     private void prepareSystemStatusScreen() {
         viewContainer.removeAllViews();
 
+        leaveButton.setVisibility(GONE);
         logoButtonView.setWaitingState(false);
         logoButtonView.setVisibility(GONE);
         unitInfoTopMenu.setVisibility(VISIBLE);
