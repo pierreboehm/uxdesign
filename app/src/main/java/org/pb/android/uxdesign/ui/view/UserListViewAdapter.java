@@ -37,7 +37,9 @@ public class UserListViewAdapter extends BaseAdapter {
 
     @Override
     public UserData getItem(int position) {
-        return userDataList.get(position);
+        UserData userData = userDataList.get(position);
+        userData.setListPosition(position);
+        return userData;
     }
 
     @Override

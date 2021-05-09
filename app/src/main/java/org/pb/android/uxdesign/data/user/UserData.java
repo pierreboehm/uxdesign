@@ -10,6 +10,8 @@ public class UserData {
     private final String locality;
     private final String profession;
 
+    private int listPosition = -1;
+
     private UserData(Builder builder) {
         id = builder.id;
         name = builder.name;
@@ -46,6 +48,14 @@ public class UserData {
 
     public String getProfession() {
         return profession;
+    }
+
+    public void setListPosition(int position) {
+        listPosition = position;
+    }
+
+    public int getListPosition() {
+        return listPosition;
     }
 
     public static Builder create() {

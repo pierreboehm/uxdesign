@@ -2,7 +2,7 @@ package org.pb.android.uxdesign.ui.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
+
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -14,7 +14,9 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ItemClick;
 
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
+import org.pb.android.uxdesign.AppPreferences_;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.UserData;
 import org.pb.android.uxdesign.event.Event;
@@ -31,6 +33,9 @@ public class UserListView extends LinearLayout {
     @Bean
     UserListViewAdapter userListViewAdapter;
 
+    @Pref
+    AppPreferences_ preferences;
+
     public UserListView(@NonNull Context context) {
         super(context);
     }
@@ -43,6 +48,7 @@ public class UserListView extends LinearLayout {
 
     @ItemClick(R.id.lvItemContainer)
     public void onItemClick(UserData userData) {
+        preferences.selectedUser().put(userData.getListPosition());
         EventBus.getDefault().post(new Event.UserDataUpdate(userData));
     }
 }

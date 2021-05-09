@@ -5,6 +5,8 @@ import android.util.Log;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.pb.android.uxdesign.AppPreferences_;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.data.user.User;
@@ -27,6 +29,9 @@ public class Demonstrator {
 
     @RootContext
     Context context;
+
+    @Pref
+    AppPreferences_ preferences;
 
     private Timer timer;
 
@@ -92,7 +97,7 @@ public class Demonstrator {
         try {
             Users users = serializer.read(Users.class, xmlUsers);
             if (users != null) {
-                user = users.getUserList().get(1);      // TODO: make dependent from SharedPref / Maintenance
+                user = users.getUserList().get(preferences.selectedUser().get());
             }
         } catch (Exception exception) {
             Log.e(TAG, Objects.requireNonNull(exception.getLocalizedMessage()));
