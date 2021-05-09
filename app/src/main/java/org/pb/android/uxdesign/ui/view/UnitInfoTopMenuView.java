@@ -23,7 +23,7 @@ public class UnitInfoTopMenuView extends RelativeLayout {
     @ViewsById({R.id.btn_1_1, R.id.btn_1_2})
     List<ImageButton> buttonGroup2_1List;
 
-    @ViewsById({R.id.btn_2_1})
+    @ViewsById({R.id.btn_2_2})
     List<ImageButton> buttonGroup2_2List;
 
     @ViewsById({R.id.btn_4_2})
@@ -41,7 +41,7 @@ public class UnitInfoTopMenuView extends RelativeLayout {
         performSelection(button);
     }
 
-    @Click({R.id.btn_1_1, R.id.btn_1_2, R.id.btn_2_1, R.id.btn_4_2, R.id.btn_5_2})
+    @Click({R.id.btn_1_1, R.id.btn_1_2, R.id.btn_2_2, R.id.btn_4_2, R.id.btn_5_2})
     public void onButtonGroup2Click(ImageButton button) {
         performSelection(button);
     }
