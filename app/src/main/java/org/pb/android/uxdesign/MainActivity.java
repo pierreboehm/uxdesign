@@ -24,9 +24,8 @@ import org.pb.android.uxdesign.fragment.VitalStatusFragment;
 import org.pb.android.uxdesign.fragment.VitalStatusFragment_;
 import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.dialog.ContentDialog;
-import org.pb.android.uxdesign.ui.dialog.ContentDialog_;
-import org.pb.android.uxdesign.ui.view.UserDataView;
-import org.pb.android.uxdesign.ui.view.UserDataView_;
+import org.pb.android.uxdesign.ui.view.UserListView;
+import org.pb.android.uxdesign.ui.view.UserListView_;
 
 @SuppressLint("NonConstantResourceId")
 @EActivity(R.layout.activity_main)
@@ -112,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case PASSENGER_INFO: {
-                UserDataView userDataView = UserDataView_.build(this, viewMode);
-                return userDataView;
+                UserListView userListView = UserListView_.build(this);
+                return userListView;
             }
             case UNIT_INFO: {
                 // TODO: implement
