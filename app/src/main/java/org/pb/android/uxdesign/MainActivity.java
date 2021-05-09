@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         new ContentDialog.Builder(this)
                 .setContent(dialogContent)
+                .setHeaderByViewMode(viewMode)
                 .build()
                 .show();
     }
