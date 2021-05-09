@@ -106,8 +106,12 @@ public class ContentDialog extends LinearLayout {
             int idNumber = title.split("\\s").length;
             String idPrefix = title.substring(0, 1).toUpperCase();
 
-            contentDialog.tvDialogTitleId.setText(String.format("%s%d", idPrefix, idNumber));
+            String titleId = String.format("%s%d", idPrefix, idNumber);
+
+            contentDialog.tvDialogTitleId.setText(titleId);
             contentDialog.tvDialogTitle.setText(title);
+
+            contentDialog.tvDialogSubText.setText(String.format("%s/%s", titleId, title));
 
             return this;
         }
