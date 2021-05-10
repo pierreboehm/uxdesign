@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.sharedpreferences.Pref;
@@ -34,8 +35,14 @@ public class Demonstrator {
     @Pref
     AppPreferences_ preferences;
 
+    private PowerManagerInfo powerManagerInfo;
     private Bitmap accessCodeBitmap;
     private Timer timer;
+
+    @AfterInject
+    public void afterInject() {
+        powerManagerInfo = new PowerManagerInfo();
+    }
 
     public void start() {
         startTimer();
@@ -72,6 +79,14 @@ public class Demonstrator {
         }
 
         return resultList;
+    }
+
+    public int getUserListCount() {
+        return getUserList().size();
+    }
+
+    public PowerManagerInfo getPowerManagerInfo() {
+        return new PowerManagerInfo();
     }
 
     private List<User> getUserList() {
