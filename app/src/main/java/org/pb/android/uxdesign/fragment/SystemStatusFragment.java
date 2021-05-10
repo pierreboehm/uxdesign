@@ -1,6 +1,7 @@
 package org.pb.android.uxdesign.fragment;
 
 import android.annotation.SuppressLint;
+import android.util.Pair;
 
 import androidx.fragment.app.Fragment;
 
@@ -49,13 +50,8 @@ public class SystemStatusFragment extends Fragment {
         hpodHeader.prepareScreen(ViewMode.UNIT_INFO);
         hpodFooter.prepareScreen(ViewMode.UNIT_INFO);
 
-        progressValueView1.setTextTop("N²");
-        progressValueView1.setTextBottom("normal");
-        progressValueView1.setProgressValue(Util.getRandomBetween(N2MIN, N2MAX));
-
-        progressValueView2.setTextTop("O²");
-        progressValueView2.setTextBottom("normal");
-        progressValueView2.setProgressValue(Util.getRandomBetween(O2MIN, O2MAX));
+        setNitrogen();
+        setOxygen();
     }
 
     @Override
@@ -72,13 +68,32 @@ public class SystemStatusFragment extends Fragment {
 
     @Click(R.id.progressValue1)
     void onProgressValue1Click() {
-        progressValueView1.setProgressValue(Util.getRandomBetween(N2MIN, N2MAX));
+        setNitrogen();
     }
 
     @Click(R.id.progressValue2)
     void onProgressValue2Click() {
-        progressValueView2.setProgressValue(Util.getRandomBetween(O2MIN, O2MAX));
+        setOxygen();
     }
 
+    private void setNitrogen() {
+        Pair<Integer, String> nitrogenValues = getProgressValueAndRelation(N2MIN, N2MAX);
+        progressValueView1.setTextTop("N²");
+        progressValueView1.setTextBottom(nitrogenValues.second);
+        progressValueView1.setProgressValue(nitrogenValues.first);
+    }
+
+    private void setOxygen() {
+        Pair<Integer, String> oxygenValues = getProgressValueAndRelation(O2MIN, O2MAX);
+        progressValueView2.setTextTop("O²");
+        progressValueView2.setTextBottom(oxygenValues.second);
+        progressValueView2.setProgressValue(oxygenValues.first);
+    }
+
+    private Pair<Integer, String> getProgressValueAndRelation(int min, int max) {
+        int random = Util.getRandomBetween(min, max);
+        String relation = Util.getRelation((float) random, (float) min, (float) max);
+        return new Pair<>(random, relation);
+    }
 
 }

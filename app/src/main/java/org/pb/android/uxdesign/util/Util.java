@@ -53,4 +53,21 @@ public class Util {
     public static int getProgressValue(int value, int maxValue) {
         return (int) ((float) value * 100f / (float) maxValue);
     }
+
+    public static String getRelation(float value, float min, float max) {
+        float difference = max - min;
+        float relation = difference / 5f;
+
+        int factor = (int)((value - min) / relation);
+
+        if (factor == 0 || factor == 5) {
+            return "critical";
+        } else if (factor == 1) {
+            return "low";
+        } else if (factor == 4) {
+            return "high";
+        } else {
+            return "normal";
+        }
+    }
 }
