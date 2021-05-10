@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.Nullable;
+
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewsById;
@@ -53,21 +55,21 @@ public class UnitInfoTopMenuView extends RelativeLayout {
 
         UnitInfoMenuConfiguration unitInfoMenuConfiguration = UnitInfoMenuConfiguration.getButtonById(button.getId());
         if (unitInfoMenuConfiguration != null) {
-            unitInfoMenuConfiguration.onClick();
+            unitInfoMenuConfiguration.onClick(button.isSelected());
         }
     }
 
     private void unselectAll(int skipId) {
         unselect(buttonGroup1List, skipId);
-        unselect(buttonGroup2_1List, skipId);
-        unselect(buttonGroup2_2List, skipId);
-        unselect(buttonGroup2_4List, skipId);
-        unselect(buttonGroup2_5List, skipId);
+        unselect(buttonGroup2_1List, null);
+        unselect(buttonGroup2_2List, null);
+        unselect(buttonGroup2_4List, null);
+        unselect(buttonGroup2_5List, null);
     }
 
-    private void unselect(List<ImageButton> imageButtonList, int skipId) {
+    private void unselect(List<ImageButton> imageButtonList, @Nullable Integer skipId) {
         for (ImageButton imageButton : imageButtonList) {
-            if (imageButton.getId() != skipId) {
+            if (skipId == null || imageButton.getId() != skipId) {
                 imageButton.setSelected(false);
             }
         }

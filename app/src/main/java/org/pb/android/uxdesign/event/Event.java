@@ -86,4 +86,12 @@ public class Event {
         }
     }
 
+    public static class ContentClear {
+    }
+
+    public static class ContentShowUserInfo {
+    }
+
+    public static class ContentShowPowerInfo {
+    }
 }

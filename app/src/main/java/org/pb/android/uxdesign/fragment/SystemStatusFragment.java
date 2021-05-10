@@ -7,11 +7,21 @@ import androidx.fragment.app.Fragment;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.data.Demonstrator;
+import org.pb.android.uxdesign.data.PowerManagerInfo;
+import org.pb.android.uxdesign.data.user.CurrentUser;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.ViewMode;
+import org.pb.android.uxdesign.ui.view.ContentItemTextView;
+import org.pb.android.uxdesign.ui.view.ContentItemTextView_;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 import org.pb.android.uxdesign.ui.view.HpodProgressValueView;
@@ -37,6 +47,9 @@ public class SystemStatusFragment extends Fragment {
     @ViewById(R.id.progressValue2)
     HpodProgressValueView progressValueView2;
 
+    @Bean
+    Demonstrator demonstrator;
+
     @AfterInject
     public void afterInject() {
         N2MIN = getResources().getInteger(R.integer.N2MIN);
@@ -57,11 +70,13 @@ public class SystemStatusFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        EventBus.getDefault().register(this);
         hpodFooter.startConsole();
     }
 
     @Override
     public void onPause() {
+        EventBus.getDefault().unregister(this);
         hpodFooter.stopConsole();
         super.onPause();
     }
@@ -74,6 +89,85 @@ public class SystemStatusFragment extends Fragment {
     @Click(R.id.progressValue2)
     void onProgressValue2Click() {
         setOxygen();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ContentClear event) {
+        hpodHeader.clearContent();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ContentShowUserInfo event) {
+        setUserInfo();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ContentShowPowerInfo event) {
+        setPowerInfo();
+    }
+
+    private void setUserInfo() {
+        ContentItemTextView contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Count of registered users:", Integer.toString(demonstrator.getUserListCount()));
+        hpodHeader.setContent(contentItemTextView);
+
+        CurrentUser currentUser = demonstrator.getCurrentUser();
+
+        contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Currently selected user", null);
+        hpodHeader.addContent(contentItemTextView);
+
+        contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Name:", currentUser.getUserData().getName());
+        hpodHeader.addContent(contentItemTextView);
+
+        contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Id:", currentUser.getUserData().getId());
+        hpodHeader.addContent(contentItemTextView);
+
+        contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Profession:", currentUser.getUserData().getProfession());
+        hpodHeader.addContent(contentItemTextView);
+
+        contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Country:", currentUser.getUserData().getCountry());
+        hpodHeader.addContent(contentItemTextView);
+
+        contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Locality:", currentUser.getUserData().getLocality());
+        hpodHeader.addContent(contentItemTextView);
+    }
+
+    private void setPowerInfo() {
+        PowerManagerInfo powerManagerInfo = demonstrator.getPowerManagerInfo();
+
+        ContentItemTextView contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("External power supply:", powerManagerInfo.isPluggedIn() ? "YES" : "NO");
+        hpodHeader.setContent(contentItemTextView);
+
+        if (powerManagerInfo.isPluggedIn()) {
+            contentItemTextView = ContentItemTextView_.build(getContext());
+            contentItemTextView.bind("Voltage:", powerManagerInfo.getPowerSupplyInVolt() + "V");
+            hpodHeader.addContent(contentItemTextView);
+
+            contentItemTextView = ContentItemTextView_.build(getContext());
+            contentItemTextView.bind("Is loading:", powerManagerInfo.isLoading() ? "YES" : "NO");
+            hpodHeader.addContent(contentItemTextView);
+
+            if (powerManagerInfo.isLoading()) {
+                contentItemTextView = ContentItemTextView_.build(getContext());
+                contentItemTextView.bind("Loading status:", powerManagerInfo.getLoadingStateInPercent() + "%");
+                hpodHeader.addContent(contentItemTextView);
+            }
+        }
+
+        contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Current consumption:", powerManagerInfo.getCurrentConsumptionInMilliAmpere() + "mA");
+        hpodHeader.addContent(contentItemTextView);
+
+        contentItemTextView = ContentItemTextView_.build(getContext());
+        contentItemTextView.bind("Battery temperature:", powerManagerInfo.getTemperatureInCelsius() + "°C");
+        hpodHeader.addContent(contentItemTextView);
     }
 
     private void setNitrogen() {
