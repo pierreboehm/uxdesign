@@ -94,4 +94,7 @@ public class Event {
 
     public static class ContentShowPowerInfo {
     }
+
+    public static class ContentShowApplicationInfo {
+    }
 }
