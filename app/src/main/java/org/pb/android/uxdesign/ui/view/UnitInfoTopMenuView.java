@@ -10,6 +10,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewsById;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.ui.UnitInfoMenuConfiguration;
 
 import java.util.List;
 
@@ -49,6 +50,11 @@ public class UnitInfoTopMenuView extends RelativeLayout {
     private void performSelection(ImageButton button) {
         unselectAll(button.getId());
         button.setSelected(!button.isSelected());
+
+        UnitInfoMenuConfiguration unitInfoMenuConfiguration = UnitInfoMenuConfiguration.getButtonById(button.getId());
+        if (unitInfoMenuConfiguration != null) {
+            unitInfoMenuConfiguration.onClick();
+        }
     }
 
     private void unselectAll(int skipId) {
