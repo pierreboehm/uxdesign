@@ -28,8 +28,18 @@ public class ContentItemTextView extends FrameLayout {
         tvText.setText(text);
     }
 
+    public void setText(int resourceId) {
+        tvText.setTypeface(Typeface.DEFAULT);
+        tvText.setText(resourceId);
+    }
+
     public void setBoldText(String text) {
         tvText.setTypeface(Typeface.DEFAULT_BOLD);
         tvText.setText(text);
+    }
+
+    public void setBoldText(int resourceId) {
+        tvText.setTypeface(Typeface.DEFAULT_BOLD);
+        tvText.setText(resourceId);
     }
 }
