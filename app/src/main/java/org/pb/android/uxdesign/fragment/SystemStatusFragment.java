@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import androidx.fragment.app.Fragment;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -21,6 +22,8 @@ public class SystemStatusFragment extends Fragment {
 
     public static final String TAG = SystemStatusFragment.class.getSimpleName();
 
+    private int N2MIN, N2MAX, O2MIN, O2MAX;
+
     @ViewById(R.id.hpodHeader)
     HpodHeader hpodHeader;
 
@@ -33,24 +36,32 @@ public class SystemStatusFragment extends Fragment {
     @ViewById(R.id.progressValue2)
     HpodProgressValueView progressValueView2;
 
+    @AfterInject
+    public void afterInject() {
+        N2MIN = getResources().getInteger(R.integer.N2MIN);
+        N2MAX = getResources().getInteger(R.integer.N2MAX);
+        O2MIN = getResources().getInteger(R.integer.O2MIN);
+        O2MAX = getResources().getInteger(R.integer.O2MAX);
+    }
+
     @AfterViews
     public void initViews() {
         hpodHeader.prepareScreen(ViewMode.UNIT_INFO);
         hpodFooter.prepareScreen(ViewMode.UNIT_INFO);
 
-        progressValueView1.setTextTop("O²");
+        progressValueView1.setTextTop("N²");
         progressValueView1.setTextBottom("normal");
-        progressValueView1.setProgressValue(Util.getRandomBetween(0, 100));
+        progressValueView1.setProgressValue(Util.getRandomBetween(N2MIN, N2MAX));
 
-        progressValueView2.setTextTop("CO²");
+        progressValueView2.setTextTop("O²");
         progressValueView2.setTextBottom("normal");
-        progressValueView2.setProgressValue(Util.getRandomBetween(0, 100));
+        progressValueView2.setProgressValue(Util.getRandomBetween(O2MIN, O2MAX));
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //hpodFooter.startConsole();
+        hpodFooter.startConsole();
     }
 
     @Override
@@ -61,11 +72,13 @@ public class SystemStatusFragment extends Fragment {
 
     @Click(R.id.progressValue1)
     void onProgressValue1Click() {
-        progressValueView1.setProgressValue(Util.getRandomBetween(0, 100));
+        progressValueView1.setProgressValue(Util.getRandomBetween(N2MIN, N2MAX));
     }
 
     @Click(R.id.progressValue2)
     void onProgressValue2Click() {
-        progressValueView2.setProgressValue(Util.getRandomBetween(0, 100));
+        progressValueView2.setProgressValue(Util.getRandomBetween(O2MIN, O2MAX));
     }
+
+
 }
