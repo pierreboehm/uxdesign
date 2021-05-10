@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="N2MIN">75</integer>
+    <integer name="N2MAX">79</integer>
+
+    <integer name="O2MIN">20</integer>
+    <integer name="O2MAX">24</integer>
+</resources>
