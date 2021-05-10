@@ -21,8 +21,16 @@ public class UnitInfoTopContentView extends RelativeLayout {
         super(context);
     }
 
+    public void clearContent() {
+        contentViewContainer.removeAllViews();
+    }
+
     public void setContentView(View view) {
         contentViewContainer.removeAllViews();
+        contentViewContainer.addView(view);
+    }
+
+    public void addContentView(View view) {
         contentViewContainer.addView(view);
     }
 }

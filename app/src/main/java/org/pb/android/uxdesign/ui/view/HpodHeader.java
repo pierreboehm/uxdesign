@@ -86,9 +86,21 @@ public class HpodHeader extends RelativeLayout {
         return logoButtonView.isSelected();
     }
 
-    public void setTopContent(View view) {
+    public void clearContent() {
+        if (unitInfoTopContent != null) {
+            unitInfoTopContent.clearContent();
+        }
+    }
+
+    public void setContent(View view) {
         if (unitInfoTopContent != null) {
             unitInfoTopContent.setContentView(view);
+        }
+    }
+
+    public void addContent(View view) {
+        if (unitInfoTopContent != null) {
+            unitInfoTopContent.addContentView(view);
         }
     }
 
