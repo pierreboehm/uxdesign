@@ -88,7 +88,6 @@ public class ProcessingConsoleView extends LinearLayout {
 
         tvConsole.setTextSize(Util.convertPxToSp(getContext(), fontSizeInPixeln));
         tvConsole.setMovementMethod(new ScrollingMovementMethod());
-        start();
     }
 
     private Pair<String, String> generate_8Byte_Dump() {
