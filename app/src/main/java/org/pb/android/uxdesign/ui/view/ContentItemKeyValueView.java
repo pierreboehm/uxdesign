@@ -12,8 +12,8 @@ import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
 
 @SuppressLint("NonConstantResourceId")
-@EViewGroup(R.layout.view_content_item_text)
-public class ContentItemTextView extends RelativeLayout {
+@EViewGroup(R.layout.view_content_item_key_value)
+public class ContentItemKeyValueView extends RelativeLayout {
 
     @ViewById(R.id.tvKey)
     TextView tvKey;
@@ -24,7 +24,7 @@ public class ContentItemTextView extends RelativeLayout {
     @ViewById(R.id.tvDots)
     TextView tvDots;
 
-    public ContentItemTextView(Context context) {
+    public ContentItemKeyValueView(Context context) {
         super(context);
     }
 

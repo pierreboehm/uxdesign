@@ -20,8 +20,8 @@ import org.pb.android.uxdesign.data.PowerManagerInfo;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.ViewMode;
-import org.pb.android.uxdesign.ui.view.ContentItemTextView;
-import org.pb.android.uxdesign.ui.view.ContentItemTextView_;
+import org.pb.android.uxdesign.ui.view.ContentItemKeyValueView;
+import org.pb.android.uxdesign.ui.view.ContentItemKeyValueView_;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 import org.pb.android.uxdesign.ui.view.HpodProgressValueView;
@@ -107,67 +107,67 @@ public class SystemStatusFragment extends Fragment {
     }
 
     private void setUserInfo() {
-        ContentItemTextView contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Count of registered users:", Integer.toString(demonstrator.getUserListCount()));
-        hpodHeader.setContent(contentItemTextView);
+        ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Count of registered users:", Integer.toString(demonstrator.getUserListCount()));
+        hpodHeader.setContent(contentItemKeyValue);
 
         CurrentUser currentUser = demonstrator.getCurrentUser();
 
-        contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Currently selected user", null);
-        hpodHeader.addContent(contentItemTextView);
+        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Currently selected user", null);
+        hpodHeader.addContent(contentItemKeyValue);
 
-        contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Name:", currentUser.getUserData().getName());
-        hpodHeader.addContent(contentItemTextView);
+        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Name:", currentUser.getUserData().getName());
+        hpodHeader.addContent(contentItemKeyValue);
 
-        contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Id:", currentUser.getUserData().getId());
-        hpodHeader.addContent(contentItemTextView);
+        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Id:", currentUser.getUserData().getId());
+        hpodHeader.addContent(contentItemKeyValue);
 
-        contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Profession:", currentUser.getUserData().getProfession());
-        hpodHeader.addContent(contentItemTextView);
+        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Profession:", currentUser.getUserData().getProfession());
+        hpodHeader.addContent(contentItemKeyValue);
 
-        contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Country:", currentUser.getUserData().getCountry());
-        hpodHeader.addContent(contentItemTextView);
+        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Country:", currentUser.getUserData().getCountry());
+        hpodHeader.addContent(contentItemKeyValue);
 
-        contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Locality:", currentUser.getUserData().getLocality());
-        hpodHeader.addContent(contentItemTextView);
+        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Locality:", currentUser.getUserData().getLocality());
+        hpodHeader.addContent(contentItemKeyValue);
     }
 
     private void setPowerInfo() {
         PowerManagerInfo powerManagerInfo = demonstrator.getPowerManagerInfo();
 
-        ContentItemTextView contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("External power supply:", powerManagerInfo.isPluggedIn() ? "YES" : "NO");
-        hpodHeader.setContent(contentItemTextView);
+        ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("External power supply:", powerManagerInfo.isPluggedIn() ? "YES" : "NO");
+        hpodHeader.setContent(contentItemKeyValue);
 
         if (powerManagerInfo.isPluggedIn()) {
-            contentItemTextView = ContentItemTextView_.build(getContext());
-            contentItemTextView.bind("Voltage:", powerManagerInfo.getPowerSupplyInVolt() + "V");
-            hpodHeader.addContent(contentItemTextView);
+            contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+            contentItemKeyValue.bind("Voltage:", powerManagerInfo.getPowerSupplyInVolt() + "V");
+            hpodHeader.addContent(contentItemKeyValue);
 
-            contentItemTextView = ContentItemTextView_.build(getContext());
-            contentItemTextView.bind("Is loading:", powerManagerInfo.isLoading() ? "YES" : "NO");
-            hpodHeader.addContent(contentItemTextView);
+            contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+            contentItemKeyValue.bind("Is loading:", powerManagerInfo.isLoading() ? "YES" : "NO");
+            hpodHeader.addContent(contentItemKeyValue);
 
             if (powerManagerInfo.isLoading()) {
-                contentItemTextView = ContentItemTextView_.build(getContext());
-                contentItemTextView.bind("Loading status:", powerManagerInfo.getLoadingStateInPercent() + "%");
-                hpodHeader.addContent(contentItemTextView);
+                contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+                contentItemKeyValue.bind("Loading status:", powerManagerInfo.getLoadingStateInPercent() + "%");
+                hpodHeader.addContent(contentItemKeyValue);
             }
         }
 
-        contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Current consumption:", powerManagerInfo.getCurrentConsumptionInMilliAmpere() + "mA");
-        hpodHeader.addContent(contentItemTextView);
+        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Current consumption:", powerManagerInfo.getCurrentConsumptionInMilliAmpere() + "mA");
+        hpodHeader.addContent(contentItemKeyValue);
 
-        contentItemTextView = ContentItemTextView_.build(getContext());
-        contentItemTextView.bind("Battery temperature:", powerManagerInfo.getTemperatureInCelsius() + "°C");
-        hpodHeader.addContent(contentItemTextView);
+        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
+        contentItemKeyValue.bind("Battery temperature:", powerManagerInfo.getTemperatureInCelsius() + "°C");
+        hpodHeader.addContent(contentItemKeyValue);
     }
 
     private void setNitrogen() {
