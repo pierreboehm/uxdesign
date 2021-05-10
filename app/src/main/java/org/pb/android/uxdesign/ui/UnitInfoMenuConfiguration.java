@@ -61,7 +61,11 @@ public enum UnitInfoMenuConfiguration {
     public abstract void onClick(boolean isSelected);
 
     public void action_btn0(boolean isSelected) {
-        // TODO: implement
+        if (isSelected) {
+            EventBus.getDefault().postSticky(new Event.ContentShowApplicationInfo());
+        } else {
+            EventBus.getDefault().post(new Event.ContentClear());
+        }
     }
 
     public void action_btn1(boolean isSelected) {

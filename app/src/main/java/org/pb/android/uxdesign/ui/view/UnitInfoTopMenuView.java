@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewsById;
@@ -37,6 +38,12 @@ public class UnitInfoTopMenuView extends RelativeLayout {
 
     public UnitInfoTopMenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @AfterViews
+    public void initView() {
+        // preselect 'application info' as default
+        performSelection(buttonGroup1List.get(0));
     }
 
     @Click({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5})
