@@ -3,6 +3,7 @@ package org.pb.android.uxdesign.ui.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -85,6 +86,12 @@ public class HpodHeader extends RelativeLayout {
         return logoButtonView.isSelected();
     }
 
+    public void setTopContent(View view) {
+        if (unitInfoTopContent != null) {
+            unitInfoTopContent.setContentView(view);
+        }
+    }
+
     private void prepareMainScreen() {
         viewContainer.removeAllViews();
 
@@ -92,6 +99,8 @@ public class HpodHeader extends RelativeLayout {
         logoButtonView.setWaitingState(false);
         logoButtonView.setVisibility(VISIBLE);
         unitInfoTopMenu.setVisibility(GONE);
+
+        unitInfoTopContent = null;
 
         userDataView = UserDataView_.build(getContext(), viewMode);
         userDataView.setCurrentUser(currentUser);
@@ -109,6 +118,8 @@ public class HpodHeader extends RelativeLayout {
         logoButtonView.setWaitingState(true);
         logoButtonView.setVisibility(VISIBLE);
         unitInfoTopMenu.setVisibility(GONE);
+
+        unitInfoTopContent = null;
 
         userDataView = UserDataView_.build(getContext(), viewMode);
         userDataView.setCurrentUser(currentUser);
