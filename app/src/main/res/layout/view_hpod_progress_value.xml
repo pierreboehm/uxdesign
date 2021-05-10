@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="6sp"
+            android:textStyle="bold"
             tools:text="O²"
             />
 
