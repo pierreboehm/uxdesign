@@ -6,8 +6,8 @@
 
     <ScrollView
         android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="8dp"
         android:scrollbars="none"
         android:background="@drawable/background_frame_top_content">
 
