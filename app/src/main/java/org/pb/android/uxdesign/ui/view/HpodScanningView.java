@@ -1,5 +1,6 @@
 package org.pb.android.uxdesign.ui.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.ui.button.ButtonView;
 
+@SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_scanning)
 public class HpodScanningView extends LinearLayout {
 
@@ -27,7 +29,7 @@ public class HpodScanningView extends LinearLayout {
 
     @AfterViews
     public void initView() {
-        bvFooterText.setText("HPOD STATUS SYS");
+        bvFooterText.setText(R.string.button_view_hpod_status_sys);
     }
 
     public void startScanning() {

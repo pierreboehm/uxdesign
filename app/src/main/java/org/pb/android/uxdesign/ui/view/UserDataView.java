@@ -14,7 +14,7 @@ import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.data.user.UserData;
 import org.pb.android.uxdesign.ui.ViewMode;
 
-@SuppressLint("NonConstantResourceId")
+@SuppressLint({"NonConstantResourceId", "ViewConstructor"})
 @EViewGroup(R.layout.view_user_data)
 public class UserDataView extends LinearLayout {
 
@@ -75,12 +75,12 @@ public class UserDataView extends LinearLayout {
     private void prepareScreen() {
         if (viewMode == ViewMode.MAIN) {
             tvSubText.setVisibility(GONE);
-            tvMainText.setText("HPOD SYSTEMS OPTIMAL");
+            tvMainText.setText(R.string.hpod_systems_optimal);
 
         } else if (viewMode == ViewMode.PASSENGER_INFO) {
             tvSubText.setVisibility(VISIBLE);
-            tvMainText.setText("HPOD SYSTEM");
-            tvSubText.setText("PASSENGER VITAL STATUS");
+            tvMainText.setText(R.string.hpod_system);
+            tvSubText.setText(R.string.passenger_vital_status);
         }
     }
 

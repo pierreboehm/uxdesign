@@ -23,6 +23,10 @@ public class ButtonView extends LinearLayout {
         super(context, attrs);
     }
 
+    public void setText(int resourceId) {
+        tvText.setText(resourceId);
+    }
+
     public void setText(String text) {
         tvText.setText(text);
     }

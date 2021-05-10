@@ -23,6 +23,10 @@ public class MenueButtonView extends LinearLayout {
         super(context, attrs);
     }
 
+    public void setText(int resourceId) {
+        buttonText.setText(resourceId);
+    }
+
     public void setText(String text) {
         buttonText.setText(text);
     }

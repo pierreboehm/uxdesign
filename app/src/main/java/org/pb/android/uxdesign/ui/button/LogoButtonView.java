@@ -22,6 +22,10 @@ public class LogoButtonView extends LinearLayout {
 
     private static final String TAG = LogoButtonView.class.getSimpleName();
 
+    private static final long ANIMATION_SPEED = 1000L;
+    private static final float ALPHA_MIN = .3f;
+    private static final float ALPHA_MAX = 1f;
+
     @ViewById(R.id.ivLogo)
     ImageView ivLogo;
 
@@ -55,7 +59,7 @@ public class LogoButtonView extends LinearLayout {
         } else {
             ivLogo.clearColorFilter();
             tvLogo.setTextColor(getContext().getColor(R.color.blue_light));
-            showWaitStatus(.3f, 1f);
+            showWaitStatus(ALPHA_MIN, ALPHA_MAX);
         }
     }
 
@@ -83,7 +87,7 @@ public class LogoButtonView extends LinearLayout {
             }
         });
 
-        animator.setDuration(1000);
+        animator.setDuration(ANIMATION_SPEED);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.REVERSE);
         animator.start();

@@ -3,7 +3,6 @@ package org.pb.android.uxdesign.ui.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.AfterViews;
@@ -52,9 +51,9 @@ public class MainMenuView extends RelativeLayout {
 
     @AfterViews
     public void initView() {
-        btnLeft.setText("PASSENGER INFO");
-        btnCenter.setText("UNIT INFO");
-        btnRight.setText("MAINTENANCE");
+        btnLeft.setText(R.string.menu_button_passenger_info);
+        btnCenter.setText(R.string.menu_button_unit_info);
+        btnRight.setText(R.string.menu_button_maintenance);
 
         dotPatternBigView.setDotPattern(DotPatternBigView.DotPattern.RANDOM);
         dotPatternSmallView.setDefaultColor(getContext().getColor(R.color.white));
@@ -80,7 +79,6 @@ public class MainMenuView extends RelativeLayout {
         Bitmap accessCodeBitmap = menueAccessSystemView.getAccessCodeBitmap();
         if (accessCodeBitmap != null) {
             demonstrator.setAccessCodeBitmap(accessCodeBitmap);
-            Log.d(TAG, "access code bitmap stored");
             EventBus.getDefault().post(new Event.ShowDialog(ViewMode.MAIN));
         }
     }

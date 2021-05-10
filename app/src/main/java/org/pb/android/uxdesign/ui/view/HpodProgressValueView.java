@@ -12,6 +12,7 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
 
+@SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_progress_value)
 public class HpodProgressValueView extends RelativeLayout {
 

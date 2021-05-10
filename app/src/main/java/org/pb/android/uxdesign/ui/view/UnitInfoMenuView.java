@@ -37,9 +37,9 @@ public class UnitInfoMenuView extends RelativeLayout {
 
     @AfterViews
     public void initView() {
-        btnLeft.setText("PASSENGER INFO");
-        btnCenter.setText("HPOD OVERVIEW");
-        btnRight.setText("MAINTENANCE");
+        btnLeft.setText(R.string.menu_button_passenger_info);
+        btnCenter.setText(R.string.menu_button_hpod_overview);
+        btnRight.setText(R.string.menu_button_maintenance);
     }
 
     public void startConsole() {

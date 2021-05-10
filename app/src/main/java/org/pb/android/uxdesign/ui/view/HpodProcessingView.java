@@ -72,18 +72,18 @@ public class HpodProcessingView extends LinearLayout {
     }
 
     public void stopProcessing() {
-        animateProgressShutDown(progressBarStatusSystem.getProgress(), 0,
+        animateProgressShutDown(progressBarStatusSystem.getProgress(),
                 tvStatusSystem, progressBarStatusSystem);
 
-        animateProgressShutDown(progressBarDataProcessing.getProgress(), 0,
+        animateProgressShutDown(progressBarDataProcessing.getProgress(),
                 tvDataProcessing, progressBarDataProcessing);
 
-        animateProgressShutDown(progressBarDataMonitoring.getProgress(), 0,
+        animateProgressShutDown(progressBarDataMonitoring.getProgress(),
                 tvDataMonitoring, progressBarDataMonitoring);
     }
 
-    private void animateProgressShutDown(int startValue, int endValue, TextView textView, ProgressBar progressBar) {
-        ValueAnimator animator = ValueAnimator.ofInt(startValue, endValue);
+    private void animateProgressShutDown(int startValue, TextView textView, ProgressBar progressBar) {
+        ValueAnimator animator = ValueAnimator.ofInt(startValue, 0);
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override

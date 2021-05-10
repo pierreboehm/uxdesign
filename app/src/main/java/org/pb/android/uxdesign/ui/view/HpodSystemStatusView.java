@@ -32,20 +32,20 @@ public class HpodSystemStatusView extends LinearLayout {
     }
 
     public void preparePowerSystemStatusScreen() {
-        bvSystemStatusHeaderText.setText("PS");
-        tvSystemStatusFooterText.setText("POWER SYSTEM");
+        bvSystemStatusHeaderText.setText(R.string.button_view_ps);
+        tvSystemStatusFooterText.setText(R.string.button_view_power_system);
         dotPatternBigView.setDotPattern(DotPatternBigView.DotPattern.TRIANGLE);
     }
 
     public void prepareCpuSystemStatusScreen() {
-        bvSystemStatusHeaderText.setText("CPU");
-        tvSystemStatusFooterText.setText("PROCESSES");
+        bvSystemStatusHeaderText.setText(R.string.button_view_cpu);
+        tvSystemStatusFooterText.setText(R.string.button_view_processes);
         dotPatternBigView.setDotPattern(DotPatternBigView.DotPattern.SQUARE);
     }
 
     public void prepareTempSystemStatusScreen() {
-        bvSystemStatusHeaderText.setText("TPS");
-        tvSystemStatusFooterText.setText("TEMP SYSTEM");
+        bvSystemStatusHeaderText.setText(R.string.button_view_tps);
+        tvSystemStatusFooterText.setText(R.string.button_view_temp_system);
         dotPatternBigView.setDotPattern(DotPatternBigView.DotPattern.CIRCLE);
     }
 }

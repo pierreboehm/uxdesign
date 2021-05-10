@@ -43,4 +43,24 @@
     <string name="power_info_key_5">Current consumption:</string>
     <string name="power_info_key_6">Battery temperature:</string>
 
+    <!-- menu button -->
+    <string name="menu_button_passenger_info">PASSENGER INFO</string>
+    <string name="menu_button_unit_info">UNIT INFO</string>
+    <string name="menu_button_maintenance">MAINTENANCE</string>
+    <string name="menu_button_hpod_overview">HPOD OVERVIEW</string>
+
+    <!-- hpod view -->
+    <string name="hpod_system">HPOD SYSTEM</string>
+    <string name="hpod_systems_optimal">HPOD SYSTEMS OPTIMAL</string>
+    <string name="passenger_vital_status">PASSENGER VITAL STATUS</string>
+
+    <!-- button view -->
+    <string name="button_view_ps">PS</string>
+    <string name="button_view_power_system">POWER SYSTEM</string>
+    <string name="button_view_cpu">CPU</string>
+    <string name="button_view_processes">PROCESSES</string>
+    <string name="button_view_tps">TPS</string>
+    <string name="button_view_temp_system">TEMP SYSTEM</string>
+    <string name="button_view_hpod_status_sys">HPOD STATUS SYS</string>
+
 </resources>
