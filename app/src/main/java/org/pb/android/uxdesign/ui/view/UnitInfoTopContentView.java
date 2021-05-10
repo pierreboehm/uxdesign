@@ -1,5 +1,6 @@
 package org.pb.android.uxdesign.ui.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
 
+@SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_unit_info_top_content)
 public class UnitInfoTopContentView extends RelativeLayout {
 
