@@ -79,6 +79,7 @@ public class HpodHeader extends RelativeLayout {
 
         if (logoButtonView.hasWaitingState()) {
             leaveButton.setVisibility(selected ? GONE : VISIBLE);
+            setDischargedState(!selected);
         }
     }
 
