@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
@@ -18,8 +19,16 @@ public class UnitInfoTopContentView extends RelativeLayout {
     @ViewById(R.id.contentViewContainer)
     ViewGroup contentViewContainer;
 
+    @ViewById(R.id.tvMainText)
+    TextView tvMainText;
+
     public UnitInfoTopContentView(Context context) {
         super(context);
+    }
+
+    @AfterViews
+    public void initView() {
+        tvMainText.setText(R.string.hpod_unit_system);
     }
 
     public void clearContent() {

@@ -51,6 +51,7 @@
 
     <!-- hpod view -->
     <string name="hpod_system">HPOD SYSTEM</string>
+    <string name="hpod_unit_system">HPOD UNIT SYSTEM</string>
     <string name="hpod_systems_optimal">HPOD SYSTEMS OPTIMAL</string>
     <string name="passenger_vital_status">PASSENGER VITAL STATUS</string>
 
