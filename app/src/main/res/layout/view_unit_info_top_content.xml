@@ -4,16 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="200dp">
 
-    <LinearLayout
-        android:id="@+id/contentViewContainer"
+    <ScrollView
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp"
-        android:background="@drawable/background_frame_top_content"
-        />
+        android:scrollbars="none"
+        android:background="@drawable/background_frame_top_content">
+
+        <LinearLayout
+            android:id="@+id/contentViewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            />
+
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"
