@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+
+    <TextView
+        android:id="@+id/tvKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        android:textColor="@color/blue_light"
+        android:textScaleX="1.2"
+        tools:text="Count of registered users:"
+        />
+
+    <TextView
+        android:id="@+id/tvDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_toRightOf="@id/tvKey"
+        android:layout_toLeftOf="@id/tvValue"
+        android:singleLine="true"
+        android:textSize="8sp"
+        android:textColor="@color/blue_light"
+        android:textScaleX="1.2"
+        android:text="......................................................................................................................................................."
+        />
+
+    <TextView
+        android:id="@+id/tvValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textSize="8sp"
+        android:textColor="@color/white"
+        android:textScaleX="1.2"
+        tools:text="20"
+        />
+
+</RelativeLayout>
