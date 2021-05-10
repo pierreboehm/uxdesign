@@ -3,6 +3,19 @@
     <string name="backPressedHintText">Press again to close the app.</string>
     <string name="vitalState_discharged">PASSENGER DISCHARGED</string>
 
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+
+    <string name="chemical_sign_nitrogen">N²</string>
+    <string name="chemical_sign_oxygen">O²</string>
+
+    <string name="unit_voltage">V</string>
+    <string name="unit_voltage_milli">mV</string>
+    <string name="unit_current">A</string>
+    <string name="unit_current_milli">mA</string>
+    <string name="unit_percent">%</string>
+    <string name="unit_temperature">°C</string>
+
     <!-- content: application info -->
     <string name="application_info_headline">Information</string>
     <string name="application_info_text_1">This project I\'ve created in three weeks as work sample for possibly prospective employers.</string>
@@ -12,4 +25,22 @@
     <string name="application_info_text_5">If you are interested in my work and you want me as a part of your developer team, just feel free to contact me: pierre.boehm@web.de</string>
     <string name="application_info_text_6">Now have fun and play with it!</string>
     <string name="application_info_text_7">Copyright © 2021 by Pierre Böhm</string>
+
+    <!-- content: user info -->
+    <string name="user_info_key_1">Count of registered users:</string>
+    <string name="user_info_key_2">Currently selected user</string>
+    <string name="user_info_key_3">Name:</string>
+    <string name="user_info_key_4">Id:</string>
+    <string name="user_info_key_5">Profession:</string>
+    <string name="user_info_key_6">Country:</string>
+    <string name="user_info_key_7">Locality:</string>
+
+    <!-- content: power info -->
+    <string name="power_info_key_1">External power supply:</string>
+    <string name="power_info_key_2">Voltage:</string>
+    <string name="power_info_key_3">Is loading:</string>
+    <string name="power_info_key_4">Loading status:</string>
+    <string name="power_info_key_5">Current consumption:</string>
+    <string name="power_info_key_6">Battery temperature:</string>
+
 </resources>

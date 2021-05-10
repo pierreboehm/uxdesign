@@ -33,4 +33,10 @@ public class ContentItemKeyValueView extends RelativeLayout {
         tvValue.setText(value);
         tvDots.setVisibility((value == null || value.length() == 0) ? INVISIBLE : VISIBLE);
     }
+
+    public void bind(int resourceId, @Nullable String value) {
+        tvKey.setText(resourceId);
+        tvValue.setText(value);
+        tvDots.setVisibility((value == null || value.length() == 0) ? INVISIBLE : VISIBLE);
+    }
 }

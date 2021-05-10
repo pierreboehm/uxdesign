@@ -150,33 +150,33 @@ public class SystemStatusFragment extends Fragment {
 
     private void setUserInfo() {
         ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Count of registered users:", Integer.toString(demonstrator.getUserListCount()));
+        contentItemKeyValue.bind(R.string.user_info_key_1, Integer.toString(demonstrator.getUserListCount()));
         hpodHeader.setContent(contentItemKeyValue);
 
         CurrentUser currentUser = demonstrator.getCurrentUser();
 
         contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Currently selected user", null);
+        contentItemKeyValue.bind(R.string.user_info_key_2, null);
         hpodHeader.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Name:", currentUser.getUserData().getName());
+        contentItemKeyValue.bind(R.string.user_info_key_3, currentUser.getUserData().getName());
         hpodHeader.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Id:", currentUser.getUserData().getId());
+        contentItemKeyValue.bind(R.string.user_info_key_4, currentUser.getUserData().getId());
         hpodHeader.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Profession:", currentUser.getUserData().getProfession());
+        contentItemKeyValue.bind(R.string.user_info_key_5, currentUser.getUserData().getProfession());
         hpodHeader.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Country:", currentUser.getUserData().getCountry());
+        contentItemKeyValue.bind(R.string.user_info_key_6, currentUser.getUserData().getCountry());
         hpodHeader.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Locality:", currentUser.getUserData().getLocality());
+        contentItemKeyValue.bind(R.string.user_info_key_7, currentUser.getUserData().getLocality());
         hpodHeader.addContent(contentItemKeyValue);
     }
 
@@ -184,44 +184,50 @@ public class SystemStatusFragment extends Fragment {
         PowerManagerInfo powerManagerInfo = demonstrator.getPowerManagerInfo();
 
         ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("External power supply:", powerManagerInfo.isPluggedIn() ? "YES" : "NO");
+        contentItemKeyValue.bind(R.string.power_info_key_1,
+                powerManagerInfo.isPluggedIn() ? getString(R.string.yes) : getString(R.string.no));
         hpodHeader.setContent(contentItemKeyValue);
 
         if (powerManagerInfo.isPluggedIn()) {
             contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-            contentItemKeyValue.bind("Voltage:", powerManagerInfo.getPowerSupplyInVolt() + "V");
+            contentItemKeyValue.bind(R.string.power_info_key_2,
+                    powerManagerInfo.getPowerSupplyInVolt() + getString(R.string.unit_voltage));
             hpodHeader.addContent(contentItemKeyValue);
 
             contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-            contentItemKeyValue.bind("Is loading:", powerManagerInfo.isLoading() ? "YES" : "NO");
+            contentItemKeyValue.bind(R.string.power_info_key_3,
+                    powerManagerInfo.isLoading() ? getString(R.string.yes) : getString(R.string.no));
             hpodHeader.addContent(contentItemKeyValue);
 
             if (powerManagerInfo.isLoading()) {
                 contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-                contentItemKeyValue.bind("Loading status:", powerManagerInfo.getLoadingStateInPercent() + "%");
+                contentItemKeyValue.bind(R.string.power_info_key_4,
+                        powerManagerInfo.getLoadingStateInPercent() + getString(R.string.unit_percent));
                 hpodHeader.addContent(contentItemKeyValue);
             }
         }
 
         contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Current consumption:", powerManagerInfo.getCurrentConsumptionInMilliAmpere() + "mA");
+        contentItemKeyValue.bind(R.string.power_info_key_5,
+                powerManagerInfo.getCurrentConsumptionInMilliAmpere() + getString(R.string.unit_current_milli));
         hpodHeader.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind("Battery temperature:", powerManagerInfo.getTemperatureInCelsius() + "°C");
+        contentItemKeyValue.bind(R.string.power_info_key_6,
+                powerManagerInfo.getTemperatureInCelsius() + getString(R.string.unit_temperature));
         hpodHeader.addContent(contentItemKeyValue);
     }
 
     private void setNitrogen() {
         Pair<Integer, String> nitrogenValues = getProgressValueAndRelation(N2MIN, N2MAX);
-        progressValueView1.setTextTop("N²");
+        progressValueView1.setTextTop(getString(R.string.chemical_sign_nitrogen));
         progressValueView1.setTextBottom(nitrogenValues.second);
         progressValueView1.setProgressValue(nitrogenValues.first);
     }
 
     private void setOxygen() {
         Pair<Integer, String> oxygenValues = getProgressValueAndRelation(O2MIN, O2MAX);
-        progressValueView2.setTextTop("O²");
+        progressValueView2.setTextTop(getString(R.string.chemical_sign_oxygen));
         progressValueView2.setTextBottom(oxygenValues.second);
         progressValueView2.setProgressValue(oxygenValues.first);
     }
