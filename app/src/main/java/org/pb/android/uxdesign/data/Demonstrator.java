@@ -86,7 +86,7 @@ public class Demonstrator {
     }
 
     public PowerManagerInfo getPowerManagerInfo() {
-        return new PowerManagerInfo();
+        return powerManagerInfo;
     }
 
     private List<User> getUserList() {

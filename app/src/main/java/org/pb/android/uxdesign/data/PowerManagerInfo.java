@@ -7,45 +7,86 @@ public class PowerManagerInfo {
     private static final float TEMP_MIN = 32f;
     private static final float TEMP_MAX = 70f;
 
+    private static final float VOLTAGE_MAX = 5000f;
+    private static final float VOLTAGE_ACCU = 3800f;    // mV
+    private static final float CAPACITY_ACCU = 3000f;   // mAh, 11.5Wh
+
+    private static final String TYP_ACCU = "Li-Ion";
+    private static final String MODEL_ACCU = "B2PZC100";
+
+    private float voltage;
+    private float voltageBattery;
+    private float resistor;
+
     private boolean plugged;
-    private int loadingState = 0;
+    private int chargingState = 50;
+    private float temperature;
 
-        /*public enum TermalStatus {
-            NORMAL, LIGHT, MODERATE, EMERGENCY, CRITICAL
-        }
+    public PowerManagerInfo() {
+        temperature = (float) Util.roundScale(Util.getRandomBetween(TEMP_MIN, TEMP_MAX));
+        updateBatteryStatus();
+    }
 
-        public static String getTermalStatus() {
-            return TermalStatus.values()[Util.getRandomBetween(0, 4)].name();
-        }*/
+    public String getBatteryTyp() {
+        return TYP_ACCU;
+    }
+
+    public String getBatteryModel() {
+        return MODEL_ACCU;
+    }
+
+    public float getBatteryCapacity() {
+        return CAPACITY_ACCU;
+    }
 
     public float getTemperatureInCelsius() {
-        return (float) Util.roundScale(Util.getRandomBetween(TEMP_MIN, TEMP_MAX));
+        // FIXME: make depended from resistor, consumption and charging state ?
+        temperature += (float) Util.getRandomBetween(-5, 5) / 100f;
+        return (float) Util.roundScale(temperature);
     }
 
     public int getPowerSupplyInVolt() {
-        return 5;
+        return (int) (voltage / 1000f);
+    }
+
+    public int getVoltageInMilliVolt() {
+        return (int) voltage;
     }
 
     public float getCurrentConsumptionInMilliAmpere() {
-        return (float) Util.roundScale(Util.getRandomBetween(.5f, 2.1f));
+        return (float) Util.roundScale(Util.getRandomBetween(500f, 2100f));
     }
 
     public boolean isPluggedIn() {
-        plugged = Util.getRandomBoolean();
+        plugged = true; //Util.getRandomBoolean();
         return plugged;
     }
 
-    public boolean isLoading() {
-        return plugged && loadingState < 100;
+    public boolean isCharging() {
+        return plugged && chargingState < 100;
     }
 
-    public int getLoadingStateInPercent() {
-        if (isPluggedIn() && isLoading()) {
-            loadingState = Math.min(Util.getRandomBetween(loadingState, loadingState + 1), 100);
+    public int getBatteryStatusInPercent() {
+        if (plugged && isCharging()) {
+            chargingState = Math.min(Util.getRandomBetween(chargingState, chargingState + 1), 100);
         } else {
-            loadingState = Math.max(Util.getRandomBetween(loadingState - 1, loadingState), 0);
+            chargingState = Math.max(Util.getRandomBetween(chargingState - 1, chargingState), 0);
         }
 
-        return loadingState;
+        return chargingState;
+    }
+
+    private float getBatteryStatusInMilliVolt() {
+        return chargingState * VOLTAGE_ACCU / 100f;
+    }
+
+    private void updateBatteryStatus() {
+        if (plugged) {
+            voltage = VOLTAGE_MAX;
+            voltageBattery = getBatteryStatusInMilliVolt();
+        } else {
+            voltageBattery = getBatteryStatusInMilliVolt();
+            voltage = voltageBattery;
+        }
     }
 }
