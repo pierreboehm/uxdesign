@@ -1,5 +1,7 @@
 package org.pb.android.uxdesign.data;
 
+import org.greenrobot.eventbus.EventBus;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.util.Util;
 
 public class PowerManagerInfo {
@@ -50,6 +52,7 @@ public class PowerManagerInfo {
     }
 
     public int getVoltageInMilliVolt() {
+        updateBatteryStatus();
         return (int) voltage;
     }
 
@@ -58,7 +61,12 @@ public class PowerManagerInfo {
     }
 
     public boolean isPluggedIn() {
-        plugged = true; //Util.getRandomBoolean();
+        plugged = Util.getRandomBetween(0, 100) < 95;
+
+        if (!plugged) {
+            EventBus.getDefault().post(new Event.ReportError());
+        }
+
         return plugged;
     }
 
