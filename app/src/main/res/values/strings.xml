@@ -6,6 +6,8 @@
     <string name="no">NO</string>
     <string name="charging">CHARGING</string>
     <string name="discharging">DISCHARGING</string>
+    <string name="connected">CONNECTED</string>
+    <string name="disconnected">DISCONNECTED</string>
     <string name="not_available">n/a</string>
 
     <string name="chemical_sign_nitrogen">N²</string>
@@ -51,6 +53,12 @@
 
     <!-- content: timers info -->
     <string name="timers_info_key_1">Defined timers:</string>
+
+    <!-- content: unit info-->
+    <string name="unit_info_key_1">Unit runtime:</string>
+    <string name="unit_info_key_2">Unit connection status:</string>
+    <string name="unit_info_key_3">Reported unit system errors:</string>
+    <string name="unit_info_key_4">Reported unit system failures:</string>
 
     <!-- menu button -->
     <string name="menu_button_passenger_info">PASSENGER INFO</string>
