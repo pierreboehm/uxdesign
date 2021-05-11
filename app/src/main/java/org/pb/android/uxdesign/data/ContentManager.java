@@ -153,13 +153,14 @@ public class ContentManager {
     }
 
     public void setUnitInfo(ContentProvider contentProvider) {
-        // TODO: implement general unit state summary (runtime, connectivity, errors/failures)
         ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(context);
         contentItemKeyValue.bind(R.string.unit_info_key_1, demonstrator.getRuntime());
         contentProvider.setContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.bind(R.string.unit_info_key_2, context.getString(R.string.connected));
+        contentItemKeyValue.bind(R.string.unit_info_key_2, demonstrator.isPlugged()
+                ? context.getString(R.string.connected)
+                : context.getString(R.string.disconnected));
         contentProvider.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);

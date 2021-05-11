@@ -6,8 +6,8 @@ import org.pb.android.uxdesign.util.Util;
 
 public class PowerManagerInfo {
 
-    private static final float TEMP_MIN = 32f;
-    private static final float TEMP_MAX = 70f;
+    private static final float TEMP_MIN = 30f;
+    private static final float TEMP_MAX = 50f;
 
     private static final float VOLTAGE_MAX = 5000f;
     private static final float VOLTAGE_ACCU = 3800f;    // mV
@@ -18,11 +18,10 @@ public class PowerManagerInfo {
 
     private float voltage;
     private float voltageBattery;
-    private float resistor;
 
     private boolean plugged;
     private boolean charging;
-    private int chargingState = 50;
+    private int chargingState;
     private float temperature;
 
     public PowerManagerInfo() {
@@ -43,7 +42,6 @@ public class PowerManagerInfo {
     }
 
     public float getTemperatureInCelsius() {
-        // FIXME: make depended from resistor, consumption and charging state ?
         temperature += (float) Util.getRandomBetween(-5, 5) / 100f;
         return (float) Util.roundScale(temperature);
     }

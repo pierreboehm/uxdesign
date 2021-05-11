@@ -79,7 +79,6 @@ public class Demonstrator {
         return timers;
     }
 
-
     @SuppressLint("DefaultLocale")
     public String getRuntime() {
         long timestamp = System.currentTimeMillis();
@@ -144,6 +143,10 @@ public class Demonstrator {
 
     public void setChargingLevel(float chargingLevel) {
         powerManagerInfo.setBatteryChargingLevelInPercent(chargingLevel);
+    }
+
+    public boolean isPlugged() {
+        return powerManagerInfo.isPluggedIn();
     }
 
     private List<User> getUserList() {
