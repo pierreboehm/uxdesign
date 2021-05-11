@@ -1,5 +1,6 @@
 package org.pb.android.uxdesign.data;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -14,15 +15,16 @@ import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.data.user.User;
 import org.pb.android.uxdesign.data.user.UserData;
 import org.pb.android.uxdesign.data.user.Users;
-import org.pb.android.uxdesign.ui.ViewMode;
+
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.InputStream;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Timer;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class Demonstrator {
@@ -37,23 +39,66 @@ public class Demonstrator {
 
     private PowerManagerInfo powerManagerInfo;
     private Bitmap accessCodeBitmap;
-    private Timer timer;
+
+    private long timestampStart;
+    private int errors = 0;
+    private int failures = 0;
+    private int timers = 0;
 
     @AfterInject
     public void afterInject() {
         powerManagerInfo = new PowerManagerInfo();
+        timestampStart = System.currentTimeMillis();
     }
 
-    public void start() {
-        startTimer();
+    public void reportError() {
+        errors++;
     }
 
-    public void stop() {
-        stopTimer();
+    public int getErrors() {
+        return errors;
     }
 
-    public void setViewMode(ViewMode viewMode) {
-        reconfigureTimerTasks(viewMode);
+    public void reportFailure() {
+        failures++;
+    }
+
+    public int getFailures() {
+        return failures;
+    }
+
+    public void reportTimerStarted() {
+        timers++;
+    }
+
+    public void reportTimerStopped() {
+        timers--;
+    }
+
+    public int getTimersRunning() {
+        return timers;
+    }
+
+
+    @SuppressLint("DefaultLocale")
+    public String getRuntime() {
+        long timestamp = System.currentTimeMillis();
+
+        Date date1 = new Date(timestampStart);
+        Date date2 = new Date(timestamp);
+
+        long differenceInMilliSeconds = Math.abs(date2.getTime() - date1.getTime());
+        long differenceInDays = (differenceInMilliSeconds / (24 * 60 * 60 * 1000)) % 365;
+        long differenceInHours = (differenceInMilliSeconds / (60 * 60 * 1000)) % 24;
+        long differenceInMinutes = (differenceInMilliSeconds / (60 * 1000)) % 60;
+        long differenceInSeconds = (differenceInMilliSeconds / 1000) % 60;
+
+        if (differenceInDays > 0) {
+            return String.format("%dd %02d:%02d:%02d", differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds);
+        } else {
+            return String.format("%02d:%02d:%02d", differenceInHours, differenceInMinutes, differenceInSeconds);
+        }
+
     }
 
     public void setAccessCodeBitmap(Bitmap bitmap) {
@@ -135,21 +180,5 @@ public class Demonstrator {
         }
 
         return UserData.create().setData(user).getUserData();
-    }
-
-    private void reconfigureTimerTasks(ViewMode viewMode) {
-
-    }
-
-    private void startTimer() {
-        timer = new Timer();
-        // prepare all needed TimerTasks here
-    }
-
-    private void stopTimer() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
     }
 }
