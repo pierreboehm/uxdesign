@@ -46,7 +46,7 @@
         android:textScaleX="1.2"
         android:textColor="@color/white"
         android:textAllCaps="true"
-        android:text="@string/vitalState_discharged"
+        android:text="@string/passenger_discharged"
         />
 
     <LinearLayout

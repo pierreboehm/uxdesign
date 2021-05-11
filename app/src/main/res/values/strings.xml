@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">uxdesign</string>
     <string name="backPressedHintText">Press again to close the app.</string>
-    <string name="vitalState_discharged">PASSENGER DISCHARGED</string>
 
     <string name="yes">YES</string>
     <string name="no">NO</string>
@@ -59,6 +58,7 @@
     <string name="hpod_unit_system">HPOD UNIT SYSTEM</string>
     <string name="hpod_systems_optimal">HPOD SYSTEMS OPTIMAL</string>
     <string name="passenger_vital_status">PASSENGER VITAL STATUS</string>
+    <string name="passenger_discharged">PASSENGER DISCHARGED</string>
 
     <!-- button view -->
     <string name="button_view_ps">PS</string>
