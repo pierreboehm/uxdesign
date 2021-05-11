@@ -106,4 +106,16 @@ public class Event {
 
     public static class ContentShowSustainmentInfo {
     }
+
+    public static class ReportError {
+    }
+
+    public static class ReportFailure {
+    }
+
+    public static class ReportTimerStarted {
+    }
+
+    public static class ReportTimerStopped {
+    }
 }

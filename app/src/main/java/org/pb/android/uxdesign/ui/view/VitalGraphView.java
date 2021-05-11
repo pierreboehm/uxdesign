@@ -146,6 +146,8 @@ public class VitalGraphView extends View {
         }, 0, 250);
 
         ekg.start();
+
+        EventBus.getDefault().post(new Event.ReportTimerStarted());
     }
 
     // FIXME: move to Demonstrator
@@ -156,6 +158,8 @@ public class VitalGraphView extends View {
         if (cardiacWaveTimer != null) {
             cardiacWaveTimer.cancel();
             cardiacWaveTimer = null;
+
+            EventBus.getDefault().post(new Event.ReportTimerStopped());
         }
 
         // cleanup drawings

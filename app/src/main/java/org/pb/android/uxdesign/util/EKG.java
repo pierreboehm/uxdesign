@@ -62,12 +62,16 @@ public class EKG {
 
         timer = new Timer();
         timer.schedule(getRestartTimerTask(), Util.getRandomBetween(200, 500));
+
+        EventBus.getDefault().post(new Event.ReportTimerStarted());
     }
 
     public void stop() {
         if (timer != null) {
             timer.cancel();
             timer = null;
+
+            EventBus.getDefault().post(new Event.ReportTimerStopped());
         }
     }
 

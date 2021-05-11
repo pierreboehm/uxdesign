@@ -14,7 +14,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.util.Util;
 
 import java.util.Timer;
@@ -74,12 +76,16 @@ public class ProcessingConsoleView extends LinearLayout {
                 appendConsoleData();
             }
         }, 0, UPDATE_INTERVAL);
+
+        EventBus.getDefault().post(new Event.ReportTimerStarted());
     }
 
     public void stop() {
         if (timer != null) {
             timer.cancel();
             timer = null;
+
+            EventBus.getDefault().post(new Event.ReportTimerStopped());
         }
     }
 

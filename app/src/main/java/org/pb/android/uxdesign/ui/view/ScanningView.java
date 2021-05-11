@@ -12,7 +12,9 @@ import androidx.annotation.Nullable;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EView;
 import org.androidannotations.annotations.UiThread;
+import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.event.Event;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -78,12 +80,16 @@ public class ScanningView extends View {
                 update();
             }
         }, 0, 125);
+
+        EventBus.getDefault().post(new Event.ReportTimerStarted());
     }
 
     public void stop() {
         if (timer != null) {
             timer.cancel();
             timer = null;
+
+            EventBus.getDefault().post(new Event.ReportTimerStopped());
         }
 
         // cleanup drawings
