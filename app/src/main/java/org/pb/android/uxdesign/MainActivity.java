@@ -99,6 +99,26 @@ public class MainActivity extends AppCompatActivity {
         showDialog(event.getViewMode());
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ReportError event) {
+        demonstrator.reportError();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ReportFailure event) {
+        demonstrator.reportFailure();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ReportTimerStarted event) {
+        demonstrator.reportTimerStarted();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ReportTimerStopped event) {
+        demonstrator.reportTimerStopped();
+    }
+
     private void showDialog(ViewMode viewMode) {
         View dialogContent = getDialogContent(viewMode);
         if (dialogContent == null) {
