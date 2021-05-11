@@ -107,8 +107,8 @@ public class ContentManager {
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);
         contentItemKeyValue.bind(R.string.power_info_key_3, powerManagerInfo.isCharging()
-                ? context.getString(R.string.yes)
-                : context.getString(R.string.no));
+                ? context.getString(R.string.charging)
+                : context.getString(R.string.discharging));
         contentProvider.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);
@@ -138,17 +138,50 @@ public class ContentManager {
         contentItemKeyValue.bind(R.string.power_info_key_9,
                 (int) powerManagerInfo.getBatteryCapacity() + context.getString(R.string.unit_capacity_milli));
         contentProvider.addContent(contentItemKeyValue);
+
+        ContentItemTextView contentItemText = ContentItemTextView_.build(context);
+        contentProvider.addContent(contentItemText);
+
+        contentItemText = ContentItemTextView_.build(context);
+        contentItemText.setText(R.string.application_info_text_4);
+        contentProvider.addContent(contentItemText);
     }
 
     public void setSustainmentInfo(ContentProvider contentProvider) {
         // TODO: implement sustainment info (status of sensors, air quality, temperature)
+        // graphical stuff?
     }
 
     public void setUnitInfo(ContentProvider contentProvider) {
         // TODO: implement general unit state summary (runtime, connectivity, errors/failures)
+        ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.unit_info_key_1, demonstrator.getRuntime());
+        contentProvider.setContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.unit_info_key_2, context.getString(R.string.connected));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.unit_info_key_3, Integer.toString(demonstrator.getErrors()));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.unit_info_key_4, Integer.toString(demonstrator.getFailures()));
+        contentProvider.addContent(contentItemKeyValue);
+
+        ContentItemTextView contentItemText = ContentItemTextView_.build(context);
+        contentItemText.setText(R.string.application_info_text_4);
+        contentProvider.addContent(contentItemText);
     }
 
     public void setTimersInfo(ContentProvider contentProvider) {
-        // TODO: implement timers info
+        ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.timers_info_key_1, Integer.toString(demonstrator.getTimersRunning()));
+        contentProvider.setContent(contentItemKeyValue);
+
+        ContentItemTextView contentItemText = ContentItemTextView_.build(context);
+        contentItemText.setText(R.string.application_info_text_4);
+        contentProvider.addContent(contentItemText);
     }
 }
