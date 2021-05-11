@@ -134,6 +134,18 @@ public class Demonstrator {
         return powerManagerInfo;
     }
 
+    public void setPluggedState(boolean isPlugged) {
+        powerManagerInfo.setPlugged(isPlugged);
+    }
+
+    public void setChargingState(boolean isCharging) {
+        powerManagerInfo.setCharging(isCharging);
+    }
+
+    public void setChargingLevel(float chargingLevel) {
+        powerManagerInfo.setBatteryChargingLevelInPercent(chargingLevel);
+    }
+
     private List<User> getUserList() {
         List<User> resultList = new ArrayList<>();
 

@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.BatteryManager;
 import android.util.Log;
 import android.view.View;
 
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Receiver;
 import org.androidannotations.annotations.UiThread;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -72,6 +75,26 @@ public class MainActivity extends AppCompatActivity {
             closeAppToast.show();
             resetCloseAppToast();
         }
+    }
+
+    @Receiver(actions = Intent.ACTION_BATTERY_CHANGED)
+    protected void onBatteryChanged(Intent batteryStatus) {
+        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = (status == BatteryManager.BATTERY_STATUS_CHARGING)
+                || (status == BatteryManager.BATTERY_STATUS_FULL);
+
+        int chargePlug = batteryStatus.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        boolean usbCharge = (chargePlug == BatteryManager.BATTERY_PLUGGED_USB);
+        boolean acCharge = (chargePlug == BatteryManager.BATTERY_PLUGGED_AC);
+
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+        float batteryLevelInPercent = level * 100 / (float) scale;
+
+        demonstrator.setChargingState(isCharging);
+        demonstrator.setPluggedState(usbCharge || acCharge);
+        demonstrator.setChargingLevel(batteryLevelInPercent);
     }
 
     @UiThread(delay = 2000)

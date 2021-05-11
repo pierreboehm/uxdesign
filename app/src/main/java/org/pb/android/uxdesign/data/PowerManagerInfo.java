@@ -21,6 +21,7 @@ public class PowerManagerInfo {
     private float resistor;
 
     private boolean plugged;
+    private boolean charging;
     private int chargingState = 50;
     private float temperature;
 
@@ -60,27 +61,30 @@ public class PowerManagerInfo {
         return (float) Util.roundScale(Util.getRandomBetween(500f, 2100f));
     }
 
-    public boolean isPluggedIn() {
-        plugged = Util.getRandomBetween(0, 100) < 95;
+    public void setPlugged(boolean isPlugged) {
+        plugged = isPlugged;
+    }
 
+    public boolean isPluggedIn() {
         if (!plugged) {
             EventBus.getDefault().post(new Event.ReportError());
         }
-
         return plugged;
     }
 
+    public void setCharging(boolean isCharging) {
+        charging = isCharging;
+    }
+
     public boolean isCharging() {
-        return plugged && chargingState < 100;
+        return charging;
+    }
+
+    public void setBatteryChargingLevelInPercent(float chargingLevel) {
+        chargingState = (int) chargingLevel;
     }
 
     public int getBatteryStatusInPercent() {
-        if (plugged && isCharging()) {
-            chargingState = Math.min(Util.getRandomBetween(chargingState, chargingState + 1), 100);
-        } else {
-            chargingState = Math.max(Util.getRandomBetween(chargingState - 1, chargingState), 0);
-        }
-
         return chargingState;
     }
 
