@@ -2,6 +2,7 @@ package org.pb.android.uxdesign.util;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.util.TypedValue;
 
 import java.util.Random;
@@ -48,6 +49,12 @@ public class Util {
 
     public static boolean getRandomBoolean() {
         return getRandomBetween(0, 1) == 1;
+    }
+
+    public static Pair<Integer, String> getProgressValueAndRelation(int min, int max) {
+        int random = getRandomBetween(min, max);
+        String relation = getRelation((float) random, (float) min, (float) max);
+        return new Pair<>(random, relation);
     }
 
     public static int getProgressValue(int value, int maxValue) {
