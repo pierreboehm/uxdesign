@@ -110,6 +110,21 @@ public class SystemStatusFragment extends Fragment {
         setPowerInfo();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ContentShowSustainmentInfo event) {
+        setSustainmentInfo();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ContentShowUnitInfo event) {
+        setUnitInfo();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.ContentShowTimersInfo event) {
+        setTimersInfo();
+    }
+
     private void setApplicationInfo() {
         contentManager.setApplicationInfo(hpodHeader);
     }
@@ -120,6 +135,18 @@ public class SystemStatusFragment extends Fragment {
 
     private void setPowerInfo() {
         contentManager.setPowerInfo(hpodHeader);
+    }
+
+    private void setSustainmentInfo() {
+        contentManager.setSustainmentInfo(hpodHeader);
+    }
+
+    private void setUnitInfo() {
+        contentManager.setUnitInfo(hpodHeader);
+    }
+
+    private void setTimersInfo() {
+        contentManager.setTimersInfo(hpodHeader);
     }
 
     private void setNitrogen() {

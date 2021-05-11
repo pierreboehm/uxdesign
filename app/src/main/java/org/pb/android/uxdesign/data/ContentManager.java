@@ -139,4 +139,16 @@ public class ContentManager {
                 (int) powerManagerInfo.getBatteryCapacity() + context.getString(R.string.unit_capacity_milli));
         contentProvider.addContent(contentItemKeyValue);
     }
+
+    public void setSustainmentInfo(ContentProvider contentProvider) {
+        // TODO: implement sustainment info (status of sensors, air quality, temperature)
+    }
+
+    public void setUnitInfo(ContentProvider contentProvider) {
+        // TODO: implement general unit state summary (runtime, connectivity, errors/failures)
+    }
+
+    public void setTimersInfo(ContentProvider contentProvider) {
+        // TODO: implement timers info
+    }
 }

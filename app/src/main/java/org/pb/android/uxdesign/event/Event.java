@@ -97,4 +97,13 @@ public class Event {
 
     public static class ContentShowApplicationInfo {
     }
+
+    public static class ContentShowTimersInfo {
+    }
+
+    public static class ContentShowUnitInfo {
+    }
+
+    public static class ContentShowSustainmentInfo {
+    }
 }

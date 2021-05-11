@@ -43,7 +43,7 @@ public enum UnitInfoMenuConfiguration {
         }
     };
 
-    public final int resourceId;
+    private final int resourceId;
 
     UnitInfoMenuConfiguration(int resourceId) {
         this.resourceId = resourceId;
@@ -85,14 +85,26 @@ public enum UnitInfoMenuConfiguration {
     }
 
     public void action_btn3(boolean isSelected) {
-        // TODO: implement
+        if (isSelected) {
+            EventBus.getDefault().post(new Event.ContentShowSustainmentInfo());
+        } else {
+            EventBus.getDefault().post(new Event.ContentClear());
+        }
     }
 
     public void action_btn4(boolean isSelected) {
-        // TODO: implement
+        if (isSelected) {
+            EventBus.getDefault().post(new Event.ContentShowUnitInfo());
+        } else {
+            EventBus.getDefault().post(new Event.ContentClear());
+        }
     }
 
     public void action_btn5(boolean isSelected) {
-        // TODO: implement
+        if (isSelected) {
+            EventBus.getDefault().post(new Event.ContentShowTimersInfo());
+        } else {
+            EventBus.getDefault().post(new Event.ContentClear());
+        }
     }
 }
