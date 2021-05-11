@@ -11,19 +11,15 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import org.pb.android.uxdesign.R;
-import org.pb.android.uxdesign.data.Demonstrator;
-import org.pb.android.uxdesign.data.PowerManagerInfo;
-import org.pb.android.uxdesign.data.user.CurrentUser;
+import org.pb.android.uxdesign.data.ContentManager;
 import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.ui.ViewMode;
-import org.pb.android.uxdesign.ui.view.ContentItemKeyValueView;
-import org.pb.android.uxdesign.ui.view.ContentItemKeyValueView_;
-import org.pb.android.uxdesign.ui.view.ContentItemTextView;
-import org.pb.android.uxdesign.ui.view.ContentItemTextView_;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 import org.pb.android.uxdesign.ui.view.HpodProgressValueView;
@@ -50,7 +46,7 @@ public class SystemStatusFragment extends Fragment {
     HpodProgressValueView progressValueView2;
 
     @Bean
-    Demonstrator demonstrator;
+    ContentManager contentManager;
 
     @AfterInject
     public void afterInject() {
@@ -115,127 +111,29 @@ public class SystemStatusFragment extends Fragment {
     }
 
     private void setApplicationInfo() {
-        ContentItemTextView contentItemText = ContentItemTextView_.build(getContext());
-        contentItemText.setBoldText(R.string.application_info_headline);
-        hpodHeader.setContent(contentItemText);
-
-        contentItemText = ContentItemTextView_.build(getContext());
-        contentItemText.setText(R.string.application_info_text_1);
-        hpodHeader.addContent(contentItemText);
-
-        contentItemText = ContentItemTextView_.build(getContext());
-        contentItemText.setText(R.string.application_info_text_2);
-        hpodHeader.addContent(contentItemText);
-
-        contentItemText = ContentItemTextView_.build(getContext());
-        contentItemText.setText(R.string.application_info_text_3);
-        hpodHeader.addContent(contentItemText);
-
-        contentItemText = ContentItemTextView_.build(getContext());
-        contentItemText.setBoldText(R.string.application_info_text_4);
-        hpodHeader.addContent(contentItemText);
-
-        contentItemText = ContentItemTextView_.build(getContext());
-        contentItemText.setText(R.string.application_info_text_5);
-        hpodHeader.addContent(contentItemText);
-
-        contentItemText = ContentItemTextView_.build(getContext());
-        contentItemText.setText(R.string.application_info_text_6);
-        hpodHeader.addContent(contentItemText);
-
-        contentItemText = ContentItemTextView_.build(getContext());
-        contentItemText.setBoldText(R.string.application_info_text_7);
-        hpodHeader.addContent(contentItemText);
+        contentManager.setApplicationInfo(hpodHeader);
     }
 
     private void setUserInfo() {
-        ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.user_info_key_1, Integer.toString(demonstrator.getUserListCount()));
-        hpodHeader.setContent(contentItemKeyValue);
-
-        CurrentUser currentUser = demonstrator.getCurrentUser();
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.user_info_key_2, null);
-        hpodHeader.addContent(contentItemKeyValue);
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.user_info_key_3, currentUser.getUserData().getName());
-        hpodHeader.addContent(contentItemKeyValue);
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.user_info_key_4, currentUser.getUserData().getId());
-        hpodHeader.addContent(contentItemKeyValue);
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.user_info_key_5, currentUser.getUserData().getProfession());
-        hpodHeader.addContent(contentItemKeyValue);
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.user_info_key_6, currentUser.getUserData().getCountry());
-        hpodHeader.addContent(contentItemKeyValue);
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.user_info_key_7, currentUser.getUserData().getLocality());
-        hpodHeader.addContent(contentItemKeyValue);
+        contentManager.setUserInfo(hpodHeader);
     }
 
     private void setPowerInfo() {
-        PowerManagerInfo powerManagerInfo = demonstrator.getPowerManagerInfo();
-
-        ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.power_info_key_1,
-                powerManagerInfo.isPluggedIn() ? getString(R.string.yes) : getString(R.string.no));
-        hpodHeader.setContent(contentItemKeyValue);
-
-        if (powerManagerInfo.isPluggedIn()) {
-            contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-            contentItemKeyValue.bind(R.string.power_info_key_2,
-                    powerManagerInfo.getPowerSupplyInVolt() + getString(R.string.unit_voltage));
-            hpodHeader.addContent(contentItemKeyValue);
-
-            contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-            contentItemKeyValue.bind(R.string.power_info_key_3,
-                    powerManagerInfo.isLoading() ? getString(R.string.yes) : getString(R.string.no));
-            hpodHeader.addContent(contentItemKeyValue);
-
-            if (powerManagerInfo.isLoading()) {
-                contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-                contentItemKeyValue.bind(R.string.power_info_key_4,
-                        powerManagerInfo.getLoadingStateInPercent() + getString(R.string.unit_percent));
-                hpodHeader.addContent(contentItemKeyValue);
-            }
-        }
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.power_info_key_5,
-                powerManagerInfo.getCurrentConsumptionInMilliAmpere() + getString(R.string.unit_current_milli));
-        hpodHeader.addContent(contentItemKeyValue);
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(getContext());
-        contentItemKeyValue.bind(R.string.power_info_key_6,
-                powerManagerInfo.getTemperatureInCelsius() + getString(R.string.unit_temperature));
-        hpodHeader.addContent(contentItemKeyValue);
+        contentManager.setPowerInfo(hpodHeader);
     }
 
     private void setNitrogen() {
-        Pair<Integer, String> nitrogenValues = getProgressValueAndRelation(N2MIN, N2MAX);
+        Pair<Integer, String> nitrogenValues = Util.getProgressValueAndRelation(N2MIN, N2MAX);
         progressValueView1.setTextTop(getString(R.string.chemical_sign_nitrogen));
         progressValueView1.setTextBottom(nitrogenValues.second);
         progressValueView1.setProgressValue(nitrogenValues.first);
     }
 
     private void setOxygen() {
-        Pair<Integer, String> oxygenValues = getProgressValueAndRelation(O2MIN, O2MAX);
+        Pair<Integer, String> oxygenValues = Util.getProgressValueAndRelation(O2MIN, O2MAX);
         progressValueView2.setTextTop(getString(R.string.chemical_sign_oxygen));
         progressValueView2.setTextBottom(oxygenValues.second);
         progressValueView2.setProgressValue(oxygenValues.first);
-    }
-
-    private Pair<Integer, String> getProgressValueAndRelation(int min, int max) {
-        int random = Util.getRandomBetween(min, max);
-        String relation = Util.getRelation((float) random, (float) min, (float) max);
-        return new Pair<>(random, relation);
     }
 
 }
