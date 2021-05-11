@@ -6,18 +6,18 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.data.ContentProvider;
 import org.pb.android.uxdesign.data.user.CurrentUser;
 import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.button.LogoButtonView;
 
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.view_hpod_header)
-public class HpodHeader extends RelativeLayout {
+public class HpodHeader extends ContentProvider {
 
     @ViewById(R.id.headerViewContainer)
     ViewGroup viewContainer;
@@ -87,18 +87,21 @@ public class HpodHeader extends RelativeLayout {
         return logoButtonView.isSelected();
     }
 
+    @Override
     public void clearContent() {
         if (unitInfoTopContent != null) {
             unitInfoTopContent.clearContent();
         }
     }
 
+    @Override
     public void setContent(View view) {
         if (unitInfoTopContent != null) {
             unitInfoTopContent.setContentView(view);
         }
     }
 
+    @Override
     public void addContent(View view) {
         if (unitInfoTopContent != null) {
             unitInfoTopContent.addContentView(view);
