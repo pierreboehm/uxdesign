@@ -6,8 +6,11 @@ import org.pb.android.uxdesign.util.Util;
 
 public class PowerManagerInfo {
 
-    private static final float TEMP_MIN = 30f;
-    private static final float TEMP_MAX = 50f;
+    private static final float TEMP_MIN = 18f;
+    private static final float TEMP_MAX = 60f;
+
+    private static final float CURR_MIN = 500f;
+    private static final float CURR_MAX = 3000f;
 
     private static final float VOLTAGE_MAX = 5000f;
     private static final float VOLTAGE_ACCU = 3800f;    // mV
@@ -23,9 +26,11 @@ public class PowerManagerInfo {
     private boolean charging;
     private int chargingState;
     private float temperature;
+    private float consumption;
 
     public PowerManagerInfo() {
-        temperature = (float) Util.roundScale(Util.getRandomBetween(TEMP_MIN, TEMP_MAX));
+        temperature = (float) Util.roundScale(Util.getRandomBetween(TEMP_MIN, TEMP_MIN + (TEMP_MIN * .5f)));
+        consumption = (float) Util.roundScale(Util.getRandomBetween(CURR_MIN, CURR_MIN + (CURR_MIN * .5f)));
         updateBatteryStatus();
     }
 
@@ -43,6 +48,10 @@ public class PowerManagerInfo {
 
     public float getTemperatureInCelsius() {
         temperature += (float) Util.getRandomBetween(-5, 5) / 100f;
+
+        temperature = Math.min(temperature, TEMP_MAX);
+        temperature = Math.max(temperature, TEMP_MIN);
+
         return (float) Util.roundScale(temperature);
     }
 
@@ -56,7 +65,12 @@ public class PowerManagerInfo {
     }
 
     public float getCurrentConsumptionInMilliAmpere() {
-        return (float) Util.roundScale(Util.getRandomBetween(500f, 2100f));
+        consumption += (float) Util.getRandomBetween(-CURR_MIN, CURR_MIN) / 100f;
+
+        consumption = Math.min(consumption, CURR_MAX);
+        consumption = Math.max(consumption, CURR_MIN);
+
+        return (float) Util.roundScale(consumption);
     }
 
     public void setPlugged(boolean isPlugged) {
