@@ -1,5 +1,8 @@
 package org.pb.android.uxdesign.event;
 
+import android.graphics.Bitmap;
+import android.util.Pair;
+
 import org.pb.android.uxdesign.data.user.UserData;
 import org.pb.android.uxdesign.ui.ViewMode;
 
@@ -117,5 +120,47 @@ public class Event {
     }
 
     public static class ReportTimerStopped {
+    }
+
+    public static class DrawingCacheBitmapUpdate {
+        private final Bitmap bitmap;
+        private final String key;
+
+        public DrawingCacheBitmapUpdate(String key, Bitmap bitmap) {
+            this.key = key;
+            this.bitmap = bitmap;
+        }
+
+        public Pair<String, Bitmap> getUpdateData() {
+            return new Pair<>(key, bitmap);
+        }
+    }
+
+    public static class IntegerValueUpdate {
+        private final String key;
+        private final Integer value;
+
+        public IntegerValueUpdate(String key, Integer value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public Pair<String, Integer> getUpdateData() {
+            return new Pair<>(key, value);
+        }
+    }
+
+    public static class FloatValueUpdate {
+        private final String key;
+        private final Float value;
+
+        public FloatValueUpdate(String key, Float value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public Pair<String, Float> getUpdateData() {
+            return new Pair<>(key, value);
+        }
     }
 }
