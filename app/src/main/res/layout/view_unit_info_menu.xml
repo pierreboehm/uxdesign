@@ -1,23 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <org.pb.android.uxdesign.ui.view.ProcessingConsoleView_
+        android:id="@+id/processingConsoleView"
         android:layout_width="180dp"
         android:layout_height="52dp"
         android:layout_above="@id/menueButtonContainer"
-        android:orientation="vertical">
+        />
 
-        <org.pb.android.uxdesign.ui.view.ProcessingConsoleView_
-            android:id="@+id/processingConsoleView"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_toRightOf="@id/processingConsoleView"
+        android:layout_above="@id/menueButtonContainer"
+        android:layout_marginLeft="10dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="12dp"
+                android:src="@drawable/iv_open_hexagon_with_dot"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="6sp"
+                android:textColor="@color/white"
+                android:text="SUSTAINMENT INFO -- AIR SENSORS"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:src="@drawable/circle_shape"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="center_vertical"
+                app:tint="#80ffffff"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical"
+                android:textScaleX="1.5"
+                android:textSize="7sp"
+                android:textColor="@color/white"
+                android:text="N2"
+                />
+
+            <org.pb.android.uxdesign.ui.view.SquarePatternView_
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom"
+                />
+
+            <!-- -->
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:src="@drawable/circle_shape"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="center_vertical"
+                app:tint="#80ffffff"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical"
+                android:textScaleX="1.5"
+                android:textSize="7sp"
+                android:textColor="@color/white"
+                android:text="O2"
+                />
+
+            <org.pb.android.uxdesign.ui.view.SquarePatternView_
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom"
+                />
+
+            <!-- -->
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:src="@drawable/circle_shape"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="center_vertical"
+                app:tint="#80ffffff"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical"
+                android:textScaleX="1.5"
+                android:textSize="7sp"
+                android:textColor="@color/white"
+                android:text="Ar"
+                />
+
+            <org.pb.android.uxdesign.ui.view.SquarePatternView_
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom"
+                />
+
+            <!-- -->
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:src="@drawable/circle_shape"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="center_vertical"
+                app:tint="#80ffffff"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical"
+                android:textScaleX="1.5"
+                android:textSize="7sp"
+                android:textColor="@color/white"
+                android:text="CO2"
+                />
+
+            <org.pb.android.uxdesign.ui.view.SquarePatternView_
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom"
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_alignParentBottom="true">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/blue_deep_sky"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:textSize="5sp"
+                android:textColor="@color/white"
+                android:text="SENSORS STATUS OPTIMAL"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:textSize="5sp"
+                android:textColor="@color/white"
+                android:text="N2 * O2 * Ar * CO2"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/menueButtonContainer"

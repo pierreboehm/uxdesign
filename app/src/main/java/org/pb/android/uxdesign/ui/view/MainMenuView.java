@@ -19,7 +19,7 @@ import org.pb.android.uxdesign.ui.button.MenueAccessSystemView;
 import org.pb.android.uxdesign.ui.button.MenueButtonView;
 
 @SuppressLint("NonConstantResourceId")
-@EViewGroup(R.layout.view_main_menu)
+@EViewGroup(R.layout.view_menu_main)
 public class MainMenuView extends RelativeLayout {
 
     private static final String TAG = MainMenuView.class.getSimpleName();
