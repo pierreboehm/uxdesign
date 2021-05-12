@@ -153,7 +153,7 @@ public class ContentManager {
         // graphical stuff?
 
         ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.setTitle("Chemical composition of air", true);
+        contentItemKeyValue.setTitle(context.getString(R.string.sustainment_info_key_1), true);
         contentProvider.setContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);
@@ -182,31 +182,37 @@ public class ContentManager {
         // ---
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.setTitle("Physical composition of air", true);
+        contentItemKeyValue.setTitle(context.getString(R.string.sustainment_info_key_2), true);
+        contentProvider.addContent(contentItemKeyValue);
+
+        float airHumidityAbsolute = demonstrator.getAirHumidityAbsolute();
+        String airHumidityAbsoluteValue = airHumidityAbsolute < 0f
+                ? context.getString(R.string.not_available)
+                : (airHumidityAbsolute + context.getString(R.string.unit_percent));
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(context.getString(R.string.sustainment_info_key_3), airHumidityAbsoluteValue);
+        contentProvider.addContent(contentItemKeyValue);
+
+        float airHumidityRelative = demonstrator.getAirHumidityRelative();
+        String airHumidityRelativeValue = airHumidityRelative < 0f
+                ? context.getString(R.string.not_available)
+                : (airHumidityRelative + context.getString(R.string.unit_percent));
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(context.getString(R.string.sustainment_info_key_4), airHumidityRelativeValue);
         contentProvider.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.bind("Humidity (absolute):",
-                context.getString(R.string.not_available) + context.getString(R.string.unit_percent));
-        contentProvider.addContent(contentItemKeyValue);
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.bind("Humidity (relative):",
-                context.getString(R.string.not_available) + context.getString(R.string.unit_percent));
-        contentProvider.addContent(contentItemKeyValue);
-
-        contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.bind("Pressure:",
+        contentItemKeyValue.bind(context.getString(R.string.sustainment_info_key_5),
                 Util.roundScale(demonstrator.getAirPressure()) + context.getString(R.string.unit_air_pressure));
         contentProvider.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.bind("Temperature:",
+        contentItemKeyValue.bind(context.getString(R.string.sustainment_info_key_6),
                 Util.roundScale(demonstrator.getAirTemperature()) + context.getString(R.string.unit_temperature));
         contentProvider.addContent(contentItemKeyValue);
 
         contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.bind("Maximum saturation:",
+        contentItemKeyValue.bind(context.getString(R.string.sustainment_info_key_7),
                 Util.roundScale(demonstrator.getAirSaturation()) + context.getString(R.string.unit_air_saturation));
         contentProvider.addContent(contentItemKeyValue);
 

@@ -56,7 +56,7 @@ public class Demonstrator {
 
     private float airTemperature;
     private float airPressure;
-    private float airHumidity;
+    private float airHumidity = -1f;
 
     @AfterInject
     public void afterInject() {
@@ -214,6 +214,14 @@ public class Demonstrator {
         float magnus = 6.112f * (float) Math.exp(exponent);
 
         return (magnus / (461.51f * (airTemperature + 273.15f))) * 100000f;
+    }
+
+    public float getAirHumidityAbsolute() {
+        return airHumidity;
+    }
+
+    public float getAirHumidityRelative() {
+        return airHumidity;
     }
 
     public CurrentUser getCurrentUser() {
