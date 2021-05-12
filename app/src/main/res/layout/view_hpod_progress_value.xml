@@ -38,7 +38,7 @@
             android:id="@+id/tvTextProgressValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/blue_cyan"
+            android:textColor="@color/blue_deep_sky"
             android:textSize="12sp"
             android:textStyle="bold"
             tools:text="25%"

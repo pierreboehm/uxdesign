@@ -12,6 +12,8 @@
 
     <string name="chemical_sign_nitrogen">N²</string>
     <string name="chemical_sign_oxygen">O²</string>
+    <string name="chemical_sign_argon">Ar</string>
+    <string name="chemical_sign_carbon_dioxyd">CO²</string>
 
     <string name="unit_voltage">V</string>
     <string name="unit_voltage_milli">mV</string>
@@ -20,6 +22,9 @@
     <string name="unit_percent">%</string>
     <string name="unit_temperature">°C</string>
     <string name="unit_capacity_milli">mAh</string>
+    <string name="unit_air_pressure">hPa</string>
+    <string name="unit_air_pressure_milli">mbar</string>
+    <string name="unit_air_saturation">g/m³</string>
 
     <!-- content: application info -->
     <string name="application_info_headline">Information</string>
@@ -53,12 +58,19 @@
 
     <!-- content: timers info -->
     <string name="timers_info_key_1">Defined timers:</string>
+    <string name="timers_info_key_2">Currently running timers:</string>
 
     <!-- content: unit info-->
     <string name="unit_info_key_1">Unit runtime:</string>
     <string name="unit_info_key_2">Unit connection status:</string>
     <string name="unit_info_key_3">Reported unit system errors:</string>
     <string name="unit_info_key_4">Reported unit system failures:</string>
+
+    <!-- unit info menu: air-sensor identifier -->
+    <string name="air_sensor_n2">air_sensor_n2</string>
+    <string name="air_sensor_o2">air_sensor_o2</string>
+    <string name="air_sensor_ar">air_sensor_ar</string>
+    <string name="air_sensor_co2">air_sensor_co2</string>
 
     <!-- menu button -->
     <string name="menu_button_passenger_info">PASSENGER INFO</string>
@@ -72,6 +84,7 @@
     <string name="hpod_systems_optimal">HPOD SYSTEMS OPTIMAL</string>
     <string name="passenger_vital_status">PASSENGER VITAL STATUS</string>
     <string name="passenger_discharged">PASSENGER DISCHARGED</string>
+    <string name="data_processing_console">DATA PROCESSING CONSOLE</string>
 
     <!-- button view -->
     <string name="button_view_ps">PS</string>
