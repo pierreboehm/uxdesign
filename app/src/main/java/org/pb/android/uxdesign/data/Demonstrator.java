@@ -16,6 +16,7 @@ import org.pb.android.uxdesign.data.user.User;
 import org.pb.android.uxdesign.data.user.UserData;
 import org.pb.android.uxdesign.data.user.Users;
 
+import org.pb.android.uxdesign.util.Util;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -31,6 +32,12 @@ public class Demonstrator {
 
     private static final String TAG = Demonstrator.class.getSimpleName();
 
+    private static final float ENV_TEMP_MIN = 20f;
+    private static final float ENV_TEMP_MAX = 38f;
+
+    private static final float AIR_PRESS_MIN = 980f;
+    private static final float AIR_PRESS_MAX = 1045f;
+
     @RootContext
     Context context;
 
@@ -38,17 +45,26 @@ public class Demonstrator {
     AppPreferences_ preferences;
 
     private PowerManagerInfo powerManagerInfo;
-    private Bitmap accessCodeBitmap;
+    private Bitmap accessCodeBitmap, n2StatusBitmap, o2StatusBitmap, arStatusBitmap, co2StatusBitmap;
+
+    private float n2Level, o2level, arLevel, co2Level;
 
     private long timestampStart;
     private int errors = 0;
     private int failures = 0;
     private int timers = 0;
 
+    private float airTemperature;
+    private float airPressure;
+    private float airHumidity;
+
     @AfterInject
     public void afterInject() {
         powerManagerInfo = new PowerManagerInfo();
         timestampStart = System.currentTimeMillis();
+
+        airTemperature = (float) Util.roundScale(Util.getRandomBetween(ENV_TEMP_MIN, ENV_TEMP_MIN + (ENV_TEMP_MIN * .5f)));
+        airPressure = (float) Util.roundScale(Util.getRandomBetween(AIR_PRESS_MIN, AIR_PRESS_MIN + (AIR_PRESS_MIN * .5f)));
     }
 
     public void reportError() {
@@ -75,6 +91,10 @@ public class Demonstrator {
         timers--;
     }
 
+    public int getTimersDefined() {
+        return 4;
+    }
+
     public int getTimersRunning() {
         return timers;
     }
@@ -97,7 +117,6 @@ public class Demonstrator {
         } else {
             return String.format("%02d:%02d:%02d", differenceInHours, differenceInMinutes, differenceInSeconds);
         }
-
     }
 
     public void setAccessCodeBitmap(Bitmap bitmap) {
@@ -106,6 +125,95 @@ public class Demonstrator {
 
     public Bitmap getAccessCodeBitmap() {
         return accessCodeBitmap;
+    }
+
+    public void setN2Level(float value) {
+        n2Level = value;
+    }
+
+    public float getN2Level() {
+        return n2Level;
+    }
+
+    public void setO2level(float value) {
+        o2level = value;
+    }
+
+    public float getO2Level() {
+        return o2level;
+    }
+
+    public void setArLevel(float value) {
+        arLevel = value;
+    }
+
+    public float getArLevel() {
+        return arLevel;
+    }
+
+    public void setCo2Level(float value) {
+        co2Level = value;
+    }
+
+    public float getCo2Level() {
+        return co2Level;
+    }
+
+    public void setN2StatusBitmap(Bitmap bitmap) {
+        n2StatusBitmap = bitmap;
+    }
+
+    public Bitmap getN2StatusBitmap() {
+        return n2StatusBitmap;
+    }
+
+    public void setO2StatusBitmap(Bitmap bitmap) {
+        o2StatusBitmap = bitmap;
+    }
+
+    public Bitmap getO2StatusBitmap() {
+        return o2StatusBitmap;
+    }
+
+    public void setArStatusBitmap(Bitmap bitmap) {
+        arStatusBitmap = bitmap;
+    }
+
+    public Bitmap getArStatusBitmap() {
+        return arStatusBitmap;
+    }
+
+    public void setCo2StatusBitmap(Bitmap bitmap) {
+        co2StatusBitmap = bitmap;
+    }
+
+    public Bitmap getCo2StatusBitmap() {
+        return co2StatusBitmap;
+    }
+
+    public float getAirTemperature() {
+        airTemperature += (float) Util.getRandomBetween(-2, 2) / 100f;
+
+        airTemperature = Math.min(airTemperature, ENV_TEMP_MAX);
+        airTemperature = Math.max(airTemperature, ENV_TEMP_MIN);
+
+        return (float) Util.roundScale(airTemperature);
+    }
+
+    public float getAirPressure() {
+        airPressure += (float) Util.getRandomBetween(-2, -2) / 100f;
+
+        airPressure = Math.min(airPressure, AIR_PRESS_MAX);
+        airPressure = Math.max(airPressure, AIR_PRESS_MIN);
+
+        return (float) Util.roundScale(airPressure);
+    }
+
+    public float getAirSaturation() {
+        float exponent = ((17.62f * airTemperature) / (243.12f + airTemperature));
+        float magnus = 6.112f * (float) Math.exp(exponent);
+
+        return (magnus / (461.51f * (airTemperature + 273.15f))) * 100000f;
     }
 
     public CurrentUser getCurrentUser() {
