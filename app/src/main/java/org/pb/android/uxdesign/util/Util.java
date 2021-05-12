@@ -57,6 +57,16 @@ public class Util {
         return new Pair<>(random, relation);
     }
 
+    public static Pair<Float, String> getProgressValueAndRelation(float min, float max) {
+        float random = getRandomBetween(min, max);
+        String relation = getRelation(random, min, max);
+        return new Pair<>(random, relation);
+    }
+
+    public static float getProgressValue(float value, float maxValue) {
+        return value * 100f / maxValue;
+    }
+
     public static int getProgressValue(int value, int maxValue) {
         return (int) ((float) value * 100f / (float) maxValue);
     }
