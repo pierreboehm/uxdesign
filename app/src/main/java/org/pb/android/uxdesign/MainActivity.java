@@ -6,8 +6,10 @@ import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.BatteryManager;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import android.widget.ImageView;
@@ -142,6 +144,16 @@ public class MainActivity extends AppCompatActivity {
         demonstrator.reportTimerStopped();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.DrawingCacheBitmapUpdate event) {
+        performDrawingCacheBitmapUpdate(event.getUpdateData());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.FloatValueUpdate event) {
+        performFloatValueUpdate(event.getUpdateData());
+    }
+
     private void showDialog(ViewMode viewMode) {
         View dialogContent = getDialogContent(viewMode);
         if (dialogContent == null) {
@@ -197,5 +209,35 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragment, fragmentTag)
                 .commit();
+    }
+
+    private void performDrawingCacheBitmapUpdate(Pair<String, Bitmap> updateData) {
+        String key = updateData.first;
+        Bitmap bitmap = updateData.second;
+
+        if (key.equals(getString(R.string.air_sensor_n2))) {
+            demonstrator.setN2StatusBitmap(bitmap);
+        } else if (key.equals(getString(R.string.air_sensor_o2))) {
+            demonstrator.setO2StatusBitmap(bitmap);
+        } else if (key.equals(getString(R.string.air_sensor_ar))) {
+            demonstrator.setArStatusBitmap(bitmap);
+        } else if (key.equals(getString(R.string.air_sensor_co2))) {
+            demonstrator.setCo2StatusBitmap(bitmap);
+        }
+    }
+
+    private void performFloatValueUpdate(Pair<String, Float> updateData) {
+        String key = updateData.first;
+        float value = updateData.second;
+
+        if (key.equals(getString(R.string.air_sensor_n2))) {
+            demonstrator.setN2Level(value);
+        } else if (key.equals(getString(R.string.air_sensor_o2))) {
+            demonstrator.setO2level(value);
+        } else if (key.equals(getString(R.string.air_sensor_ar))) {
+            demonstrator.setArLevel(value);
+        } else if (key.equals(getString(R.string.air_sensor_co2))) {
+            demonstrator.setCo2Level(value);
+        }
     }
 }

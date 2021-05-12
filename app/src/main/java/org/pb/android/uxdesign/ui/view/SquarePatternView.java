@@ -1,7 +1,9 @@
 package org.pb.android.uxdesign.ui.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -11,11 +13,15 @@ import androidx.annotation.Nullable;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EView;
 import org.androidannotations.annotations.UiThread;
+import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.util.Util;
 
 @EView
 public class SquarePatternView extends View {
+
+    private final static String TAG = SquarePatternView.class.getSimpleName();
 
     private Paint color;
 
@@ -26,6 +32,9 @@ public class SquarePatternView extends View {
     @AfterViews
     public void initView() {
         setWillNotDraw(false);
+
+        setDrawingCacheEnabled(true);
+        setDrawingCacheBackgroundColor(Color.TRANSPARENT);
 
         color = new Paint();
         color.setColor(getContext().getColor(R.color.blue_deep_sky));
@@ -66,5 +75,11 @@ public class SquarePatternView extends View {
                 canvas.drawRect(squareXPosition, dotYPosition, squareXPosition + square, dotYPosition + square, color);
             }
         }
+
+        sendDrawingCacheContent(getDrawingCache());
+    }
+
+    private void sendDrawingCacheContent(Bitmap drawingCacheBitmap) {
+        EventBus.getDefault().post(new Event.DrawingCacheBitmapUpdate((String) getContentDescription(), drawingCacheBitmap));
     }
 }
