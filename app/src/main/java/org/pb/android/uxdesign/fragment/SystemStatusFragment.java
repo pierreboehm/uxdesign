@@ -1,8 +1,8 @@
 package org.pb.android.uxdesign.fragment;
 
 import android.annotation.SuppressLint;
-import android.util.Pair;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import org.androidannotations.annotations.AfterInject;
@@ -31,7 +31,8 @@ public class SystemStatusFragment extends Fragment {
 
     public static final String TAG = SystemStatusFragment.class.getSimpleName();
 
-    private int N2MIN, N2MAX, O2MIN, O2MAX;
+    private float N2MIN, N2MAX, O2MIN, O2MAX, CO2MIN, CO2MAX;
+    private float nitrogenValue, oxygenValue, argonValue, carbonDioxydValue;
 
     @ViewById(R.id.hpodHeader)
     HpodHeader hpodHeader;
@@ -50,10 +51,14 @@ public class SystemStatusFragment extends Fragment {
 
     @AfterInject
     public void afterInject() {
-        N2MIN = getResources().getInteger(R.integer.N2MIN);
-        N2MAX = getResources().getInteger(R.integer.N2MAX);
-        O2MIN = getResources().getInteger(R.integer.O2MIN);
-        O2MAX = getResources().getInteger(R.integer.O2MAX);
+        N2MIN = ResourcesCompat.getFloat(getResources(), R.dimen.n2_min);
+        N2MAX = ResourcesCompat.getFloat(getResources(), R.dimen.n2_max);
+
+        O2MIN = ResourcesCompat.getFloat(getResources(), R.dimen.o2_min);
+        O2MAX = ResourcesCompat.getFloat(getResources(), R.dimen.o2_max);
+
+        CO2MIN = ResourcesCompat.getFloat(getResources(), R.dimen.co2_min);
+        CO2MAX = ResourcesCompat.getFloat(getResources(), R.dimen.co2_max);
     }
 
     @AfterViews
@@ -61,8 +66,7 @@ public class SystemStatusFragment extends Fragment {
         hpodHeader.prepareScreen(ViewMode.UNIT_INFO);
         hpodFooter.prepareScreen(ViewMode.UNIT_INFO);
 
-        setNitrogen();
-        setOxygen();
+        setupGases();
     }
 
     @Override
@@ -81,12 +85,12 @@ public class SystemStatusFragment extends Fragment {
 
     @Click(R.id.progressValue1)
     void onProgressValue1Click() {
-        setNitrogen();
+        setNitrogen(true);
     }
 
     @Click(R.id.progressValue2)
     void onProgressValue2Click() {
-        setOxygen();
+        setOxygen(true);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -149,18 +153,57 @@ public class SystemStatusFragment extends Fragment {
         contentManager.setTimersInfo(hpodHeader);
     }
 
-    private void setNitrogen() {
-        Pair<Integer, String> nitrogenValues = Util.getProgressValueAndRelation(N2MIN, N2MAX);
+    private void setupGases() {
+        setNitrogen(false);
+        setOxygen(false);
+        setCarbonDioxyd();
+        setArgon();
+        sendFloatValuesUpdate();
+    }
+
+    private void setNitrogen(boolean updateOthers) {
+        nitrogenValue = Util.getRandomBetween(N2MIN, N2MAX);
+        String relation = Util.getRelation(nitrogenValue, N2MIN, N2MAX);
+
         progressValueView1.setTextTop(getString(R.string.chemical_sign_nitrogen));
-        progressValueView1.setTextBottom(nitrogenValues.second);
-        progressValueView1.setProgressValue(nitrogenValues.first);
+        progressValueView1.setTextBottom(relation);
+        progressValueView1.setProgressValue(nitrogenValue);
+
+        if (updateOthers) {
+            setCarbonDioxyd();
+            setArgon();
+            sendFloatValuesUpdate();
+        }
     }
 
-    private void setOxygen() {
-        Pair<Integer, String> oxygenValues = Util.getProgressValueAndRelation(O2MIN, O2MAX);
+    private void setOxygen(boolean updateOthers) {
+        oxygenValue = Util.getRandomBetween(O2MIN, O2MAX);
+        String relation = Util.getRelation(oxygenValue, O2MIN, O2MAX);
+
         progressValueView2.setTextTop(getString(R.string.chemical_sign_oxygen));
-        progressValueView2.setTextBottom(oxygenValues.second);
-        progressValueView2.setProgressValue(oxygenValues.first);
+        progressValueView2.setTextBottom(relation);
+        progressValueView2.setProgressValue(oxygenValue);
+
+        if (updateOthers) {
+            setCarbonDioxyd();
+            setArgon();
+            sendFloatValuesUpdate();
+        }
     }
 
+    private void setCarbonDioxyd() {
+        carbonDioxydValue = Util.getRandomBetween(CO2MIN, CO2MAX);
+    }
+
+    private void setArgon() {
+        argonValue = 100f - nitrogenValue - oxygenValue - carbonDioxydValue;
+        argonValue = Math.max(argonValue, 0f);
+    }
+
+    private void sendFloatValuesUpdate() {
+        EventBus.getDefault().post(new Event.FloatValueUpdate(getString(R.string.air_sensor_n2), nitrogenValue));
+        EventBus.getDefault().post(new Event.FloatValueUpdate(getString(R.string.air_sensor_o2), oxygenValue));
+        EventBus.getDefault().post(new Event.FloatValueUpdate(getString(R.string.air_sensor_ar), argonValue));
+        EventBus.getDefault().post(new Event.FloatValueUpdate(getString(R.string.air_sensor_co2), carbonDioxydValue));
+    }
 }

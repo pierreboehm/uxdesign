@@ -38,6 +38,10 @@ public class HpodProgressValueView extends RelativeLayout {
         animateProgressChange(progressBar.getProgress(), progressValue);
     }
 
+    public void setProgressValue(float progressValue) {
+        animateProgressChange((float) progressBar.getProgress(), progressValue);
+    }
+
     public void setTextTop(String text) {
         tvSubTextTop.setText(text);
     }
@@ -56,6 +60,23 @@ public class HpodProgressValueView extends RelativeLayout {
                 int value = (int) animation.getAnimatedValue();
                 progressBar.setProgress(value);
                 tvProgressValue.setText(String.format("%d%%", value));
+            }
+        });
+
+        animator.setDuration(ANIMATION_SPEED_IN_MILLISECONDS);
+        animator.start();
+    }
+
+    private void animateProgressChange(float startValue, float endValue) {
+        ValueAnimator animator = ValueAnimator.ofFloat(startValue, endValue);
+
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                progressBar.setProgress((int) value);
+                tvProgressValue.setText(String.format("%d%%", (int) value));
             }
         });
 

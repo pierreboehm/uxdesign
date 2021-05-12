@@ -2,6 +2,7 @@ package org.pb.android.uxdesign.ui.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,6 +25,9 @@ public class ContentItemKeyValueView extends RelativeLayout {
     @ViewById(R.id.tvDots)
     TextView tvDots;
 
+    @ViewById(R.id.underline)
+    View viewUnderline;
+
     public ContentItemKeyValueView(Context context) {
         super(context);
     }
@@ -32,11 +36,27 @@ public class ContentItemKeyValueView extends RelativeLayout {
         tvKey.setText(key);
         tvValue.setText(value);
         tvDots.setVisibility((value == null || value.length() == 0) ? INVISIBLE : VISIBLE);
+        viewUnderline.setVisibility(GONE);
     }
 
     public void bind(int resourceId, @Nullable String value) {
         tvKey.setText(resourceId);
         tvValue.setText(value);
         tvDots.setVisibility((value == null || value.length() == 0) ? INVISIBLE : VISIBLE);
+        viewUnderline.setVisibility(GONE);
+    }
+
+    public void setTitle(String text, boolean underline) {
+        tvDots.setVisibility(INVISIBLE);
+        viewUnderline.setVisibility(underline ? VISIBLE : GONE);
+        tvKey.setText(text);
+        tvValue.setText(null);
+    }
+
+    public void setTitle(int resourceId, boolean underline) {
+        tvDots.setVisibility(INVISIBLE);
+        viewUnderline.setVisibility(underline ? VISIBLE : GONE);
+        tvKey.setText(resourceId);
+        tvValue.setText(null);
     }
 }

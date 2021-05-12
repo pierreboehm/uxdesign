@@ -11,6 +11,7 @@ import org.pb.android.uxdesign.ui.view.ContentItemKeyValueView;
 import org.pb.android.uxdesign.ui.view.ContentItemKeyValueView_;
 import org.pb.android.uxdesign.ui.view.ContentItemTextView;
 import org.pb.android.uxdesign.ui.view.ContentItemTextView_;
+import org.pb.android.uxdesign.util.Util;
 
 @EBean
 public class ContentManager {
@@ -150,6 +151,73 @@ public class ContentManager {
     public void setSustainmentInfo(ContentProvider contentProvider) {
         // TODO: implement sustainment info (status of sensors, air quality, temperature)
         // graphical stuff?
+
+        ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.setTitle("Chemical composition of air", true);
+        contentProvider.setContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.chemical_sign_nitrogen,
+                Util.roundScale(demonstrator.getN2Level()) + context.getString(R.string.unit_percent));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.chemical_sign_oxygen,
+                Util.roundScale(demonstrator.getO2Level()) + context.getString(R.string.unit_percent));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.chemical_sign_argon,
+                Util.roundScale(demonstrator.getArLevel()) + context.getString(R.string.unit_percent));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.chemical_sign_carbon_dioxyd,
+                Util.roundScale(demonstrator.getCo2Level()) + context.getString(R.string.unit_percent));
+        contentProvider.addContent(contentItemKeyValue);
+
+        ContentItemTextView contentItemText = ContentItemTextView_.build(context);
+        contentProvider.addContent(contentItemText);
+
+        // ---
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.setTitle("Physical composition of air", true);
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind("Humidity (absolute):",
+                context.getString(R.string.not_available) + context.getString(R.string.unit_percent));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind("Humidity (relative):",
+                context.getString(R.string.not_available) + context.getString(R.string.unit_percent));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind("Pressure:",
+                Util.roundScale(demonstrator.getAirPressure()) + context.getString(R.string.unit_air_pressure));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind("Temperature:",
+                Util.roundScale(demonstrator.getAirTemperature()) + context.getString(R.string.unit_temperature));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind("Maximum saturation:",
+                Util.roundScale(demonstrator.getAirSaturation()) + context.getString(R.string.unit_air_saturation));
+        contentProvider.addContent(contentItemKeyValue);
+
+        contentItemText = ContentItemTextView_.build(context);
+        contentProvider.addContent(contentItemText);
+
+        // ---
+
+        contentItemText = ContentItemTextView_.build(context);
+        contentItemText.setText(R.string.application_info_text_4);
+        contentProvider.addContent(contentItemText);
     }
 
     public void setUnitInfo(ContentProvider contentProvider) {
@@ -178,8 +246,12 @@ public class ContentManager {
 
     public void setTimersInfo(ContentProvider contentProvider) {
         ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(context);
-        contentItemKeyValue.bind(R.string.timers_info_key_1, Integer.toString(demonstrator.getTimersRunning()));
+        contentItemKeyValue.bind(R.string.timers_info_key_1, Integer.toString(demonstrator.getTimersDefined()));
         contentProvider.setContent(contentItemKeyValue);
+
+        contentItemKeyValue = ContentItemKeyValueView_.build(context);
+        contentItemKeyValue.bind(R.string.timers_info_key_2, Integer.toString(demonstrator.getTimersRunning()));
+        contentProvider.addContent(contentItemKeyValue);
 
         ContentItemTextView contentItemText = ContentItemTextView_.build(context);
         contentItemText.setText(R.string.application_info_text_4);
