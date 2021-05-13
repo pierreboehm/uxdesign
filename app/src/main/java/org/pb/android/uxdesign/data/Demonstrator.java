@@ -269,7 +269,7 @@ public class Demonstrator {
         List<User> resultList = new ArrayList<>();
 
         Serializer serializer = new Persister();
-        InputStream xmlUsers = context.getResources().openRawResource(R.raw.users);
+        InputStream xmlUsers = context.getResources().openRawResource(R.raw.users2);
 
         try {
             Users users = serializer.read(Users.class, xmlUsers);
@@ -293,7 +293,7 @@ public class Demonstrator {
         User user = new User();
 
         Serializer serializer = new Persister();
-        InputStream xmlUsers = context.getResources().openRawResource(R.raw.users);
+        InputStream xmlUsers = context.getResources().openRawResource(R.raw.users2);
 
         try {
             Users users = serializer.read(Users.class, xmlUsers);

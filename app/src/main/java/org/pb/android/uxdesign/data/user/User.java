@@ -16,10 +16,10 @@ public class User {
     @Element(name = "Country")
     String country;
 
-    @Element(name = "CountryCode")
+    @Element(name = "CountryCode", required = false)
     String countryCode;
 
-    @Element(name = "State")
+    @Element(name = "State", required = false)
     String state;
 
     @Element(name = "Locality")
