@@ -34,6 +34,12 @@ import org.pb.android.uxdesign.fragment.VitalStatusFragment_;
 import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.dialog.ContentDialog;
 import org.pb.android.uxdesign.ui.dialog.WarningDialog;
+import org.pb.android.uxdesign.ui.view.ContentItemContainerView;
+import org.pb.android.uxdesign.ui.view.ContentItemContainerView_;
+import org.pb.android.uxdesign.ui.view.ContentItemKeyValueView;
+import org.pb.android.uxdesign.ui.view.ContentItemKeyValueView_;
+import org.pb.android.uxdesign.ui.view.ContentItemTextView;
+import org.pb.android.uxdesign.ui.view.ContentItemTextView_;
 import org.pb.android.uxdesign.ui.view.ContentItemWarningView;
 import org.pb.android.uxdesign.ui.view.ContentItemWarningView_;
 import org.pb.android.uxdesign.ui.view.UserListView;
@@ -197,9 +203,35 @@ public class MainActivity extends AppCompatActivity {
 
         switch (viewMode) {
             case MAIN: {
+                ContentItemContainerView containerView = ContentItemContainerView_.build(this);
+
+                ContentItemKeyValueView contentItemKeyValue = ContentItemKeyValueView_.build(this);
+                contentItemKeyValue.setTitle("SECURITY INFORMATION", true);
+                containerView.setView(contentItemKeyValue);
+
+                contentItemKeyValue = ContentItemKeyValueView_.build(this);
+                contentItemKeyValue.bind("Count of security breaches:", "0");
+                containerView.addView(contentItemKeyValue);
+
+                contentItemKeyValue = ContentItemKeyValueView_.build(this);
+                contentItemKeyValue.bind("Use this code for verification issues.", null);
+                containerView.addView(contentItemKeyValue);
+
+                ContentItemTextView contentItemText = ContentItemTextView_.build(this);
+                containerView.addView(contentItemText);
+
                 ImageView imageView = new ImageView(this);
                 imageView.setImageBitmap(demonstrator.getAccessCodeBitmap());
-                return imageView;
+                containerView.addView(imageView);
+
+                contentItemText = ContentItemTextView_.build(this);
+                containerView.addView(contentItemText);
+
+                contentItemText = ContentItemTextView_.build(this);
+                contentItemText.setText(getString(R.string.application_info_text_4));
+                containerView.addView(contentItemText);
+
+                return containerView;
             }
             case PASSENGER_INFO: {
                 UserListView userListView = UserListView_.build(this);
