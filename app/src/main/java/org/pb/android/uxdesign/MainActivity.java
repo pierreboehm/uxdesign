@@ -33,6 +33,9 @@ import org.pb.android.uxdesign.fragment.VitalStatusFragment;
 import org.pb.android.uxdesign.fragment.VitalStatusFragment_;
 import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.dialog.ContentDialog;
+import org.pb.android.uxdesign.ui.dialog.WarningDialog;
+import org.pb.android.uxdesign.ui.view.ContentItemWarningView;
+import org.pb.android.uxdesign.ui.view.ContentItemWarningView_;
 import org.pb.android.uxdesign.ui.view.UserListView;
 import org.pb.android.uxdesign.ui.view.UserListView_;
 
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Bean
     Demonstrator demonstrator;
 
+    private WarningDialog warningDialog;
     private Toast closeAppToast;
 
     @AfterViews
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Receiver(actions = Intent.ACTION_BATTERY_CHANGED)
+    @Receiver(actions = {Intent.ACTION_BATTERY_CHANGED, Intent.ACTION_BATTERY_LOW, Intent.ACTION_BATTERY_OKAY})
     protected void onBatteryChanged(Intent batteryStatus) {
         int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
         boolean isCharging = (status == BatteryManager.BATTERY_STATUS_CHARGING)
@@ -97,6 +101,16 @@ public class MainActivity extends AppCompatActivity {
         demonstrator.setChargingState(isCharging);
         demonstrator.setPluggedState(usbCharge || acCharge);
         demonstrator.setChargingLevel(batteryLevelInPercent);
+
+        if (batteryStatus.getAction().equals(Intent.ACTION_BATTERY_LOW)) {
+            showDialog(ViewMode.WARNING);
+
+        } else if (batteryStatus.getAction().equals(Intent.ACTION_BATTERY_OKAY)) {
+            if (warningDialog != null) {
+                warningDialog.dismiss();
+                warningDialog = null;
+            }
+        }
     }
 
     @UiThread(delay = 2000)
@@ -160,11 +174,23 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        new ContentDialog.Builder(this)
-                .setContent(dialogContent)
-                .setHeaderByViewMode(viewMode)
-                .build()
-                .show();
+        if (viewMode == ViewMode.WARNING) {
+            if (warningDialog != null) {
+                warningDialog.dismiss();
+            }
+
+            warningDialog = new WarningDialog.Builder(this)
+                    .setContent(dialogContent)
+                    .build();
+            warningDialog.show();
+
+        } else {
+            new ContentDialog.Builder(this)
+                    .setContent(dialogContent)
+                    .setHeaderByViewMode(viewMode)
+                    .build()
+                    .show();
+        }
     }
 
     private View getDialogContent(ViewMode viewMode) {
@@ -182,6 +208,11 @@ public class MainActivity extends AppCompatActivity {
             case UNIT_INFO: {
                 // TODO: implement
                 break;
+            }
+            case WARNING: {
+                ContentItemWarningView contentItemWarningView = ContentItemWarningView_.build(this);
+                // TODO: modify content here
+                return contentItemWarningView;
             }
         }
 
