@@ -62,6 +62,6 @@ public class UnitInfoMenuView extends RelativeLayout {
 
     @Click(R.id.btnRight)
     public void onButtonRightClick() {
-        EventBus.getDefault().post(new Event.ShowDialog(ViewMode.UNIT_INFO));
+        EventBus.getDefault().post(new Event.ShowDialog(ViewMode.PASSENGER_INFO));
     }
 }
