@@ -25,5 +25,7 @@
     <color name="blue_navy">#000080</color>
 
     <color name="orange_warm">#FAAA00</color>
+    <color name="red_warm">#E03A00</color>
+    <color name="red_warm_alpha_16">#39E03A00</color>
 
 </resources>
