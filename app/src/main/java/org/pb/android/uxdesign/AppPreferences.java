@@ -7,4 +7,7 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
 public interface AppPreferences {
     @DefaultInt(0)
     int selectedUser();
+
+    @DefaultInt(0)
+    int selectedButton();
 }

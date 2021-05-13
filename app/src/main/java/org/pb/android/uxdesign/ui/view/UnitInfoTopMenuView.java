@@ -12,6 +12,8 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewsById;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.pb.android.uxdesign.AppPreferences_;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.ui.UnitInfoMenuConfiguration;
 
@@ -36,14 +38,17 @@ public class UnitInfoTopMenuView extends RelativeLayout {
     @ViewsById({R.id.btn_5_2})
     List<ImageButton> buttonGroup2_5List;
 
+    @Pref
+    AppPreferences_ preferences;
+
     public UnitInfoTopMenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @AfterViews
     public void initView() {
-        // preselect 'application info' as default
-        performSelection(buttonGroup1List.get(0));
+        // preselect 'sustainment info' from preferences
+        performSelection(buttonGroup1List.get(preferences.selectedButton().get()));
     }
 
     @Click({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5})
@@ -64,6 +69,12 @@ public class UnitInfoTopMenuView extends RelativeLayout {
         if (unitInfoMenuConfiguration != null) {
             unitInfoMenuConfiguration.onClick(button.isSelected());
         }
+
+        // store preselection in preferences
+        int indexOfMainButtonClicked = indexOf(button.getId());
+        if (indexOfMainButtonClicked != -1) {
+            preferences.selectedButton().put(indexOfMainButtonClicked);
+        }
     }
 
     private void unselectAll(int skipId) {
@@ -80,5 +91,15 @@ public class UnitInfoTopMenuView extends RelativeLayout {
                 imageButton.setSelected(false);
             }
         }
+    }
+
+    private int indexOf(int buttonId) {
+        for (int index = 0; index < buttonGroup1List.size(); index++) {
+            ImageButton imageButton = buttonGroup1List.get(index);
+            if (imageButton.getId() == buttonId) {
+                return index;
+            }
+        }
+        return -1;
     }
 }

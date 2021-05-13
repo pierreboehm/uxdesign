@@ -70,7 +70,7 @@ public enum UnitInfoMenuConfiguration {
 
     public void action_btn1(boolean isSelected) {
         if (isSelected) {
-            EventBus.getDefault().post(new Event.ContentShowUserInfo());
+            EventBus.getDefault().postSticky(new Event.ContentShowUserInfo());
         } else {
             EventBus.getDefault().post(new Event.ContentClear());
         }
@@ -78,7 +78,7 @@ public enum UnitInfoMenuConfiguration {
 
     public void action_btn2(boolean isSelected) {
         if (isSelected) {
-            EventBus.getDefault().post(new Event.ContentShowPowerInfo());
+            EventBus.getDefault().postSticky(new Event.ContentShowPowerInfo());
         } else {
             EventBus.getDefault().post(new Event.ContentClear());
         }
@@ -86,7 +86,7 @@ public enum UnitInfoMenuConfiguration {
 
     public void action_btn3(boolean isSelected) {
         if (isSelected) {
-            EventBus.getDefault().post(new Event.ContentShowSustainmentInfo());
+            EventBus.getDefault().postSticky(new Event.ContentShowSustainmentInfo());
         } else {
             EventBus.getDefault().post(new Event.ContentClear());
         }
@@ -94,7 +94,7 @@ public enum UnitInfoMenuConfiguration {
 
     public void action_btn4(boolean isSelected) {
         if (isSelected) {
-            EventBus.getDefault().post(new Event.ContentShowUnitInfo());
+            EventBus.getDefault().postSticky(new Event.ContentShowUnitInfo());
         } else {
             EventBus.getDefault().post(new Event.ContentClear());
         }
@@ -102,7 +102,7 @@ public enum UnitInfoMenuConfiguration {
 
     public void action_btn5(boolean isSelected) {
         if (isSelected) {
-            EventBus.getDefault().post(new Event.ContentShowTimersInfo());
+            EventBus.getDefault().postSticky(new Event.ContentShowTimersInfo());
         } else {
             EventBus.getDefault().post(new Event.ContentClear());
         }

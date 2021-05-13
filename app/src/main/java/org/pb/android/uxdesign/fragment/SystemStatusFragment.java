@@ -101,55 +101,36 @@ public class SystemStatusFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(Event.ContentShowApplicationInfo event) {
         EventBus.getDefault().removeStickyEvent(event);
-        setApplicationInfo();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(Event.ContentShowUserInfo event) {
-        setUserInfo();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(Event.ContentShowPowerInfo event) {
-        setPowerInfo();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(Event.ContentShowSustainmentInfo event) {
-        setSustainmentInfo();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(Event.ContentShowUnitInfo event) {
-        setUnitInfo();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(Event.ContentShowTimersInfo event) {
-        setTimersInfo();
-    }
-
-    private void setApplicationInfo() {
         contentManager.setApplicationInfo(hpodHeader);
     }
 
-    private void setUserInfo() {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onEvent(Event.ContentShowUserInfo event) {
+        EventBus.getDefault().removeStickyEvent(event);
         contentManager.setUserInfo(hpodHeader);
     }
 
-    private void setPowerInfo() {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onEvent(Event.ContentShowPowerInfo event) {
+        EventBus.getDefault().removeStickyEvent(event);
         contentManager.setPowerInfo(hpodHeader);
     }
 
-    private void setSustainmentInfo() {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onEvent(Event.ContentShowSustainmentInfo event) {
+        EventBus.getDefault().removeStickyEvent(event);
         contentManager.setSustainmentInfo(hpodHeader);
     }
 
-    private void setUnitInfo() {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onEvent(Event.ContentShowUnitInfo event) {
+        EventBus.getDefault().removeStickyEvent(event);
         contentManager.setUnitInfo(hpodHeader);
     }
 
-    private void setTimersInfo() {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onEvent(Event.ContentShowTimersInfo event) {
+        EventBus.getDefault().removeStickyEvent(event);
         contentManager.setTimersInfo(hpodHeader);
     }
 
