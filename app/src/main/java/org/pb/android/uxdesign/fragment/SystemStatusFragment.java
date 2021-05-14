@@ -11,15 +11,12 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.ContentManager;
 import org.pb.android.uxdesign.event.Event;
-import org.pb.android.uxdesign.ui.UnitInfoContentType;
 import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
@@ -32,6 +29,10 @@ import org.pb.android.uxdesign.util.Util;
 public class SystemStatusFragment extends Fragment {
 
     public static final String TAG = SystemStatusFragment.class.getSimpleName();
+
+    private enum UnitInfoContentType {
+        UNDEFINED, APPLICATION_INFO, USER_INFO, POWER_INFO, SUSTAINMENT_INFO, UNIT_INFO, TIMERS_INFO
+    }
 
     private float N2MIN, N2MAX, O2MIN, O2MAX, CO2MIN, CO2MAX;
     private float nitrogenValue, oxygenValue, argonValue, carbonDioxydValue;
