@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @Bean
     Demonstrator demonstrator;
 
+    private int batteryLowLevel = 15;
     private WarningDialog warningDialog;
     private Toast closeAppToast;
 
@@ -103,12 +104,14 @@ public class MainActivity extends AppCompatActivity {
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
         float batteryLevelInPercent = level * 100 / (float) scale;
+        int batteryLowLevelInPercent = (int) batteryLevelInPercent;
 
         demonstrator.setChargingState(isCharging);
         demonstrator.setPluggedState(usbCharge || acCharge);
         demonstrator.setChargingLevel(batteryLevelInPercent);
 
-        if (batteryStatus.getAction().equals(Intent.ACTION_BATTERY_LOW)) {
+        if (batteryStatus.getAction().equals(Intent.ACTION_BATTERY_LOW) || batteryLowLevelInPercent < batteryLowLevel) {
+            batteryLowLevel = batteryLowLevelInPercent;
             showDialog(ViewMode.WARNING);
 
         } else if (batteryStatus.getAction().equals(Intent.ACTION_BATTERY_OKAY)) {
