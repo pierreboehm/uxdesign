@@ -68,6 +68,11 @@ public class SystemStatusFragment extends Fragment {
 
         CO2MIN = ResourcesCompat.getFloat(getResources(), R.dimen.co2_min);
         CO2MAX = ResourcesCompat.getFloat(getResources(), R.dimen.co2_max);
+
+        nitrogenValue = Util.getRandomBetween(N2MIN, N2MAX);
+        oxygenValue = Util.getRandomBetween(O2MIN, O2MAX);
+        carbonDioxydValue = Util.getRandomBetween(CO2MIN, CO2MAX);
+
     }
 
     @AfterViews
@@ -169,7 +174,7 @@ public class SystemStatusFragment extends Fragment {
     }
 
     private void setNitrogen(boolean updateOthers) {
-        nitrogenValue = Util.getRandomBetween(N2MIN, N2MAX);
+        nitrogenValue = Util.getGasLevel(nitrogenValue, N2MIN, N2MAX);
         String relation = Util.getRelation(nitrogenValue, N2MIN, N2MAX);
 
         progressValueView1.setTextTop(getString(R.string.chemical_sign_nitrogen));
@@ -184,7 +189,7 @@ public class SystemStatusFragment extends Fragment {
     }
 
     private void setOxygen(boolean updateOthers) {
-        oxygenValue = Util.getRandomBetween(O2MIN, O2MAX);
+        oxygenValue = Util.getGasLevel(oxygenValue, O2MIN, O2MAX);
         String relation = Util.getRelation(oxygenValue, O2MIN, O2MAX);
 
         progressValueView2.setTextTop(getString(R.string.chemical_sign_oxygen));
@@ -199,7 +204,7 @@ public class SystemStatusFragment extends Fragment {
     }
 
     private void setCarbonDioxyd() {
-        carbonDioxydValue = Util.getRandomBetween(CO2MIN, CO2MAX);
+        carbonDioxydValue = Util.getGasLevel(carbonDioxydValue, CO2MIN, CO2MAX);
     }
 
     private void setArgon() {

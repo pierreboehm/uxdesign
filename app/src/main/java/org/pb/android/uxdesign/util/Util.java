@@ -85,4 +85,14 @@ public class Util {
             return "normal";
         }
     }
+
+    public static float getGasLevel(float gasLevel, float minGasLevel, float maxGasLevel) {
+        float resultLevel = gasLevel;
+        resultLevel += (float) Util.getRandomBetween(-2, 2) / 100f;
+
+        resultLevel = Math.min(resultLevel, maxGasLevel);
+        resultLevel = Math.max(resultLevel, minGasLevel);
+
+        return (float) Util.roundScale(resultLevel);
+    }
 }
