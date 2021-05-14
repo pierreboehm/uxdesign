@@ -46,6 +46,8 @@ public class VitalStatusFragment extends Fragment {
     @Bean
     Demonstrator demonstrator;
 
+    private boolean initiated;
+
     @AfterViews
     public void initViews() {
         CurrentUser currentUser = demonstrator.getCurrentUser();
@@ -55,6 +57,7 @@ public class VitalStatusFragment extends Fragment {
         hpodFooter.prepareScreen(ViewMode.PASSENGER_INFO);
 
         powerSystemStatusView.preparePowerSystemStatusScreen();
+        initiated = true;
     }
 
     @Override
@@ -67,6 +70,13 @@ public class VitalStatusFragment extends Fragment {
     public void onPause() {
         EventBus.getDefault().unregister(this);
         super.onPause();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.Refresh event) {
+        if (initiated) {
+            powerSystemStatusView.refresh();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)

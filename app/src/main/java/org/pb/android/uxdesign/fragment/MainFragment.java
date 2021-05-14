@@ -44,6 +44,8 @@ public class MainFragment extends Fragment {
     @Bean
     Demonstrator demonstrator;
 
+    private boolean initiated;
+
     @AfterViews
     public void initViews() {
         CurrentUser currentUser = demonstrator.getCurrentUser();
@@ -55,6 +57,8 @@ public class MainFragment extends Fragment {
         powerSystemStatusView.preparePowerSystemStatusScreen();
         cpuSystemStatusView.prepareCpuSystemStatusScreen();
         tempSystemStatusView.prepareTempSystemStatusScreen();
+
+        initiated = true;
     }
 
     @Override
@@ -72,5 +76,15 @@ public class MainFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(Event.UserDataUpdate event) {
         hpodHeader.setCurrentUser(new CurrentUser(event.getUserData()));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.Refresh event) {
+        if (initiated) {
+            powerSystemStatusView.refresh();
+            cpuSystemStatusView.refresh();
+            tempSystemStatusView.refresh();
+            hpodFooter.refresh();
+        }
     }
 }

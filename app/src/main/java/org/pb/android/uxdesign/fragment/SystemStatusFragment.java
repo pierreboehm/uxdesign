@@ -19,10 +19,12 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.ContentManager;
 import org.pb.android.uxdesign.event.Event;
+import org.pb.android.uxdesign.ui.UnitInfoContentType;
 import org.pb.android.uxdesign.ui.ViewMode;
 import org.pb.android.uxdesign.ui.view.HpodFooter;
 import org.pb.android.uxdesign.ui.view.HpodHeader;
 import org.pb.android.uxdesign.ui.view.HpodProgressValueView;
+import org.pb.android.uxdesign.ui.view.HpodStatusOverviewView;
 import org.pb.android.uxdesign.util.Util;
 
 @SuppressLint("NonConstantResourceId")
@@ -46,8 +48,14 @@ public class SystemStatusFragment extends Fragment {
     @ViewById(R.id.progressValue2)
     HpodProgressValueView progressValueView2;
 
+    @ViewById(R.id.statusOverview)
+    HpodStatusOverviewView statusOverview;
+
     @Bean
     ContentManager contentManager;
+
+    private UnitInfoContentType unitInfoContentType = UnitInfoContentType.UNDEFINED;
+    private boolean initiated;
 
     @AfterInject
     public void afterInject() {
@@ -67,6 +75,7 @@ public class SystemStatusFragment extends Fragment {
         hpodFooter.prepareScreen(ViewMode.UNIT_INFO);
 
         setupGases();
+        initiated = true;
     }
 
     @Override
@@ -94,44 +103,60 @@ public class SystemStatusFragment extends Fragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event.Refresh event) {
+        if (initiated) {
+            int gasUpdate = Util.getRandomBetween(1, 5);
+            if (gasUpdate == 1) {
+                setNitrogen(true);
+            } else if (gasUpdate == 5) {
+                setOxygen(true);
+            }
+
+            statusOverview.refresh();
+            hpodFooter.refresh();
+            contentRefresh(unitInfoContentType);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(Event.ContentClear event) {
-        hpodHeader.clearContent();
+        contentRefresh(UnitInfoContentType.UNDEFINED);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(Event.ContentShowApplicationInfo event) {
         EventBus.getDefault().removeStickyEvent(event);
-        contentManager.setApplicationInfo(hpodHeader);
+        contentRefresh(UnitInfoContentType.APPLICATION_INFO);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(Event.ContentShowUserInfo event) {
         EventBus.getDefault().removeStickyEvent(event);
-        contentManager.setUserInfo(hpodHeader);
+        contentRefresh(UnitInfoContentType.USER_INFO);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(Event.ContentShowPowerInfo event) {
         EventBus.getDefault().removeStickyEvent(event);
-        contentManager.setPowerInfo(hpodHeader);
+        contentRefresh(UnitInfoContentType.POWER_INFO);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(Event.ContentShowSustainmentInfo event) {
         EventBus.getDefault().removeStickyEvent(event);
-        contentManager.setSustainmentInfo(hpodHeader);
+        contentRefresh(UnitInfoContentType.SUSTAINMENT_INFO);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(Event.ContentShowUnitInfo event) {
         EventBus.getDefault().removeStickyEvent(event);
-        contentManager.setUnitInfo(hpodHeader);
+        contentRefresh(UnitInfoContentType.UNIT_INFO);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(Event.ContentShowTimersInfo event) {
         EventBus.getDefault().removeStickyEvent(event);
-        contentManager.setTimersInfo(hpodHeader);
+        contentRefresh(UnitInfoContentType.TIMERS_INFO);
     }
 
     private void setupGases() {
@@ -186,5 +211,40 @@ public class SystemStatusFragment extends Fragment {
         EventBus.getDefault().post(new Event.FloatValueUpdate(getString(R.string.air_sensor_o2), oxygenValue));
         EventBus.getDefault().post(new Event.FloatValueUpdate(getString(R.string.air_sensor_ar), argonValue));
         EventBus.getDefault().post(new Event.FloatValueUpdate(getString(R.string.air_sensor_co2), carbonDioxydValue));
+    }
+
+    private void contentRefresh(UnitInfoContentType contentType) {
+        unitInfoContentType = contentType;
+
+        switch (contentType) {
+            case APPLICATION_INFO: {
+                contentManager.setApplicationInfo(hpodHeader);
+                break;
+            }
+            case USER_INFO: {
+                contentManager.setUserInfo(hpodHeader);
+                break;
+            }
+            case POWER_INFO: {
+                contentManager.setPowerInfo(hpodHeader);
+                break;
+            }
+            case SUSTAINMENT_INFO: {
+                contentManager.setSustainmentInfo(hpodHeader);
+                break;
+            }
+            case UNIT_INFO: {
+                contentManager.setUnitInfo(hpodHeader);
+                break;
+            }
+            case TIMERS_INFO: {
+                contentManager.setTimersInfo(hpodHeader);
+                break;
+            }
+            case UNDEFINED: {
+                hpodHeader.clearContent();
+                break;
+            }
+        }
     }
 }
