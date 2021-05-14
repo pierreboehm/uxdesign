@@ -69,10 +69,9 @@ public class SystemStatusFragment extends Fragment {
         CO2MIN = ResourcesCompat.getFloat(getResources(), R.dimen.co2_min);
         CO2MAX = ResourcesCompat.getFloat(getResources(), R.dimen.co2_max);
 
-        nitrogenValue = Util.getRandomBetween(N2MIN, N2MAX);
-        oxygenValue = Util.getRandomBetween(O2MIN, O2MAX);
-        carbonDioxydValue = Util.getRandomBetween(CO2MIN, CO2MAX);
-
+        nitrogenValue = Util.getRandomBetween(N2MIN, N2MIN + (N2MIN * .25f));
+        oxygenValue = Util.getRandomBetween(O2MIN, O2MIN + (O2MIN * .25f));
+        carbonDioxydValue = Util.getRandomBetween(CO2MIN, CO2MIN + (CO2MIN * .25f));
     }
 
     @AfterViews
