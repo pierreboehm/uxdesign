@@ -163,4 +163,7 @@ public class Event {
             return new Pair<>(key, value);
         }
     }
+
+    public static class Refresh {
+    }
 }

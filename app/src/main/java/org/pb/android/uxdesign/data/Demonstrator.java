@@ -9,6 +9,7 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.AppPreferences_;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.data.user.CurrentUser;
@@ -16,6 +17,7 @@ import org.pb.android.uxdesign.data.user.User;
 import org.pb.android.uxdesign.data.user.UserData;
 import org.pb.android.uxdesign.data.user.Users;
 
+import org.pb.android.uxdesign.event.Event;
 import org.pb.android.uxdesign.util.Util;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -26,11 +28,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class Demonstrator {
 
     private static final String TAG = Demonstrator.class.getSimpleName();
+
+    private static final long REFRESH_INTERVAL = 3000L;
 
     private static final float ENV_TEMP_MIN = 20f;
     private static final float ENV_TEMP_MAX = 38f;
@@ -46,6 +52,8 @@ public class Demonstrator {
 
     private PowerManagerInfo powerManagerInfo;
     private Bitmap accessCodeBitmap, n2StatusBitmap, o2StatusBitmap, arStatusBitmap, co2StatusBitmap;
+
+    private Timer refreshTimer;
 
     private float n2Level, o2level, arLevel, co2Level;
 
@@ -65,6 +73,26 @@ public class Demonstrator {
 
         airTemperature = (float) Util.roundScale(Util.getRandomBetween(ENV_TEMP_MIN, ENV_TEMP_MIN + (ENV_TEMP_MIN * .5f)));
         airPressure = (float) Util.roundScale(Util.getRandomBetween(AIR_PRESS_MIN, AIR_PRESS_MIN + (AIR_PRESS_MIN * .5f)));
+    }
+
+    public void startRefreshTimer() {
+        if (refreshTimer == null) {
+            refreshTimer = new Timer();
+        }
+
+        refreshTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                EventBus.getDefault().post(new Event.Refresh());
+            }
+        }, 0, REFRESH_INTERVAL);
+    }
+
+    public void stopRefreshTimer() {
+        if (refreshTimer != null) {
+            refreshTimer.cancel();
+            refreshTimer = null;
+        }
     }
 
     public void reportError() {
@@ -92,7 +120,7 @@ public class Demonstrator {
     }
 
     public int getTimersDefined() {
-        return 4;
+        return 5;
     }
 
     public int getTimersRunning() {
