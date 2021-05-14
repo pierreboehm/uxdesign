@@ -80,8 +80,20 @@ public class HpodFooter extends RelativeLayout {
         }
     }
 
+    public void refresh() {
+        if (mainMenuView != null) {
+            mainMenuView.refresh();
+
+        } else if (unitInfoMenuView != null) {
+            unitInfoMenuView.refresh();
+        }
+    }
+
     private void prepareMainScreen() {
         viewContainer.removeAllViews();
+
+        vitalStatusView = null;
+        unitInfoMenuView = null;
 
         mainMenuView = MainMenuView_.build(getContext());
         viewContainer.addView(mainMenuView);
@@ -90,12 +102,18 @@ public class HpodFooter extends RelativeLayout {
     private void prepareVitalStatusScreen() {
         viewContainer.removeAllViews();
 
+        mainMenuView = null;
+        unitInfoMenuView = null;
+
         vitalStatusView = VitalStatusView_.build(getContext());
         viewContainer.addView(vitalStatusView);
     }
 
     private void prepareSystemStatusScreen() {
         viewContainer.removeAllViews();
+
+        mainMenuView = null;
+        vitalStatusView = null;
 
         unitInfoMenuView = UnitInfoMenuView_.build(getContext());
         viewContainer.addView(unitInfoMenuView);

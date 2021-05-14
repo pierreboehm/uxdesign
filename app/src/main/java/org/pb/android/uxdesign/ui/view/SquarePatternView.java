@@ -50,7 +50,7 @@ public class SquarePatternView extends View {
     }
 
     @UiThread
-    public void update() {
+    public void refresh() {
         invalidate();
     }
 

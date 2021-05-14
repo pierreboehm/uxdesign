@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="90dp"
     android:layout_height="90dp"
     android:orientation="vertical"
@@ -23,6 +21,7 @@
             />
 
         <org.pb.android.uxdesign.ui.view.DotPatternSmallView_
+            android:id="@+id/powerSystemDotPattern"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_alignParentRight="true"
@@ -54,6 +53,7 @@
             />
 
         <org.pb.android.uxdesign.ui.view.DotPatternSmallView_
+            android:id="@+id/cpuSystemDotPattern"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_alignParentRight="true"
@@ -85,6 +85,7 @@
             />
 
         <org.pb.android.uxdesign.ui.view.DotPatternSmallView_
+            android:id="@+id/tempSystemDotPattern"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_alignParentRight="true"

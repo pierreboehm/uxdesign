@@ -73,6 +73,7 @@
                 />
 
             <org.pb.android.uxdesign.ui.view.SquarePatternView_
+                android:id="@+id/n2SquarePattern"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="bottom"
@@ -103,6 +104,7 @@
                 />
 
             <org.pb.android.uxdesign.ui.view.SquarePatternView_
+                android:id="@+id/o2SquarePattern"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="bottom"
@@ -133,6 +135,7 @@
                 />
 
             <org.pb.android.uxdesign.ui.view.SquarePatternView_
+                android:id="@+id/arSquarePattern"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="bottom"
@@ -163,6 +166,7 @@
                 />
 
             <org.pb.android.uxdesign.ui.view.SquarePatternView_
+                android:id="@+id/co2SquarePattern"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="bottom"

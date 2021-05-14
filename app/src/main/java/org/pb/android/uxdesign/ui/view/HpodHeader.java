@@ -41,6 +41,27 @@ public class HpodHeader extends ContentProvider {
         super(context, attrs);
     }
 
+    @Override
+    public void clearContent() {
+        if (unitInfoTopContent != null) {
+            unitInfoTopContent.clearContent();
+        }
+    }
+
+    @Override
+    public void setContent(View view) {
+        if (unitInfoTopContent != null) {
+            unitInfoTopContent.setContentView(view);
+        }
+    }
+
+    @Override
+    public void addContent(View view) {
+        if (unitInfoTopContent != null) {
+            unitInfoTopContent.addContentView(view);
+        }
+    }
+
     public void setCurrentUser(CurrentUser currentUser) {
         this.currentUser = currentUser;
         updateCurrentUser();
@@ -85,27 +106,6 @@ public class HpodHeader extends ContentProvider {
 
     public boolean isLogoButtonSelected() {
         return logoButtonView.isSelected();
-    }
-
-    @Override
-    public void clearContent() {
-        if (unitInfoTopContent != null) {
-            unitInfoTopContent.clearContent();
-        }
-    }
-
-    @Override
-    public void setContent(View view) {
-        if (unitInfoTopContent != null) {
-            unitInfoTopContent.setContentView(view);
-        }
-    }
-
-    @Override
-    public void addContent(View view) {
-        if (unitInfoTopContent != null) {
-            unitInfoTopContent.addContentView(view);
-        }
     }
 
     private void prepareMainScreen() {

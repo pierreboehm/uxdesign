@@ -73,7 +73,7 @@ public class DotPatternBigView extends View {
     }
 
     @UiThread
-    public void update() {
+    public void refresh() {
         invalidate();
     }
 

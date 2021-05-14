@@ -42,7 +42,7 @@ public class DotPatternSmallView extends View {
     }
 
     @UiThread
-    public void update() {
+    public void refresh() {
         invalidate();
     }
 

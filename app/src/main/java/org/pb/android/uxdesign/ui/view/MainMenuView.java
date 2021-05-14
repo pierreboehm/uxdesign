@@ -82,4 +82,9 @@ public class MainMenuView extends RelativeLayout {
             EventBus.getDefault().post(new Event.ShowDialog(ViewMode.MAIN));
         }
     }
+
+    public void refresh() {
+        dotPatternBigView.refresh();
+        dotPatternSmallView.refresh();
+    }
 }

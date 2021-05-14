@@ -48,4 +48,9 @@ public class HpodSystemStatusView extends LinearLayout {
         tvSystemStatusFooterText.setText(R.string.button_view_temp_system);
         dotPatternBigView.setDotPattern(DotPatternBigView.DotPattern.CIRCLE);
     }
+
+    public void refresh() {
+        dotPatternBigView.refresh();
+        dotPatternSmallView.refresh();
+    }
 }
