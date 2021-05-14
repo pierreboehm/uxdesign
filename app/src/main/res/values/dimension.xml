@@ -9,15 +9,15 @@
     <dimen name="hex_button_2_width">37dp</dimen>
     <dimen name="hex_button_2_height">32dp</dimen>
 
-    <dimen name="n2_min">76.08</dimen>
-    <dimen name="n2_max">80.08</dimen>
+    <dimen name="n2_min">73.08</dimen>
+    <dimen name="n2_max">83.08</dimen>
 
-    <dimen name="o2_min">18.95</dimen>
-    <dimen name="o2_max">22.95</dimen>
+    <dimen name="o2_min">16.95</dimen>
+    <dimen name="o2_max">26.95</dimen>
 
     <dimen name="ar_min">0.73</dimen>
     <dimen name="ar_max">1.13</dimen>
 
     <dimen name="co2_min">0.02</dimen>
-    <dimen name="co2_max">0.06</dimen>
+    <dimen name="co2_max">1.06</dimen>
 </resources>
