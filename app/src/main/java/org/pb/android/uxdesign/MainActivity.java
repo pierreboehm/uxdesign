@@ -1,9 +1,5 @@
 package org.pb.android.uxdesign;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,9 +7,12 @@ import android.os.BatteryManager;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
-
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -68,10 +67,12 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         EventBus.getDefault().register(this);
+        demonstrator.startRefreshTimer();
     }
 
     @Override
     public void onPause() {
+        demonstrator.stopRefreshTimer();
         EventBus.getDefault().unregister(this);
 
         super.onPause();
