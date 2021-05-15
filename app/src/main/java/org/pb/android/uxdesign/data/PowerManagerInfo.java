@@ -59,7 +59,7 @@ public class PowerManagerInfo {
         return (int) (voltage / 1000f);
     }
 
-    public int getVoltageInMilliVolt() {
+    public synchronized int getVoltageInMilliVolt() {
         updateBatteryStatus();
         return (int) voltage;
     }
@@ -73,38 +73,38 @@ public class PowerManagerInfo {
         return (float) Util.roundScale(consumption);
     }
 
-    public void setPlugged(boolean isPlugged) {
+    public synchronized void setPlugged(boolean isPlugged) {
         plugged = isPlugged;
     }
 
-    public boolean isPluggedIn() {
+    public synchronized boolean isPluggedIn() {
         if (!plugged) {
             EventBus.getDefault().post(new Event.ReportError());
         }
         return plugged;
     }
 
-    public void setCharging(boolean isCharging) {
+    public synchronized void setCharging(boolean isCharging) {
         charging = isCharging;
     }
 
-    public boolean isCharging() {
+    public synchronized boolean isCharging() {
         return charging;
     }
 
-    public void setBatteryChargingLevelInPercent(float chargingLevel) {
+    public synchronized void setBatteryChargingLevelInPercent(float chargingLevel) {
         chargingState = (int) chargingLevel;
     }
 
-    public int getBatteryStatusInPercent() {
+    public synchronized int getBatteryStatusInPercent() {
         return chargingState;
     }
 
-    private float getBatteryStatusInMilliVolt() {
-        return chargingState * VOLTAGE_ACCU / 100f;
+    private synchronized float getBatteryStatusInMilliVolt() {
+        return (float) chargingState * VOLTAGE_ACCU / 100f;
     }
 
-    private void updateBatteryStatus() {
+    private synchronized void updateBatteryStatus() {
         if (plugged) {
             voltage = VOLTAGE_MAX;
             voltageBattery = getBatteryStatusInMilliVolt();
