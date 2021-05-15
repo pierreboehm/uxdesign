@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">uxdesign</string>
+    <string name="app_name">HPOD Simulator</string>
     <string name="backPressedHintText">Press again to close the app.</string>
 
     <string name="yes">YES</string>
