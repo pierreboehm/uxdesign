@@ -10,7 +10,7 @@ Als 3rd party Hilfen nutze ich hier Android Annotations, EventBus von greenrobot
 
 Hinweis: 
   
-  Die Layouts sind NICHT optimiert für große und extra-große Displays. (Tablet / TV)
+  Die Layouts sind NICHT optimiert für große und extra-große Displays (Tablet / TV), wäre aber problemlos machbar.
   
   Getestet wurden nur Smartphones mit verschiedenen Auflösungen.
   
