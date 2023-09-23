@@ -1,5 +1,7 @@
 package org.pb.android.uxdesign.ui;
 
+import androidx.annotation.Nullable;
+
 import org.greenrobot.eventbus.EventBus;
 import org.pb.android.uxdesign.R;
 import org.pb.android.uxdesign.event.Event;
@@ -49,6 +51,7 @@ public enum UnitInfoMenuConfiguration {
         this.resourceId = resourceId;
     }
 
+    @Nullable
     public static UnitInfoMenuConfiguration getButtonById(int resourceId) {
         for (UnitInfoMenuConfiguration unitInfoMenuConfiguration : UnitInfoMenuConfiguration.values()) {
             if (unitInfoMenuConfiguration.resourceId == resourceId) {
