@@ -18,7 +18,6 @@
         android:layout_width="12dp"
         android:layout_height="40dp"
         android:scaleType="fitXY"
-        android:fitsSystemWindows="true"
         android:src="@drawable/iv_button_left"
         />
 
@@ -33,7 +32,6 @@
         android:layout_width="12dp"
         android:layout_height="40dp"
         android:scaleType="fitXY"
-        android:fitsSystemWindows="true"
         android:src="@drawable/iv_button_right"
         />
 

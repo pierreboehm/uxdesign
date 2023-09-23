@@ -17,7 +17,6 @@
             android:layout_height="8dp"
             android:src="@drawable/iv_header_left_big"
             android:scaleType="fitXY"
-            android:fitsSystemWindows="true"
             app:tint="@color/blue_deep_sky"
             />
 
