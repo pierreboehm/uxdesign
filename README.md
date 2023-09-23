@@ -4,7 +4,7 @@ Kleine Arbeitsprobe, wie ich ein Android Frontend entwickle.
 
 Als Beispiel dient das Health-POD Display aus dem Film "Passengers" von Morten Tyldum.
 
-<img src="IMAG1008.jpg" width="128"/>
+<img src="IMAG1008.jpg" width="128"/><img src="IMAG1009.jpg" width="128"/><img src="IMAG1010.jpg" width="128"/>
 
 Im Vordergrund steht das Schachteln von Views, um effiziente Wiederverwendbarkeit und Wartbarkeit zu garantieren.
 
