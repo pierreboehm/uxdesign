@@ -3,17 +3,17 @@ plugins {
 }
 
 def AAVersion = '4.8.0'
-def ACVersion = '1.2.0'
+def ACVersion = '1.4.1'
 def EBVersion = '3.1.1'
 def SFVersion = '2.7.1'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "org.pb.android.uxdesign"
         minSdkVersion 24
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
